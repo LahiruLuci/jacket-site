@@ -44,8 +44,14 @@ const categories = [
 export default function CategoryShowcase() {
   const [active, setActive] = useState(0);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const isFirstMount = useRef(true);
 
   useEffect(() => {
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      return;
+    }
+
     if (active !== null && cardRefs.current[active]) {
       // Small delay to allow the layout expansion animation to start/finish
       const timer = setTimeout(() => {
