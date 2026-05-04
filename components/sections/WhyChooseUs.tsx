@@ -1,157 +1,115 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
-import { Truck, RotateCcw, Award, ShieldCheck } from "lucide-react";
+import React from "react";
+import { motion } from "framer-motion";
+import { ShieldCheck, Truck, Award, RotateCcw, Star, Zap, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 
+const features = [
+  {
+    icon: Award,
+    title: "Made to Last",
+    desc: "Strong fabrics that stay in great shape even after many wears.",
+    label: "Quality"
+  },
+  {
+    icon: Zap,
+    title: "Look Your Best",
+    desc: "Modern designs that help you stand out and feel confident.",
+    label: "Style"
+  },
+  {
+    icon: Truck,
+    title: "Fast Delivery",
+    desc: "Get your new jackets delivered across Sri Lanka within 48 hours.",
+    label: "Shipping"
+  },
+  {
+    icon: RotateCcw,
+    title: "Shop with Trust",
+    desc: "Easy returns and safe payments for a worry-free experience.",
+    label: "Returns"
+  },
+  {
+    icon: ShieldCheck,
+    title: "Unique Designs",
+    desc: "Exclusive styles that help you express your own personality.",
+    label: "Exclusivity"
+  },
+  {
+    icon: Star,
+    title: "Happy Customers",
+    desc: "Join over 10,000 people who love our quality and service.",
+    label: "Trust"
+  }
+];
+
 const WhyChooseUs = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const textX = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, 200]);
-
   return (
-    <section 
-      ref={containerRef}
-      className="relative py-32 md:py-64 bg-[#0B0B0B] overflow-hidden"
-    >
-      {/* Cinematic Background Typography */}
-      <motion.div 
-        style={{ x: textX }}
-        className="absolute top-1/2 left-0 -translate-y-1/2 whitespace-nowrap pointer-events-none z-0"
-      >
-        <span className="text-[20vw] font-black text-white/[0.02] leading-none uppercase select-none">
-          Superior Logistics Protocol Superior Logistics Protocol
-        </span>
-      </motion.div>
+    <section className="relative py-24 md:py-40 bg-[#0B0B0B] overflow-hidden" id="protocol">
+      {/* Background Ambience */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-1/4 -right-20 w-[600px] h-[600px] bg-[#C9A227]/5 blur-[120px] rounded-full opacity-40 animate-pulse" />
+        <div className="absolute -bottom-20 -left-20 w-[500px] h-[500px] bg-[#C9A227]/5 blur-[100px] rounded-full opacity-30" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] pointer-events-none" />
+      </div>
 
-      {/* Floating Ambient Orbs */}
-      <motion.div 
-        style={{ y: bgY }}
-        className="absolute top-1/4 -left-20 w-[600px] h-[600px] bg-[#C9A227]/5 blur-[180px] rounded-full pointer-events-none"
-      />
-      <motion.div 
-        style={{ y: useTransform(scrollYProgress, [0, 1], [0, -300]) }}
-        className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-white/[0.02] blur-[150px] rounded-full pointer-events-none"
-      />
-
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24 relative z-10">
-        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-20 lg:gap-0 items-start">
+      <div className="container relative z-10 mx-auto px-6">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
           
-          {/* Sticky Header with Advanced Reveal */}
+          {/* LEFT COLUMN: BRAND STATEMENT */}
           <div className="lg:col-span-5 lg:sticky lg:top-40">
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 1 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="flex items-center gap-4 mb-8 overflow-hidden">
-                <motion.div 
-                  initial={{ x: -100 }}
-                  whileInView={{ x: 0 }}
-                  transition={{ duration: 0.8, ease: "circOut" }}
-                  className="w-12 h-[1px] bg-[#C9A227]" 
-                />
-                <motion.span 
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  className="text-[10px] font-black uppercase tracking-[0.5em] text-[#C9A227]"
-                >
-                  The Protocol
-                </motion.span>
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-12 h-[1px] bg-[#C9A227]" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#C9A227]">
+                  Why Choose Us
+                </span>
               </div>
               
-              <h2 className="text-6xl md:text-[100px] font-black uppercase tracking-tighter text-white leading-[0.75] mb-12">
-                <span className="block overflow-hidden">
-                  <motion.span
-                    initial={{ y: "100%" }}
-                    whileInView={{ y: 0 }}
-                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                    className="block"
-                  >
-                    Superior
-                  </motion.span>
-                </span>
-                <span className="block overflow-hidden text-transparent" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.2)" }}>
-                  <motion.span
-                    initial={{ y: "100%" }}
-                    whileInView={{ y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                    className="block"
-                  >
-                    Standard.
-                  </motion.span>
-                </span>
+              <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-white leading-[0.9] mb-8">
+                Jackets Built <br />
+                For Your <br />
+                <span className="text-transparent" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.4)" }}>Real Life.</span>
               </h2>
               
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-white/40 text-sm md:text-lg font-light leading-relaxed max-w-sm mb-16"
-              >
-                Engineered to eliminate friction. Every touchpoint is a statement of our obsession with high-performance service.
-              </motion.p>
+              <p className="text-white/50 text-sm md:text-lg leading-relaxed font-light mb-12 max-w-md">
+                We make simple, high-quality fashion jackets that help you look great and feel comfortable every day. Buy jackets online in Sri Lanka with total confidence.
+              </p>
 
-              {/* Data Points with HUD Styling */}
-              <div className="grid grid-cols-2 gap-12 pt-12 border-t border-white/5 relative">
-                <div className="absolute top-0 left-0 w-8 h-[1px] bg-[#C9A227]" />
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                >
-                  <div className="text-4xl font-black text-white mb-2 font-mono">48H</div>
-                  <div className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#C9A227]">Global Ops</div>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  <div className="text-4xl font-black text-white mb-2 font-mono">24/7</div>
-                  <div className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#C9A227]">Direct Access</div>
-                </motion.div>
+              {/* Trust Stats */}
+              <div className="grid grid-cols-2 gap-10 mb-12">
+                <div>
+                  <div className="text-3xl font-black text-white mb-2">10K+</div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-white/30 italic">Happy Customers</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-black text-white mb-2">4.9/5</div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-white/30 italic">Star Rating</div>
+                </div>
               </div>
+
+              <Link 
+                href="/shop"
+                className="group inline-flex items-center gap-4 bg-white text-black px-8 py-4 text-xs font-black uppercase tracking-[0.2em] hover:bg-[#C9A227] transition-all duration-500"
+              >
+                Explore Collection
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
             </motion.div>
           </div>
 
-          {/* 3D Interactive Grid */}
-          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-            <InteractiveCard 
-              icon={<Truck size={32} />}
-              title="Sonic Deployment"
-              desc="Priority logistics pipeline. Arrives at your terminal within 48 hours."
-              index={0}
-              className="md:translate-y-20"
-            />
-            <InteractiveCard 
-              icon={<Award size={32} />}
-              title="Elite Materials"
-              desc="Sourced from heritage tanneries. Ballistic-grade protection."
-              index={1}
-            />
-            <InteractiveCard 
-              icon={<RotateCcw size={32} />}
-              title="Zero Friction"
-              desc="Instant return cycles. Engineered for uncompromised satisfaction."
-              index={2}
-              className="md:translate-y-20"
-            />
-            <InteractiveCard 
-              icon={<ShieldCheck size={32} />}
-              title="Ironclad Security"
-              desc="AES-256 encrypted architecture. Absolute data sovereignty."
-              index={3}
-            />
+          {/* RIGHT COLUMN: FEATURE CARDS */}
+          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+            {features.map((feature, idx) => (
+              <FeatureCard key={idx} feature={feature} index={idx} />
+            ))}
           </div>
 
         </div>
@@ -160,111 +118,40 @@ const WhyChooseUs = () => {
   );
 };
 
-const InteractiveCard = ({ icon, title, desc, index, className }: any) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  
-  // Mouse tracking for 3D tilt
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [15, -15]), { stiffness: 200, damping: 30 });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-15, 15]), { stiffness: 200, damping: 30 });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
+const FeatureCard = ({ feature, index }: { feature: any; index: number }) => {
   return (
     <motion.div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.8, delay: index * 0.1 }}
-      style={{
-        rotateX,
-        rotateY,
-        perspective: 1000,
-        transformStyle: "preserve-3d",
-      }}
-      className={cn(
-        "group relative bg-[#111111]/80 backdrop-blur-md border border-white/5 p-12 md:p-16 rounded-[3rem] overflow-hidden transition-all duration-500 hover:border-[#C9A227]/30",
-        className
-      )}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      className="group relative p-8 md:p-10 rounded-[2rem] bg-white/[0.02] border border-white/5 backdrop-blur-xl overflow-hidden hover:border-[#C9A227]/30 transition-all duration-500"
     >
-      {/* Dynamic Glow Spotlight */}
-      <motion.div 
-        className="absolute inset-0 z-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        style={{
-          background: useTransform(
-            [mouseX, mouseY],
-            ([x, y]) => `radial-gradient(circle at ${Number(x) * 100 + 50}% ${Number(y) * 100 + 50}%, rgba(201,162,39,0.15) 0%, transparent 80%)`
-          )
-        }}
-      />
-
-      {/* Floating Icon with 3D Depth */}
-      <div 
-        className="relative z-10 mb-16 inline-block"
-        style={{ transform: "translateZ(60px)" }}
-      >
-        <div className="w-20 h-20 flex items-center justify-center rounded-[1.5rem] bg-white/5 border border-white/10 group-hover:bg-[#C9A227] group-hover:text-black transition-all duration-700 text-white relative">
-          {icon}
-          {/* Animated Ring */}
-          <motion.div 
-            animate={isHovered ? { scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] } : {}}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="absolute inset-0 rounded-[1.5rem] border border-[#C9A227]/50 pointer-events-none"
-          />
+      {/* Card Gradient Glow */}
+      <div className="absolute -top-1/2 -right-1/2 w-full h-full bg-[#C9A227]/5 blur-[80px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+      
+      {/* Icon Area */}
+      <div className="relative z-10 mb-8">
+        <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 group-hover:bg-[#C9A227] group-hover:text-black transition-all duration-500 text-white">
+          <feature.icon size={22} className="group-hover:scale-110 transition-transform" />
         </div>
       </div>
 
-      {/* Content with 3D Depth */}
-      <div 
-        className="relative z-10"
-        style={{ transform: "translateZ(40px)" }}
-      >
-        <h4 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-white mb-6 group-hover:text-[#C9A227] transition-colors duration-500">
-          {title}
-        </h4>
-        <p className="text-white/40 text-base leading-relaxed font-light group-hover:text-white/70 transition-colors duration-500">
-          {desc}
+      {/* Content Area */}
+      <div className="relative z-10">
+        <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#C9A227] mb-3 block">
+          {feature.label}
+        </span>
+        <h3 className="text-xl md:text-2xl font-black uppercase tracking-tight text-white mb-4 leading-none">
+          {feature.title}
+        </h3>
+        <p className="text-white/40 text-xs md:text-sm leading-relaxed font-light">
+          {feature.desc}
         </p>
       </div>
 
-      {/* Scanning Line Effect on Hover */}
-      <AnimatePresence>
-        {isHovered && (
-          <motion.div 
-            initial={{ top: "-100%" }}
-            animate={{ top: "100%" }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-            className="absolute left-0 w-full h-20 bg-gradient-to-b from-transparent via-[#C9A227]/5 to-transparent pointer-events-none z-0"
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Modernist Accent */}
-      <div className="absolute bottom-8 right-8 flex gap-1 items-end pointer-events-none">
-        <div className="w-[1px] h-4 bg-white/10" />
-        <div className="w-4 h-[1px] bg-white/10" />
-      </div>
+      {/* Mobile Interaction Hint (Subtle line at bottom) */}
+      <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#C9A227] group-hover:w-full transition-all duration-700" />
     </motion.div>
   );
 };
