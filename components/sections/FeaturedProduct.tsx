@@ -5,9 +5,32 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ShoppingBag, Ruler, ArrowRight, ShieldCheck } from "lucide-react";
 
-export default function FeaturedProduct() {
+interface FeaturedProductProps {
+  product?: {
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+    images: string[];
+    category?: { name: string };
+  };
+}
+
+export default function FeaturedProduct({ product }: FeaturedProductProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedSize, setSelectedSize] = useState("M");
+  
+  // Default data for fallback
+  const defaultProduct = {
+    id: "vanguard-stealth",
+    name: "Vanguard Stealth",
+    description: "The pinnacle of urban camouflage and ballistic-grade protection. Features an integrated spine matrix and matte-black hydrophobic material.",
+    price: 1850,
+    images: ["/assets/sohag_hawlader-ai-generated-9034981_1920.webp"],
+    category: { name: "Masterpiece" }
+  };
+
+  const activeProduct = product || defaultProduct;
   const sizes = ["S", "M", "L", "XL", "XXL"];
 
   const { scrollYProgress } = useScroll({
@@ -50,8 +73,8 @@ export default function FeaturedProduct() {
           {/* Main Product Image - The Gallery Pane */}
           <div className="lg:col-span-7 relative h-[60vh] md:h-[800px] rounded-2xl overflow-hidden group bg-[#1F2022] border border-white/5">
             <Image
-              src="/assets/sohag_hawlader-ai-generated-9034981_1920.webp"
-              alt="Vanguard Stealth Jacket"
+              src={activeProduct.images[0] || "/assets/placeholder.webp"}
+              alt={activeProduct.name}
               fill
               className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
             />
@@ -64,7 +87,7 @@ export default function FeaturedProduct() {
                   Limited Allocation
                 </span>
                 <p className="text-white/40 text-xs font-mono tracking-widest hidden md:block">
-                  LAT: 45.4642Â° N // LON: 9.1900Â° E
+                  LAT: 45.4642° N // LON: 9.1900° E
                 </p>
               </div>
               
@@ -86,17 +109,17 @@ export default function FeaturedProduct() {
                 Archive No. 001
               </span>
               
-              <h3 className="text-4xl md:text-5xl text-white font-black uppercase tracking-tight leading-[0.9] mb-4" style={{ fontFamily: "var(--font-serif)" }}>
-                Vanguard <br />
-                <span className="text-[#C9A227] italic font-light">Stealth</span>
+              <h3 className="text-4xl md:text-5xl text-white font-black uppercase tracking-tight leading-[0.9] mb-4">
+                {activeProduct.name.split(" ")[0]} <br />
+                <span className="text-[#C9A227] italic font-light">{activeProduct.name.split(" ").slice(1).join(" ")}</span>
               </h3>
               
-              <p className="text-white/50 text-sm leading-relaxed mb-8">
-                The pinnacle of urban camouflage and ballistic-grade protection. Hand-tailored in Milan. Features an integrated titanium spine matrix and matte-black hydrophobic leather.
+              <p className="text-white/50 text-sm leading-relaxed mb-8 line-clamp-3">
+                {activeProduct.description}
               </p>
 
               <div className="flex items-center gap-6 mb-10 pb-10 border-b border-white/10">
-                <span className="text-3xl tracking-tighter font-black text-white">$1,850</span>
+                <span className="text-3xl tracking-tighter font-black text-white">${activeProduct.price}</span>
                 <span className="text-[#C9A227] text-xs font-bold uppercase tracking-widest border border-[#C9A227]/30 bg-[#C9A227]/10 px-3 py-1 rounded-sm">
                   In Stock
                 </span>
@@ -142,7 +165,7 @@ export default function FeaturedProduct() {
             {/* The Detail / Material Pane */}
             <div className="h-[250px] md:h-[300px] rounded-2xl bg-[#1F2022] border border-white/5 relative overflow-hidden group">
               <Image
-                src="/assets/stocksnap-dark-2598357_1920.webp"
+                src={activeProduct.images[0] || "/assets/stocksnap-dark-2598357_1920.webp"}
                 alt="Material Texture"
                 fill
                 className="object-cover opacity-40 mix-blend-screen grayscale transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110"
@@ -151,10 +174,10 @@ export default function FeaturedProduct() {
               
               <div className="absolute inset-x-0 bottom-0 p-8">
                 <h4 className="text-white text-xl font-black uppercase tracking-tight mb-2">
-                  Obsidian Leather
+                  Premium Materials
                 </h4>
                 <p className="text-white/50 text-xs leading-relaxed max-w-[280px]">
-                  Tanned in absolute darkness. Sourced exclusively from heritage Italian hides. Impervious to the elements.
+                  Engineered with uncompromised precision and sourced from elite heritage hides.
                 </p>
                 <div className="mt-6 flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.3em] text-[#C9A227]">
                   View Materials <ArrowRight size={12} />

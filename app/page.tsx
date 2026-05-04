@@ -14,21 +14,32 @@ import Newsletter from "@/components/sections/Newsletter";
 import prisma from "@/lib/prisma";
 
 export default async function Home() {
-  const featuredProducts = await prisma.product.findMany({
-    where: {
-      isFeatured: true,
-    },
-    include: {
-      category: true,
-    },
-    take: 8,
-  });
+  let formattedProducts = [];
+  let masterpieceProduct = null;
 
-  // Map to the format expected by the component
-  const formattedProducts = featuredProducts.map(p => ({
-    ...p,
-    category: p.category.name,
-  }));
+  try {
+    // Attempt to fetch featured products for the grid
+    const featuredProducts = await prisma.product.findMany({
+      where: { isFeatured: true },
+      include: { category: true },
+      take: 8,
+    });
+
+    if (featuredProducts && featuredProducts.length > 0) {
+      formattedProducts = featuredProducts.map(p => ({
+        ...p,
+        category: p.category?.name || "Jacket",
+      }));
+      
+      // Use the first featured product as the masterpiece for now
+      masterpieceProduct = featuredProducts[0];
+    }
+  } catch (err) {
+    // Silently fallback to hardcoded data if DB is unreachable
+    console.log("Database connection failed. Using sample data instead.");
+    formattedProducts = [];
+    masterpieceProduct = null;
+  }
 
   return (
     <main className="min-h-screen bg-[#161718] text-white">
@@ -40,7 +51,7 @@ export default async function Home() {
       <BrandValues />
       <Lifestyle />
       <Technology />
-      <FeaturedProduct />
+      <FeaturedProduct product={masterpieceProduct} />
       <Reviews />
       <CommunityFeed />
       <Newsletter />
