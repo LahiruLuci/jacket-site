@@ -1,5 +1,7 @@
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/sections/Hero";
+import FeaturedProductsGrid from "@/components/sections/FeaturedProductsGrid";
+import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import CategoryShowcase from "@/components/sections/CategoryShowcase";
 import BrandValues from "@/components/sections/BrandValues";
 import Lifestyle from "@/components/sections/Lifestyle";
@@ -14,6 +16,8 @@ export default function Home() {
     <main className="min-h-screen bg-[#161718] text-white">
       <Navbar />
       <Hero />
+      <FeaturedProductsGrid />
+      <WhyChooseUs />
       <CategoryShowcase />
       <BrandValues />
       <Lifestyle />

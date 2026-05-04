@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -8,6 +8,16 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function Lifestyle() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -22,8 +32,7 @@ export default function Lifestyle() {
   // Parallax for the massive background text
   const yText = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
-  // Disable parallax on mobile for stability
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+  // Disable parallax on mobile for stability - using state to avoid hydration errors
   const py1 = isMobile ? 0 : y1;
   const py2 = isMobile ? 0 : y2;
   const py3 = isMobile ? 0 : y3;
