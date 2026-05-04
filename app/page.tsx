@@ -11,12 +11,30 @@ import Reviews from "@/components/sections/Reviews";
 import CommunityFeed from "@/components/sections/CommunityFeed";
 import Newsletter from "@/components/sections/Newsletter";
 
-export default function Home() {
+import prisma from "@/lib/prisma";
+
+export default async function Home() {
+  const featuredProducts = await prisma.product.findMany({
+    where: {
+      isFeatured: true,
+    },
+    include: {
+      category: true,
+    },
+    take: 8,
+  });
+
+  // Map to the format expected by the component
+  const formattedProducts = featuredProducts.map(p => ({
+    ...p,
+    category: p.category.name,
+  }));
+
   return (
     <main className="min-h-screen bg-[#161718] text-white">
       <Navbar />
       <Hero />
-      <FeaturedProductsGrid />
+      <FeaturedProductsGrid products={formattedProducts} />
       <WhyChooseUs />
       <CategoryShowcase />
       <BrandValues />

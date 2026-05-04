@@ -58,7 +58,24 @@ const featuredProducts = [
   }
 ];
 
-const FeaturedProductsGrid = () => {
+interface ProductType {
+  id: string;
+  name: string;
+  price: number;
+  image?: string;
+  images?: string[];
+  sizes?: string[];
+  category?: string;
+  categoryName?: string;
+}
+
+interface FeaturedProductsGridProps {
+  products?: ProductType[];
+}
+
+const FeaturedProductsGrid = ({ products }: FeaturedProductsGridProps) => {
+  const displayProducts = products && products.length > 0 ? products : featuredProducts;
+
   return (
     <section className="bg-[#0B0B0B] py-24 md:py-32 px-6">
       <div className="max-w-[1600px] mx-auto">
@@ -96,7 +113,7 @@ const FeaturedProductsGrid = () => {
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 md:gap-y-20">
-          {featuredProducts.map((product, idx) => (
+          {displayProducts.map((product, idx) => (
             <ProductCard key={product.id} product={product} index={idx} />
           ))}
         </div>
@@ -118,6 +135,11 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
     setTimeout(() => setIsAdded(false), 2000);
   };
 
+  // Handle differences between DB schema and hardcoded data
+  const productImage = product.image || (product.images && product.images[0]) || "/assets/placeholder.webp";
+  const productSizes = product.sizes || ["S", "M", "L", "XL"];
+  const categoryName = product.category || (product.category && product.category.name) || "Jacket";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -129,14 +151,14 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
       {/* Image Area */}
       <div className="relative aspect-[4/5] overflow-hidden bg-[#161718]">
         <Image
-          src={product.image}
+          src={productImage}
           alt={product.name}
           fill
-          className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 grayscale group-hover:grayscale-0"
+          className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110"
         />
         
         {/* Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-30 group-hover:opacity-50 transition-opacity duration-500" />
         
         {/* Quick Actions (Floating) */}
         <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 lg:group-hover:opacity-100 transition-all duration-500 translate-x-4 lg:group-hover:translate-x-0">
@@ -151,19 +173,32 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
         {/* Size Selection HUD (Visible on hover or mobile) */}
         <div className="absolute inset-x-4 bottom-4 z-20">
           <div className="flex flex-col gap-3 opacity-100 lg:opacity-0 lg:translate-y-4 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 transition-all duration-500">
+            {/* Added Label for clarity */}
+            <div className="flex justify-center">
+              <span className="text-[8px] font-black tracking-[0.2em] text-white/60 bg-black/60 px-3 py-1 rounded-full backdrop-blur-md border border-white/5">
+                SELECT SIZE
+              </span>
+            </div>
+
             <div className="flex gap-2 justify-center">
-              {product.sizes.map((size: string) => (
+              {productSizes.map((size: string) => (
                 <button
                   key={size}
                   onClick={(e) => { e.preventDefault(); setSelectedSize(size); }}
                   className={cn(
-                    "w-8 h-8 md:w-10 md:h-10 rounded-full border text-[10px] md:text-xs font-bold transition-all flex items-center justify-center",
+                    "w-9 h-9 md:w-11 md:h-11 rounded-full border text-[10px] md:text-xs font-bold transition-all flex items-center justify-center relative overflow-hidden",
                     selectedSize === size 
-                      ? "bg-accent border-accent text-black" 
-                      : "bg-black/40 border-white/20 text-white hover:border-white/50 backdrop-blur-sm"
+                      ? "bg-accent border-accent text-black scale-110 shadow-[0_0_15px_rgba(201,162,39,0.5)]" 
+                      : "bg-black/60 border-white/20 text-white hover:border-white/50 backdrop-blur-md"
                   )}
                 >
                   {size}
+                  {selectedSize === size && (
+                    <motion.div 
+                      layoutId={`active-size-${product.id}`}
+                      className="absolute inset-0 bg-accent/20 animate-pulse"
+                    />
+                  )}
                 </button>
               ))}
             </div>
@@ -182,8 +217,10 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
             >
               {isAdded ? (
                 <>Added <Check size={16} /></>
+              ) : selectedSize ? (
+                <>Add to Cart <Plus size={16} /></>
               ) : (
-                <>Add to Arsenal <Plus size={16} /></>
+                <>Select Size to Add <Plus size={16} /></>
               )}
             </button>
           </div>
@@ -194,7 +231,7 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
       <div className="p-6 md:p-8 flex flex-col flex-1">
         <div className="flex justify-between items-start mb-4">
           <div>
-            <span className="text-[9px] font-bold text-accent uppercase tracking-widest block mb-2">{product.category}</span>
+            <span className="text-[9px] font-bold text-accent uppercase tracking-widest block mb-2">{categoryName}</span>
             <h3 className="text-xl md:text-2xl font-black uppercase tracking-tighter leading-none text-white group-hover:text-accent transition-colors">
               {product.name}
             </h3>
