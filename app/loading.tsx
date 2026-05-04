@@ -1,59 +1,75 @@
 "use client";
 
+import React from "react";
 import { motion } from "framer-motion";
 
 export default function Loading() {
   return (
-    <div className="fixed inset-0 z-[99999] bg-[#111213] flex flex-col items-center justify-center font-mono">
-      {/* 
-        This is the "On-Demand" compiler loader for Next.js 16+ 
-        It uses a minimal but premium pulse indicator to signal background compilation.
-      */}
-      <div className="relative flex flex-col items-center gap-12">
-        
-        {/* Animated Crosshair Center */}
-        <div className="relative w-32 h-32 flex items-center justify-center">
-             <motion.div 
-               animate={{ rotate: 360 }}
-               transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-               className="absolute inset-0 border border-white/10 rounded-full"
-             />
-             <motion.div 
-               animate={{ rotate: -360 }}
-               transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-               className="absolute inset-4 border border-[#C9A227]/20 rounded-full border-t-[#C9A227]"
-             />
-             <div className="w-1.5 h-1.5 bg-[#C9A227] rounded-full shadow-[0_0_15px_#C9A227]" />
-        </div>
-
-        {/* Textual Feedback */}
-        <div className="flex flex-col items-center gap-4">
-           <motion.span 
-             animate={{ opacity: [0.3, 1, 0.3] }}
-             transition={{ duration: 1.5, repeat: Infinity }}
-             className="text-[10px] md:text-sm font-bold uppercase tracking-[0.6em] text-white"
-           >
-             Compiling Terminal
-           </motion.span>
-           
-           <div className="flex items-center gap-3">
-              <span className="w-12 h-[1px] bg-white/10" />
-              <span className="text-[9px] text-[#C9A227] tracking-widest font-bold">VANGUARD_CORE_V1</span>
-              <span className="w-12 h-[1px] bg-white/10" />
-           </div>
-        </div>
-
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0B0B0B]">
+      {/* Background Ambience */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#C9A227]/5 blur-[120px] rounded-full" />
       </div>
 
-      {/* Background CAD Grid */}
-      <div 
-        className="absolute inset-0 opacity-10 pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-          backgroundSize: `40px 40px`,
-          backgroundPosition: `center center`
-        }}
-      />
+      <div className="relative flex flex-col items-center">
+        {/* Futuristic HUD Loader */}
+        <div className="relative w-24 h-24 mb-8">
+          {/* Outer Rotating Ring */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-0 border-t-2 border-r-2 border-[#C9A227]/20 rounded-full"
+          />
+          
+          {/* Inner Pulsing Ring */}
+          <motion.div
+            animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute inset-4 border-2 border-[#C9A227] rounded-full"
+          />
+
+          {/* Center Point */}
+          <div className="absolute inset-[45%] bg-[#C9A227] rounded-full shadow-[0_0_15px_rgba(201,162,39,0.8)]" />
+        </div>
+
+        {/* Text Animation */}
+        <div className="flex flex-col items-center gap-2">
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-[10px] font-black uppercase tracking-[0.5em] text-[#C9A227]"
+          >
+            Establishing Connection
+          </motion.span>
+          
+          <div className="flex gap-1">
+            {[0, 1, 2].map((i) => (
+              <motion.div
+                key={i}
+                animate={{ 
+                  height: [4, 12, 4],
+                  opacity: [0.3, 1, 0.3]
+                }}
+                transition={{ 
+                  duration: 1, 
+                  repeat: Infinity, 
+                  delay: i * 0.2,
+                  ease: "easeInOut" 
+                }}
+                className="w-[2px] bg-[#C9A227]"
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* HUD Scanning Line */}
+        <motion.div
+          animate={{ top: ["0%", "100%", "0%"] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+          className="absolute -inset-x-12 h-[1px] bg-gradient-to-r from-transparent via-[#C9A227]/20 to-transparent pointer-events-none"
+        />
+      </div>
     </div>
   );
 }
