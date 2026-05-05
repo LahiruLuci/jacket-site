@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 const featuredProducts = [
   {
     id: "shadow-black",
+    slug: "shadow-guard-all-weather-performance-jacket",
     name: "Shadow Guard All-Weather Performance Jacket",
     price: 599,
     image: "/assets/black-jacket/black-jacket.webp",
@@ -18,6 +19,7 @@ const featuredProducts = [
   },
   {
     id: "interceptor-nv",
+    slug: "navy-guard-water-resistant-utility-jacket",
     name: "Navy Guard Water-Resistant Utility Jacket",
     price: 799,
     image: "/assets/navy-blue-jacket/navy-blue-jacket.webp",
@@ -26,6 +28,7 @@ const featuredProducts = [
   },
   {
     id: "vanguard-titan",
+    slug: "vanguard-titan-racing",
     name: "Vanguard Titan Racing",
     price: 1450,
     image: "/assets/sohag_hawlader-ai-generated-9034981_1920.webp",
@@ -34,6 +37,7 @@ const featuredProducts = [
   },
   {
     id: "stealth-commuter",
+    slug: "stealth-commuter-shell",
     name: "Stealth Commuter Shell",
     price: 850,
     image: "/assets/derneuemann-jacket-2821961_1920.webp",
@@ -42,6 +46,7 @@ const featuredProducts = [
   },
   {
     id: "apex-kinetic",
+    slug: "apex-kinetic-armor",
     name: "Apex Kinetic Armor",
     price: 1200,
     image: "/assets/image (1).webp",
@@ -50,6 +55,7 @@ const featuredProducts = [
   },
   {
     id: "heritage-cafe",
+    slug: "heritage-cafe-racer",
     name: "Heritage Cafe Racer",
     price: 950,
     image: "/assets/peterlesliemorris-motorcycle-1829461_1920.webp",
@@ -58,6 +64,7 @@ const featuredProducts = [
   },
   {
     id: "velocity-air",
+    slug: "velocity-air-mesh",
     name: "Velocity Air Mesh",
     price: 600,
     image: "/assets/splitshire-biker-407123_1920.webp",
@@ -66,6 +73,7 @@ const featuredProducts = [
   },
   {
     id: "nomad-goretex",
+    slug: "nomad-gore-tex-pro",
     name: "Nomad Gore-Tex Pro",
     price: 1100,
     image: "/assets/stocksnap-dark-2598357_1920.webp",
@@ -76,6 +84,7 @@ const featuredProducts = [
 
 interface ProductType {
   id: string;
+  slug: string;
   name: string;
   price: number;
   image?: string;
@@ -179,7 +188,7 @@ const ProductCard = ({ product, index }: { product: ProductType; index: number }
         {/* Quick Actions (Floating) */}
         <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 lg:group-hover:opacity-100 transition-all duration-500 translate-x-4 lg:group-hover:translate-x-0">
           <Link 
-            href={`/product/${product.id}`}
+            href={`/jacket/${product.slug}`}
             className="w-10 h-10 bg-white/10 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-accent hover:text-black transition-all"
           >
             <Eye size={18} />
@@ -260,7 +269,7 @@ const ProductCard = ({ product, index }: { product: ProductType; index: number }
 
         <div className="mt-auto pt-4 flex items-center justify-between border-t border-white/5">
           <Link 
-            href={`/product/${product.id}`}
+            href={`/jacket/${product.slug}`}
             className="text-xs font-bold uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors"
           >
             View Details

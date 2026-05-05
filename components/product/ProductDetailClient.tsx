@@ -30,58 +30,80 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
   return (
     <div className="bg-[#050505] text-white min-h-screen font-sans selection:bg-accent selection:text-black">
       
-      {/* 01. THE CINEMATIC HERO */}
-      <section className="relative w-full h-screen min-h-[800px] flex items-center justify-center overflow-hidden border-b border-white/10 pt-20">
+      {/* 01. THE PRO ARCHIVE HERO */}
+      <section className="relative w-full h-[85vh] min-h-[700px] flex items-center justify-center overflow-hidden bg-[#050505]">
+        {/* Laboratory Grid Overlay */}
+        <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
+             style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '64px 64px' }} 
+        />
         
-        {/* Dynamic Typography Background */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none overflow-hidden">
-          <h1 className="text-[25vw] font-black uppercase tracking-tighter leading-none whitespace-nowrap">
-            {product.category?.name || "ARCHIVE"}
-          </h1>
-        </div>
-
-        {/* Ambient Lighting */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] max-w-[600px] bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
-
-        {/* Main Product Feature */}
+        {/* Kinetic Light Beam */}
         <motion.div 
-          initial={{ opacity: 0, scale: 0.9, y: 50 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="relative w-full max-w-[1000px] aspect-[4/3] z-10"
-        >
-          <Image 
-            src="/assets/navy-blue.png" 
-            alt={product.name} 
-            fill 
-            className="object-contain mix-blend-lighten drop-shadow-2xl p-8 md:p-16" 
-            priority
-          />
-        </motion.div>
+          animate={{ 
+            opacity: [0.1, 0.2, 0.1],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-accent/10 rounded-full blur-[160px] pointer-events-none" 
+        />
 
-        {/* Hero Meta Overlay */}
-        <div className="absolute bottom-12 left-6 md:left-12 z-20">
+        {/* The Masterpiece: Isolated Product */}
+        <div className="container relative z-10 flex flex-col items-center">
           <motion.div 
-            initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5, duration: 0.8 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+            className="relative w-full max-w-[900px] aspect-square md:aspect-[16/10]"
           >
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-8 h-[1px] bg-accent" />
-              <span className="text-[10px] font-bold text-accent uppercase tracking-[0.4em]">Deployment Ready</span>
-            </div>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-[0.9]">
-              {product.name}
-            </h1>
+            <Image 
+              src={product.images[0] || "/assets/placeholder.webp"} 
+              alt={product.name} 
+              fill 
+              className="object-contain drop-shadow-[0_40px_100px_rgba(0,0,0,0.8)] filter grayscale-[0.2] hover:grayscale-0 transition-all duration-1000 p-8" 
+              priority
+            />
           </motion.div>
+
+          {/* Minimal Meta Branding */}
+          <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center text-center pb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 1 }}
+            >
+              <span className="text-[10px] font-black tracking-[0.8em] text-accent uppercase mb-6 block">
+                {product.category?.name || "Premium Archive"}
+              </span>
+              <h1 className="text-6xl md:text-8xl lg:text-[120px] font-black uppercase tracking-tighter leading-none mb-8">
+                {product.name.split(" ").slice(0, 2).join(" ")}<br />
+                <span className="text-white/20 italic font-light text-4xl md:text-6xl tracking-normal">
+                  {product.name.split(" ").slice(2).join(" ")}
+                </span>
+              </h1>
+              <motion.button 
+                onClick={scrollToConfig}
+                className="flex flex-col items-center gap-4 text-white/30 hover:text-accent transition-colors group mt-12"
+              >
+                <span className="text-[9px] font-bold uppercase tracking-[0.4em]">Initialize Configuration</span>
+                <div className="w-px h-16 bg-gradient-to-b from-accent/50 to-transparent group-hover:h-24 transition-all duration-700" />
+              </motion.button>
+            </motion.div>
+          </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <motion.button 
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
-          onClick={scrollToConfig}
-          className="absolute bottom-12 right-6 md:right-12 z-20 w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:text-white hover:border-white transition-all group backdrop-blur-sm"
-        >
-          <ArrowDown size={18} className="group-hover:translate-y-1 transition-transform" />
-        </motion.button>
+        {/* Tech Overlay: Corner Stats */}
+        <div className="absolute top-32 left-12 hidden xl:block">
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-1">
+              <span className="text-[8px] font-mono text-white/20 uppercase tracking-widest">Serial No.</span>
+              <span className="text-[10px] font-bold text-white/60 uppercase tracking-widest">JJ-{product.id.slice(0, 8)}</span>
+            </div>
+            <div className="flex flex-col gap-1">
+              <span className="text-[8px] font-mono text-white/20 uppercase tracking-widest">Model Fidelity</span>
+              <span className="text-[10px] font-bold text-white/60 uppercase tracking-widest">v2.04 Kinetic Armor</span>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* 02. EDITORIAL GALLERY & CONFIGURATION */}

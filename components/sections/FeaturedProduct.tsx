@@ -2,12 +2,14 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ShoppingBag, Ruler, ArrowRight, ShieldCheck } from "lucide-react";
 
 interface FeaturedProductProps {
   product?: {
     id: string;
+    slug: string;
     name: string;
     description: string;
     price: number;
@@ -23,6 +25,7 @@ export default function FeaturedProduct({ product }: FeaturedProductProps) {
   // Default data for fallback
   const defaultProduct = {
     id: "interceptor-nv",
+    slug: "navy-guard-water-resistant-utility-jacket",
     name: "Navy Guard Water-Resistant Utility Jacket",
     description: "The ultimate aquatic-inspired defense layer. Engineered with 1000D Navy Ballistic Weave and integrated carbon-silicate sliders for high-velocity urban deployment.",
     price: 799,
@@ -71,7 +74,10 @@ export default function FeaturedProduct({ product }: FeaturedProductProps) {
         >
           
           {/* Main Product Image - The Gallery Pane */}
-          <div className="lg:col-span-7 relative h-[60vh] md:h-[800px] rounded-2xl overflow-hidden group bg-[#1F2022] border border-white/5">
+          <Link 
+            href={`/jacket/${activeProduct.slug}`}
+            className="lg:col-span-7 relative h-[60vh] md:h-[800px] rounded-2xl overflow-hidden group bg-[#1F2022] border border-white/5"
+          >
             <Image
               src={activeProduct.images[0] || "/assets/placeholder.webp"}
               alt={activeProduct.name}
@@ -95,7 +101,7 @@ export default function FeaturedProduct({ product }: FeaturedProductProps) {
                 <ShieldCheck size={20} className="text-[#C9A227]" />
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* Right Column: Interaction & Detail Panes */}
           <div className="lg:col-span-5 flex flex-col gap-6 lg:gap-8">
@@ -109,12 +115,14 @@ export default function FeaturedProduct({ product }: FeaturedProductProps) {
                 Archive No. 001
               </span>
               
-              <h3 className="text-4xl md:text-5xl text-white font-black uppercase tracking-tight leading-[0.9] mb-4">
-                {activeProduct.name.split(" ").slice(0, 2).join(" ")} <br />
-                <span className="text-[#C9A227] italic font-light text-2xl md:text-3xl block mt-2">
-                  {activeProduct.name.split(" ").slice(2).join(" ")}
-                </span>
-              </h3>
+              <Link href={`/jacket/${activeProduct.slug}`}>
+                <h3 className="text-4xl md:text-5xl text-white font-black uppercase tracking-tight leading-[0.9] mb-4 hover:text-[#C9A227] transition-colors">
+                  {activeProduct.name.split(" ").slice(0, 2).join(" ")} <br />
+                  <span className="text-[#C9A227] italic font-light text-2xl md:text-3xl block mt-2">
+                    {activeProduct.name.split(" ").slice(2).join(" ")}
+                  </span>
+                </h3>
+              </Link>
               
               <p className="text-white/50 text-sm leading-relaxed mb-8 line-clamp-3">
                 {activeProduct.description}
@@ -178,7 +186,7 @@ export default function FeaturedProduct({ product }: FeaturedProductProps) {
                 <h4 className="text-white text-xl font-black uppercase tracking-tight mb-2">
                   Premium Materials
                 </h4>
-                <p className="text-white/50 text-xs leading-relaxed max-w-[280px]">
+                <p className="text-white/50 text-sm leading-relaxed max-w-[280px]">
                   Engineered with uncompromised precision and sourced from elite heritage hides.
                 </p>
                 <div className="mt-6 flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.3em] text-[#C9A227]">

@@ -5,13 +5,13 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
 interface ProductPageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
-  const { id } = await params;
+  const { slug } = await params;
   const product = await prisma.product.findUnique({
-    where: { id },
+    where: { slug },
     include: { category: true }
   });
 
@@ -24,10 +24,10 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { id } = await params;
+  const { slug } = await params;
 
   const product = await prisma.product.findUnique({
-    where: { id },
+    where: { slug },
     include: {
       category: true,
     },

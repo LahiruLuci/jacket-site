@@ -10,6 +10,7 @@ import { ChevronDown, Check, Plus, SlidersHorizontal } from "lucide-react";
 const products = [
   { 
     id: 1, 
+    slug: "vanguard-titan-racing-suit",
     name: "Vanguard Titan Racing Suit", 
     price: 1450, 
     category: "Race", 
@@ -20,6 +21,7 @@ const products = [
   },
   { 
     id: 2, 
+    slug: "stealth-commuter-shell",
     name: "Stealth Commuter Shell", 
     price: 850, 
     category: "Urban", 
@@ -30,6 +32,7 @@ const products = [
   },
   { 
     id: 3, 
+    slug: "apex-kinetic-armor",
     name: "Apex Kinetic Armor", 
     price: 1200, 
     category: "Race", 
@@ -40,6 +43,7 @@ const products = [
   },
   { 
     id: 4, 
+    slug: "heritage-cafe-racer",
     name: "Heritage Cafe Racer", 
     price: 950, 
     category: "Heritage", 
@@ -50,6 +54,7 @@ const products = [
   },
   { 
     id: 5, 
+    slug: "velocity-air-mesh",
     name: "Velocity Air Mesh", 
     price: 600, 
     category: "Urban", 
@@ -60,6 +65,7 @@ const products = [
   },
   { 
     id: 6, 
+    slug: "nomad-gore-tex-pro",
     name: "Nomad Gore-Tex Pro", 
     price: 1100, 
     category: "Touring", 
@@ -183,7 +189,7 @@ export default function ShopCatalog() {
 // High-End Product Card Component
 function ProductCard({ product }: { product: any }) {
   return (
-    <Link href={`/product/${product.id}`} className="block">
+    <Link href={`/jacket/${product.slug}`} className="block">
       <motion.div 
         layout
         initial={{ opacity: 0, y: 50, scale: 0.95 }}

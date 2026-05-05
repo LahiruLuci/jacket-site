@@ -30,6 +30,7 @@ import { cn } from "@/lib/utils";
 // --- Types ---
 type Product = {
   id: string;
+  slug: string;
   name: string;
   description: string;
   price: number;
@@ -378,7 +379,7 @@ function ProductCard({ product, index }: { product: Product, index: number }) {
       </div>
 
       {/* 02. METADATA: CLEAN EDITORIAL */}
-      <Link href={`/product/${product.id}`} className="block px-2 md:px-4">
+      <Link href={`/jacket/${product.slug}`} className="block px-2 md:px-4">
         <div className="flex flex-col gap-4 md:gap-6">
           <div className="flex justify-between items-start">
             <div>
