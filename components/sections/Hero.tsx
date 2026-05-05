@@ -158,7 +158,7 @@ export default function Hero() {
           className="flex flex-wrap items-center gap-4"
         >
           <Link
-            href="/shop"
+            href="/#featured-products"
             className="group flex items-center gap-3 bg-[#C9A227] hover:bg-[#b8911e] text-black font-bold text-xs uppercase tracking-widest px-8 py-4 transition-colors duration-300"
           >
             Shop Now

@@ -102,7 +102,7 @@ const FeaturedProductsGrid = ({ products }: FeaturedProductsGridProps) => {
   const displayProducts = products && products.length > 0 ? products : featuredProducts;
 
   return (
-    <section className="bg-[#0B0B0B] py-24 md:py-32 px-6">
+    <section id="featured-products" className="bg-[#0B0B0B] py-24 md:py-32 px-6">
       <div className="max-w-[1600px] mx-auto">
         {/* Section Header */}
         <div className="flex flex-col mb-16 md:mb-20">

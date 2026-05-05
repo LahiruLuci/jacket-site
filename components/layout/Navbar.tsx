@@ -33,7 +33,7 @@ const Navbar = () => {
   }, [isMobileMenuOpen]);
 
   const navLinks = [
-    { name: "Home", href: "/" },
+    { name: "Home", href: "/#featured-products" },
     { name: "Shop", href: "/shop" },
     { name: "About", href: "/about" },
     { name: "Technology", href: "/technology" },
@@ -52,7 +52,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex items-center justify-between px-6">
         {/* Logo - Premium Typography */}
-        <Link href="/" className="flex flex-col group border-l-2 border-accent pl-4 md:pl-6 py-1 relative">
+        <Link href="/#featured-products" className="flex flex-col group border-l-2 border-accent pl-4 md:pl-6 py-1 relative">
           <span className="text-base sm:text-lg md:text-2xl font-black tracking-[0.1em] md:tracking-[0.2em] text-white leading-none uppercase">
             Jacket <span className="text-accent">Junction</span>
           </span>

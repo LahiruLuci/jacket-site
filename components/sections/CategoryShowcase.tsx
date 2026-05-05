@@ -46,23 +46,10 @@ export default function CategoryShowcase() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const isFirstMount = useRef(true);
 
+  // Removed auto-scroll logic to prevent unexpected jumps during navigation
   useEffect(() => {
-    if (isFirstMount.current) {
-      isFirstMount.current = false;
-      return;
-    }
-
-    if (active !== null && cardRefs.current[active]) {
-      // Small delay to allow the layout expansion animation to start/finish
-      const timer = setTimeout(() => {
-        cardRefs.current[active]?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
-      }, 100);
-      return () => clearTimeout(timer);
-    }
-  }, [active]);
+    isFirstMount.current = false;
+  }, []);
 
   return (
     <section className="w-full bg-[#161718] py-24 md:py-32 relative overflow-hidden">
