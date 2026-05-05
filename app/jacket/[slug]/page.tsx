@@ -24,6 +24,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+export async function generateStaticParams() {
+  const products = await (prisma as any).product.findMany({
+    select: { slug: true },
+  });
+
+  return products.map((product: any) => ({
+    slug: product.slug,
+  }));
+}
+
 export default async function ProductPage({ params }: PageProps) {
   const { slug } = await params;
 
