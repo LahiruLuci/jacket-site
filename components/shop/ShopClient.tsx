@@ -52,7 +52,7 @@ type Category = {
 };
 
 interface ShopClientProps {
-  initialProducts: any[];
+  initialProducts: Product[];
   categories: Category[];
 }
 
@@ -62,7 +62,7 @@ export default function ShopClient({ initialProducts, categories }: ShopClientPr
   const [sortOrder, setSortOrder] = useState("Featured");
 
   const materials = useMemo(() => {
-    const m = new Set(initialProducts.map(p => p.material).filter(Boolean));
+    const m = new Set(initialProducts.map(p => p.material).filter(Boolean) as string[]);
     return ["All", ...Array.from(m)];
   }, [initialProducts]);
 
@@ -235,7 +235,7 @@ function FilterPill({ label, options, active, onSelect }: { label: string, optio
             : "bg-white/[0.03] border-white/5 text-white/40 hover:text-white hover:border-white/20"
         )}
       >
-        <span>{label} // <span className={cn("transition-colors", active !== "All" && active !== "Featured" ? "text-black" : "text-white")}>{active}</span></span>
+        <span>{label} <span className="text-white/20">/</span> <span className={cn("transition-colors", active !== "All" && active !== "Featured" ? "text-black" : "text-white")}>{active}</span></span>
         <ChevronDown size={12} className={cn("transition-transform duration-700", open && "rotate-180")} />
       </button>
 

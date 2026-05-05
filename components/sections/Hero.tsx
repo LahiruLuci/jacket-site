@@ -19,7 +19,7 @@ const slides = [
     badge: "Artisan Craftsmanship",
     headline: ["Built For", "The", "Road."],
     accent: "Road.",
-    sub: "Every stitch, every panel â€” designed to perform at the limit while looking effortlessly elite.",
+    sub: "Every stitch, every panel — designed to perform at the limit while looking effortlessly elite.",
   },
   {
     image: "/assets/sohag_hawlader-ai-generated-9034981_1920.webp",

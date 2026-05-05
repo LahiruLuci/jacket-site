@@ -14,8 +14,8 @@ import Newsletter from "@/components/sections/Newsletter";
 import prisma from "@/lib/prisma";
 
 export default async function Home() {
-  let formattedProducts = [];
-  let masterpieceProduct = null;
+  let formattedProducts: any[] = []; // Keeping any[] for the grid as it's complex, but masterpiece is better
+  let masterpieceProduct: any | undefined = undefined;
 
   try {
     // Attempt to fetch featured products for the grid
@@ -38,7 +38,7 @@ export default async function Home() {
     // Silently fallback to hardcoded data if DB is unreachable
     console.log("Database connection failed. Using sample data instead.");
     formattedProducts = [];
-    masterpieceProduct = null;
+    masterpieceProduct = undefined;
   }
 
   return (

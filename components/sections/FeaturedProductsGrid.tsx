@@ -81,7 +81,7 @@ interface ProductType {
   image?: string;
   images?: string[];
   sizes?: string[];
-  category?: string;
+  category?: any;
   categoryName?: string;
 }
 
@@ -138,7 +138,7 @@ const FeaturedProductsGrid = ({ products }: FeaturedProductsGridProps) => {
   );
 };
 
-const ProductCard = ({ product, index }: { product: any; index: number }) => {
+const ProductCard = ({ product, index }: { product: ProductType; index: number }) => {
   const [selectedSize, setSelectedSize] = useState("");
   const [isAdded, setIsAdded] = useState(false);
 
