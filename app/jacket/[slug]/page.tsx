@@ -25,13 +25,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export async function generateStaticParams() {
-  const products = await (prisma as any).product.findMany({
-    select: { slug: true },
-  });
+  try {
+    const products = await (prisma as any).product.findMany({
+      select: { slug: true },
+    });
 
-  return products.map((product: any) => ({
-    slug: product.slug,
-  }));
+    return products.map((product: any) => ({
+      slug: product.slug,
+    }));
+  } catch (error) {
+    console.error("Build-time database fetch failed. Falling back to dynamic rendering.", error);
+    return [];
+  }
 }
 
 export default async function ProductPage({ params }: PageProps) {
