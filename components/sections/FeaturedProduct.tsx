@@ -22,12 +22,12 @@ export default function FeaturedProduct({ product }: FeaturedProductProps) {
   
   // Default data for fallback
   const defaultProduct = {
-    id: "vanguard-stealth",
-    name: "Vanguard Stealth",
-    description: "The pinnacle of urban camouflage and ballistic-grade protection. Features an integrated spine matrix and matte-black hydrophobic material.",
-    price: 1850,
-    images: ["/assets/sohag_hawlader-ai-generated-9034981_1920.webp"],
-    category: { name: "Masterpiece" }
+    id: "interceptor-nv",
+    name: "Navy Guard Water-Resistant Utility Jacket",
+    description: "The ultimate aquatic-inspired defense layer. Engineered with 1000D Navy Ballistic Weave and integrated carbon-silicate sliders for high-velocity urban deployment.",
+    price: 799,
+    images: ["/assets/navy-blue-jacket/navy-blue-jacket.webp"],
+    category: { name: "Elite Series" }
   };
 
   const activeProduct = product || defaultProduct;
@@ -110,8 +110,10 @@ export default function FeaturedProduct({ product }: FeaturedProductProps) {
               </span>
               
               <h3 className="text-4xl md:text-5xl text-white font-black uppercase tracking-tight leading-[0.9] mb-4">
-                {activeProduct.name.split(" ")[0]} <br />
-                <span className="text-[#C9A227] italic font-light">{activeProduct.name.split(" ").slice(1).join(" ")}</span>
+                {activeProduct.name.split(" ").slice(0, 2).join(" ")} <br />
+                <span className="text-[#C9A227] italic font-light text-2xl md:text-3xl block mt-2">
+                  {activeProduct.name.split(" ").slice(2).join(" ")}
+                </span>
               </h3>
               
               <p className="text-white/50 text-sm leading-relaxed mb-8 line-clamp-3">
@@ -140,7 +142,7 @@ export default function FeaturedProduct({ product }: FeaturedProductProps) {
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`flex-1 h-12 flex items-center justify-center text-xs font-bold transition-all duration-300 border ${
+                      className={`flex-1 h-12 flex items-center justify-center text-xs font-bold transition-all duration-300 border cursor-pointer ${
                         selectedSize === size 
                           ? "bg-white text-black border-white" 
                           : "bg-transparent text-white/60 border-white/10 hover:border-white/40"
@@ -153,7 +155,7 @@ export default function FeaturedProduct({ product }: FeaturedProductProps) {
               </div>
 
               {/* Add to Cart Button */}
-              <button className="w-full h-18 md:h-22 bg-[#C9A227] hover:bg-white text-black flex items-center justify-between px-8 md:px-12 font-black uppercase tracking-[0.2em] text-base md:text-lg transition-colors duration-500 group/btn relative overflow-hidden shadow-[0_20px_60px_rgba(201,162,39,0.2)]">
+              <button className="w-full h-18 md:h-22 bg-[#C9A227] hover:bg-white text-black flex items-center justify-between px-8 md:px-12 font-black uppercase tracking-[0.2em] text-base md:text-lg transition-colors duration-500 group/btn relative overflow-hidden shadow-[0_20px_60px_rgba(201,162,39,0.2)] cursor-pointer">
                 <span className="relative z-10">Acquire Now</span>
                 <div className="relative z-10 flex items-center gap-4 md:gap-6">
                   <span className="w-[1px] h-8 bg-[#0A0B0C]/20" />

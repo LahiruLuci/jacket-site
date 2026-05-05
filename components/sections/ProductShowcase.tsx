@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import Image from "next/image";
@@ -20,16 +20,16 @@ const products = [
     detail: "Hand-Burnished Calfskin",
   },
   {
-    name: "Midnight Vanguard",
-    price: "$3,100",
-    image: "/assets/stocksnap-dark-2598357_1920.webp",
-    detail: "Titanium Sub-Structure",
+    name: "Shadow Guard All-Weather Performance Jacket",
+    price: "$599",
+    image: "/assets/black-jacket/black-jacket.webp",
+    detail: "Matte Ballistic Weave",
   },
   {
-    name: "Lunar Ops v2",
-    price: "$2,200",
-    image: "/assets/splitshire-biker-407123_1920.webp",
-    detail: "Ballistic Nylon Hybrid",
+    name: "Navy Guard Water-Resistant Utility Jacket",
+    price: "$799",
+    image: "/assets/navy-blue-jacket/navy-blue-jacket.webp",
+    detail: "Navy Ballistic Weave",
   },
 ];
 
@@ -77,12 +77,17 @@ const ProductShowcase = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
-              className="group relative bg-[#161718] p-8 flex flex-col justify-between h-[600px] hover:z-20 transition-all duration-500"
+              className="group relative bg-[#161718] p-8 flex flex-col justify-between h-[600px] hover:z-20 transition-all duration-500 cursor-pointer"
             >
               <div className="flex justify-between items-start relative z-20">
                 <div className="flex flex-col gap-1">
                   <span className="text-[10px] font-bold text-accent tracking-widest">{product.detail}</span>
-                  <p className="text-white font-serif text-xl italic group-hover:text-accent transition-colors duration-500">{product.name}</p>
+                  <p className="text-white font-serif text-xl italic group-hover:text-accent transition-colors duration-500 flex flex-col">
+                    <span>{product.name.split(" ").slice(0, 2).join(" ")}</span>
+                    <span className="text-xs not-italic font-sans font-light tracking-widest text-white/40 group-hover:text-white/60">
+                      {product.name.split(" ").slice(2).join(" ")}
+                    </span>
+                  </p>
                 </div>
                 <button className="text-white/20 hover:text-accent transition-colors">
                   <Heart size={16} strokeWidth={1.5} />

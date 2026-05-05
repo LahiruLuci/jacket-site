@@ -9,6 +9,22 @@ import { cn } from "@/lib/utils";
 
 const featuredProducts = [
   {
+    id: "shadow-black",
+    name: "Shadow Guard All-Weather Performance Jacket",
+    price: 599,
+    image: "/assets/black-jacket/black-jacket.webp",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    category: "Urban Series"
+  },
+  {
+    id: "interceptor-nv",
+    name: "Navy Guard Water-Resistant Utility Jacket",
+    price: 799,
+    image: "/assets/navy-blue-jacket/navy-blue-jacket.webp",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    category: "Elite Series"
+  },
+  {
     id: "vanguard-titan",
     name: "Vanguard Titan Racing",
     price: 1450,
@@ -146,7 +162,7 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="group flex flex-col h-full bg-[#111111] border border-white/5 rounded-3xl overflow-hidden transition-all duration-500 hover:border-white/20 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+      className="group flex flex-col h-full bg-[#111111] border border-white/5 rounded-3xl overflow-hidden transition-all duration-500 hover:border-white/20 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] cursor-pointer"
     >
       {/* Image Area */}
       <div className="relative aspect-[4/5] overflow-hidden bg-[#161718]">
@@ -186,7 +202,7 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
                   key={size}
                   onClick={(e) => { e.preventDefault(); setSelectedSize(size); }}
                   className={cn(
-                    "w-9 h-9 md:w-11 md:h-11 rounded-full border text-[10px] md:text-xs font-bold transition-all flex items-center justify-center relative overflow-hidden",
+                    "w-9 h-9 md:w-11 md:h-11 rounded-full border text-[10px] md:text-xs font-bold transition-all flex items-center justify-center relative overflow-hidden cursor-pointer",
                     selectedSize === size 
                       ? "bg-accent border-accent text-black scale-110 shadow-[0_0_15px_rgba(201,162,39,0.5)]" 
                       : "bg-black/60 border-white/20 text-white hover:border-white/50 backdrop-blur-md"
@@ -207,7 +223,7 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
               onClick={handleAddToCart}
               disabled={!selectedSize}
               className={cn(
-                "w-full py-3 md:py-4 rounded-xl flex items-center justify-center gap-3 text-[10px] md:text-xs font-black uppercase tracking-widest transition-all duration-300",
+                "w-full py-3 md:py-4 rounded-xl flex items-center justify-center gap-3 text-[10px] md:text-xs font-black uppercase tracking-widest transition-all duration-300 cursor-pointer",
                 isAdded 
                   ? "bg-green-500 text-white" 
                   : selectedSize 
@@ -232,8 +248,11 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
         <div className="flex justify-between items-start mb-4">
           <div>
             <span className="text-[9px] font-bold text-accent uppercase tracking-widest block mb-2">{categoryName}</span>
-            <h3 className="text-xl md:text-2xl font-black uppercase tracking-tighter leading-none text-white group-hover:text-accent transition-colors">
-              {product.name}
+            <h3 className="text-xl md:text-2xl font-black uppercase tracking-tighter leading-none text-white group-hover:text-accent transition-colors flex flex-col gap-1">
+              <span>{product.name.split(" ").slice(0, 2).join(" ")}</span>
+              <span className="text-sm md:text-base font-light text-white/50 lowercase italic tracking-wide">
+                {product.name.split(" ").slice(2).join(" ")}
+              </span>
             </h3>
           </div>
           <span className="text-lg md:text-xl font-black text-white">${product.price}</span>
@@ -242,13 +261,13 @@ const ProductCard = ({ product, index }: { product: any; index: number }) => {
         <div className="mt-auto pt-4 flex items-center justify-between border-t border-white/5">
           <Link 
             href={`/product/${product.id}`}
-            className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors"
+            className="text-xs font-bold uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors"
           >
             View Details
           </Link>
           <div className="flex items-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-            <span className="text-[8px] font-mono text-white/20 uppercase tracking-widest">Available Now</span>
+            <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest">Available Now</span>
           </div>
         </div>
       </div>
