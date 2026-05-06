@@ -3,6 +3,7 @@ import { Sora, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import Preloader from "@/components/ui/Preloader";
+import CartDrawer from "@/components/cart/CartDrawer";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -40,6 +41,7 @@ export default function RootLayout({
       <body className="antialiased selection:bg-accent selection:text-white" suppressHydrationWarning>
         <CartProvider>
           <Preloader />
+          <CartDrawer />
           {children}
           <Footer />
         </CartProvider>

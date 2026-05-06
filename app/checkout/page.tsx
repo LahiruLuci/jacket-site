@@ -272,7 +272,7 @@ export default function CheckoutPage() {
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-[10px] font-bold text-accent uppercase tracking-widest mb-1">Size {item.size}</p>
-                          <p className="text-sm font-black uppercase tracking-tight text-white truncate">{item.name}</p>
+                          <p className="text-sm font-black uppercase tracking-tight text-white leading-snug">{item.name}</p>
                           <p className="text-xs text-white/40 font-bold uppercase tracking-widest mt-1">
                             {item.quantity} × ${item.price.toLocaleString()}
                           </p>

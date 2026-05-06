@@ -89,14 +89,14 @@ export default function Newsletter() {
           </div>
 
           <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-white leading-[0.9] mb-8">
-            Enter The <br />
+            Join The <br />
             <span className="text-transparent" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.4)" }}>
-              Syndicate.
+              Elite.
             </span>
           </h2>
 
           <p className="text-white/50 text-sm md:text-base leading-relaxed font-light mb-12">
-            Receive highly classified material drops, access to unreleased ballistic prototypes, and priority purchasing allocations guaranteed before public deployment.
+            Get early access to new collection drops, exclusive offers, and the latest in motorcycle safety technology delivered straight to your inbox.
           </p>
 
           <div className="relative">

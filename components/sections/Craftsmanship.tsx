@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import Image from "next/image";
@@ -104,7 +104,7 @@ const Craftsmanship = () => {
               <p className="text-2xl font-serif italic text-white leading-snug">
                 "We don't just build jackets. We curate the last line of defense between the rider and the infinite road."
               </p>
-              <p className="text-[10px] font-black uppercase tracking-widest text-accent mt-6">â€” Jacket Junction Atelier</p>
+              <p className="text-[10px] font-black uppercase tracking-widest text-accent mt-6">— Jacket Junction Atelier</p>
             </motion.div>
           </div>
         </div>

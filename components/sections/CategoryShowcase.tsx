@@ -8,36 +8,36 @@ import { ArrowUpRight } from "lucide-react";
 
 const categories = [
   {
-    id: "racing",
-    title: "Apex Racing",
-    short: "Racing",
+    id: "daily",
+    title: "Daily Wear",
+    short: "Daily",
     number: "01",
-    desc: "Aerodynamic precision, titanium sliders, and uncompromised safety engineered for the track and hyper-naked speeds.",
-    image: "/assets/peterlesliemorris-motorcycle-1829461_1920.webp",
-  },
-  {
-    id: "heritage",
-    title: "Heritage",
-    short: "Classic",
-    number: "02",
-    desc: "Timeless leather craftsmanship. Hand-waxed full-grain hides that tell a unique story with every single mile.",
+    desc: "Clean, comfortable jackets designed for everyday use. Perfect for work, travel, and casual outings.",
     image: "/assets/derneuemann-jacket-2821961_1920.webp",
   },
   {
-    id: "urban",
-    title: "Urban Stealth",
-    short: "Urban",
-    number: "03",
-    desc: "Under the radar aesthetics fused with hidden CE-level armor, built specifically for the unforgiving concrete jungle.",
-    image: "/assets/sohag_hawlader-ai-generated-9034981_1920.webp",
+    id: "weather",
+    title: "Weather Protection",
+    short: "Weather",
+    number: "02",
+    desc: "Water-resistant jackets built to handle light rain and wind while keeping you comfortable throughout the day.",
+    image: "/assets/splitshire-biker-407123_1920.webp",
   },
   {
-    id: "touring",
-    title: "Adventure",
-    short: "Touring",
+    id: "outdoor",
+    title: "Outdoor & Riding",
+    short: "Riding",
+    number: "03",
+    desc: "Durable jackets designed for movement and changing conditions, ideal for rides and outdoor activities.",
+    image: "/assets/peterlesliemorris-motorcycle-1829461_1920.webp",
+  },
+  {
+    id: "utility",
+    title: "Utility Jackets",
+    short: "Utility",
     number: "04",
-    desc: "Absolute all-weather dominance. Engineered to conquer continents in supreme comfort and peak protection.",
-    image: "/assets/splitshire-biker-407123_1920.webp",
+    desc: "Functional designs with multiple pockets and practical features for everyday convenience.",
+    image: "/assets/sohag_hawlader-ai-generated-9034981_1920.webp",
   },
 ];
 
@@ -46,7 +46,6 @@ export default function CategoryShowcase() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const isFirstMount = useRef(true);
 
-  // Removed auto-scroll logic to prevent unexpected jumps during navigation
   useEffect(() => {
     isFirstMount.current = false;
   }, []);
@@ -69,17 +68,17 @@ export default function CategoryShowcase() {
             <div className="flex items-center gap-4 mb-6">
               <div className="w-12 h-[1px] bg-[#C9A227]" />
               <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-[#C9A227]">
-                The Archetypes
+                Purpose Built
               </span>
             </div>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-white leading-[0.9]">
-              Choose Your <br />
-              <span className="text-transparent" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.4)" }}>Discipline.</span>
+              Built for Every <br />
+              <span className="text-transparent" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.4)" }}>Situation.</span>
             </h2>
           </div>
 
           <p className="text-white/50 max-w-md text-sm md:text-base leading-relaxed font-light">
-            Four distinct philosophies. One uncompromising standard of protection. Discover the gear precisely engineered for your exact riding style.
+            Functional gear for your daily life. Whether you are commuting, riding, or exploring the outdoors, we have the perfect jacket for you.
           </p>
         </motion.div>
       </div>
@@ -99,7 +98,7 @@ export default function CategoryShowcase() {
                 className="relative overflow-hidden cursor-pointer group transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
                 style={{
                   flex: isActive ? 6 : 1,
-                  minHeight: isActive ? "350px" : "140px", // Increased height to prevent text hitting bottom
+                  minHeight: isActive ? "350px" : "140px",
                 }}
               >
                 {/* Image */}
@@ -179,10 +178,10 @@ export default function CategoryShowcase() {
                       </p>
 
                       <Link
-                        href={`/category/${cat.id}`}
+                        href={`/shop?category=${cat.id}`}
                         className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-[#C9A227] hover:text-white transition-colors duration-300 pointer-events-auto group/btn"
                       >
-                        Explore Category
+                        Explore Collection
                         <span className="w-8 h-[1px] bg-[#C9A227] group-hover/btn:w-12 transition-all duration-300" />
                       </Link>
                     </div>

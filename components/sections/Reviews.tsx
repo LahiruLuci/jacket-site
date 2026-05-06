@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useRef, useState } from "react";
 import Image from "next/image";
@@ -9,7 +9,7 @@ const reviewsRow1 = [
   {
     name: "Marcus T.",
     role: "Ducati Panigale V4 Rider",
-    text: "I've worn gear from every major European brand. Nothing, and I mean absolutely nothing, fits or protects like the Vanguard Stealth. Itâ€™s on another planet.",
+    text: "I've worn gear from every major European brand. Nothing, and I mean absolutely nothing, fits or protects like the Vanguard Stealth. It's on another planet.",
     rating: 5,
   },
   {
@@ -21,7 +21,7 @@ const reviewsRow1 = [
   {
     name: "David K.",
     role: "Custom Builder, LA",
-    text: "The craftsmanship is absurd. You can smell the Italian leather from across the room. The stitching is surgical. This isnâ€™t a jacket, itâ€™s an heirloom.",
+    text: "The craftsmanship is absurd. You can smell the Italian leather from across the room. The stitching is surgical. This isn't a jacket, it's an heirloom.",
     rating: 5,
   },
   {

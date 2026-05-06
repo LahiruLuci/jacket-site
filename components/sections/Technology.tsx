@@ -76,9 +76,9 @@ export default function Technology() {
               Advanced R&D Lab
             </span>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-white leading-[0.9]">
-              Absolute <br />
+              Safety <br />
               <span className="text-transparent" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.4)" }}>
-                Physics.
+                Engineering.
               </span>
             </h2>
           </div>

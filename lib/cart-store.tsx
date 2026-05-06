@@ -22,6 +22,10 @@ interface CartContextType {
   clearCart: () => void;
   getCartCount: () => number;
   getCartTotal: () => number;
+  isDrawerOpen: boolean;
+  setIsDrawerOpen: (isOpen: boolean) => void;
+  openDrawer: () => void;
+  closeDrawer: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -29,6 +33,10 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const openDrawer = () => setIsDrawerOpen(true);
+  const closeDrawer = () => setIsDrawerOpen(false);
 
   // Hydrate from localStorage
   useEffect(() => {
@@ -78,6 +86,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       };
       return [...prevItems, newItem];
     });
+
+    openDrawer();
   };
 
   const removeItem = (cartItemId: string) => {
@@ -119,6 +129,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
         clearCart,
         getCartCount,
         getCartTotal,
+        isDrawerOpen,
+        setIsDrawerOpen,
+        openDrawer,
+        closeDrawer,
       }}
     >
       {children}

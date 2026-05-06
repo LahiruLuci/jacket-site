@@ -7,23 +7,23 @@ import { motion, useScroll, useTransform } from "framer-motion";
 const values = [
   {
     num: "01",
-    title: "Kinetic Armor",
-    subtitle: "Absolute Protection",
-    desc: "We refuse to compromise. Forged with reactive D3O® polymers and titanium impact matrices, our garments learn from the crash. Setting a new paradigm where safety meets an unforgivingly sharp aesthetic.",
+    title: "Quality First",
+    subtitle: "Built to Last",
+    desc: "We focus on creating jackets that balance durability, comfort, and clean design. We use durable materials and reinforced construction to ensure long-term use in real-world conditions.",
     image: "/assets/peterlesliemorris-motorcycle-1829461_1920.webp",
   },
   {
     num: "02",
-    title: "Artisanal Forge",
-    subtitle: "Generational Craft",
-    desc: "Sourced from elite European tanneries, only the top 2% of full-grain hides make the cut. Hand-burnished, organically waxed, and triple-stitched by masters whose obsession with perfection mirrors our own.",
+    title: "Practical Design",
+    subtitle: "Real-World Use",
+    desc: "Every detail is designed for everyday functionality, from pocket placement to fit and comfort. No unnecessary features. No overdesign. Just reliable jackets that work in real life.",
     image: "/assets/derneuemann-jacket-2821961_1920.webp",
   },
   {
     num: "03",
-    title: "Zero Drag",
-    subtitle: "Aerodynamic Dominance",
-    desc: "Stripped of all excess. Every seam, vent, and zipper is meticulously tunnel-tested. We deliver a hyper-minimalist silhouette that ensures stealth navigation across both city grids and mountain passes.",
+    title: "Everyday Comfort",
+    subtitle: "Daily Travel",
+    desc: "Lightweight and easy to wear, suitable for daily travel and changing conditions. Our jackets are made to handle daily wear while staying practical and easy to use.",
     image: "/assets/splitshire-biker-407123_1920.webp",
   },
 ];
@@ -44,17 +44,15 @@ export default function BrandValues() {
     <section ref={targetRef} className="relative h-[300vh] bg-[#161718]">
       {/* Sticky container that locks during scroll */}
       <div className="sticky top-0 h-screen flex items-center pt-24 md:pt-32 overflow-hidden bg-[#1F2022]">
-        
-        {/* Absolute Section Header */}
-        <div className="absolute top-16 md:top-24 left-8 md:left-16 lg:left-24 z-20 mix-blend-difference pointer-events-none">
+                {/* Absolute Section Header - Gold Badge Only */}
+        <div className="absolute top-12 md:top-20 left-8 md:left-16 lg:left-24 z-[30] pointer-events-none">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-8 md:w-16 h-[2px] bg-[#C9A227]" />
             <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.4em] text-[#C9A227]">
-              The Ethos
+              Built with Purpose
             </span>
           </div>
         </div>
-
         {/* The Sliding Track */}
         <motion.div style={{ x }} className="flex w-[300vw] h-full items-center">
           {values.map((val, index) => {
@@ -67,7 +65,7 @@ export default function BrandValues() {
                   The Premium "Glass Box" layout using Flexbox for rock-solid stability. 
                   Images are massive and text overlaps them beautifully. 
                 */}
-                <div className="w-full max-w-[1400px] h-[80vh] lg:h-[75vh] min-h-[500px] md:min-h-[600px] max-h-[850px] flex flex-col lg:flex-row relative items-center">
+                <div className="w-full max-w-[1400px] h-[80vh] lg:h-[75vh] min-h-[500px] md:min-h-[600px] max-h-[850px] flex flex-col lg:flex-row relative items-center mt-8 md:mt-12 lg:mt-16">
                   
                   {/* Left Column: Huge Image */}
                   <div className="w-full lg:w-[65%] relative h-[35vh] lg:h-full overflow-hidden rounded-t-2xl lg:rounded-none lg:rounded-l-2xl">

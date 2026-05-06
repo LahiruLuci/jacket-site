@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -66,7 +66,7 @@ export default function Footer() {
                    </div>
                    <div className="hidden md:block">
                        <div className="text-[10px] text-[#C9A227] font-bold uppercase tracking-widest mb-2">Coordinates</div>
-                       <div className="text-white/70 font-mono text-sm tracking-wider">45.4642Â° N, 9.1900Â° E</div>
+                       <div className="text-white/70 font-mono text-sm tracking-wider">45.4642° N, 9.1900° E</div>
                    </div>
                </div>
             </div>
@@ -126,7 +126,7 @@ export default function Footer() {
 
             {/* Copyright & Legal */}
             <div className="w-full flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-[9px] md:text-[10px] uppercase tracking-widest text-white/30 font-bold">
-               <p>Â© {new Date().getFullYear()} Jacket Junction. All rights reserved.</p>
+               <p>© {new Date().getFullYear()} Jacket Junction. All rights reserved.</p>
                <div className="flex gap-6 mt-4 md:mt-0">
                   <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
                   <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>

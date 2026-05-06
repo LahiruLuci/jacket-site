@@ -12,7 +12,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const { getCartCount } = useCart();
+  const { getCartCount, openDrawer } = useCart();
   const cartCount = getCartCount();
 
   useEffect(() => {
@@ -98,29 +98,26 @@ const Navbar = () => {
         </div>
 
         {/* Action Icons - Premium Detailing */}
-        <div className="flex items-center gap-3 md:gap-8">
-          <button className="w-11 h-11 md:w-12 md:h-12 flex items-center justify-center text-white/60 hover:text-accent transition-all duration-300 hover:bg-white/5 rounded-full">
+        <div className="flex items-center gap-1.5 sm:gap-3 md:gap-8">
+          <button className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-white/60 hover:text-accent transition-all duration-300 hover:bg-white/5 rounded-full">
             <Search strokeWidth={2} className="w-5 h-5 md:w-5.5 md:h-5.5" />
           </button>
           
           <div className="h-8 w-[1px] bg-white/10 hidden sm:block" />
 
-          <Link 
-            href="/cart"
-            className="flex items-center gap-3 md:gap-5 group bg-white/10 md:bg-white/5 hover:bg-white/10 px-4 md:px-6 py-2.5 md:py-3 rounded-full border border-white/10 md:border-white/5 transition-all duration-300"
+          <button 
+            onClick={openDrawer}
+            className="flex items-center gap-2 md:gap-3 group bg-white/10 md:bg-white/5 hover:bg-white/10 px-3 md:px-5 py-2 md:py-2.5 rounded-full border border-white/10 md:border-white/5 transition-all duration-300 cursor-pointer flex-shrink-0"
           >
-            <div className="hidden sm:flex flex-col items-end">
-              <span className="text-[11px] md:text-xs font-black uppercase tracking-widest text-white">Cart</span>
-              <span className="text-[9px] md:text-[11px] text-accent font-bold">{formatCount(cartCount)} UNITS</span>
-            </div>
-            <div className="relative">
-              <ShoppingCart strokeWidth={2} className="w-6 h-6 md:w-7 md:h-7 text-white group-hover:text-accent transition-colors" />
-              <span className="absolute -top-3 -right-3 w-5.5 h-5.5 md:w-6 md:h-6 bg-accent text-black text-[10px] md:text-[11px] font-bold rounded-full flex items-center justify-center border-2 border-[#0B0B0B]">{cartCount}</span>
-            </div>
-          </Link>
+            <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-white group-hover:text-accent transition-colors">
+              Cart <span className="hidden xs:inline">({cartCount})</span>
+              <span className="xs:hidden">({cartCount})</span>
+            </span>
+            <ShoppingCart strokeWidth={2.5} className="w-4 h-4 md:w-5 md:h-5 text-white group-hover:text-accent transition-colors" />
+          </button>
 
           <button 
-            className="lg:hidden text-white p-2 hover:bg-white/5 rounded-lg transition-colors z-[210]"
+            className="lg:hidden text-white p-2 hover:bg-white/5 rounded-lg transition-colors z-[210] flex-shrink-0"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -207,10 +204,10 @@ const Navbar = () => {
                       "text-4xl md:text-6xl font-black uppercase tracking-tighter transition-all duration-300",
                       pathname === "/cart" ? "text-accent" : "text-white group-hover:text-accent"
                     )}>
-                      Cart
+                      Cart ({cartCount})
                     </span>
                     <span className="text-[10px] font-bold tracking-[0.3em] text-accent uppercase">
-                      {pathname === "/cart" ? "Currently Viewing" : `${formatCount(cartCount)} Items // View Bag`}
+                      {pathname === "/cart" ? "Currently Viewing" : "View Manifest"}
                     </span>
                   </div>
                 </Link>
