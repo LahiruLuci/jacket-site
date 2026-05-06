@@ -10,27 +10,34 @@ import {
   Shield,
   Layout,
   Package,
-  ChevronDown,
   CheckCircle2,
   Clock,
-  RotateCcw
+  RotateCcw,
+  X,
+  Maximize2,
+  AlertCircle
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useCart } from "@/lib/cart-store";
 
 interface ProductDetailClientProps {
   product: any;
+  relatedProducts: any[];
 }
 
-export default function ProductDetailClient({ product }: ProductDetailClientProps) {
+export default function ProductDetailClient({ product, relatedProducts }: ProductDetailClientProps) {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [isAdded, setIsAdded] = useState(false);
   const [showStickyBar, setShowStickyBar] = useState(false);
+  const [activeImage, setActiveImage] = useState<string | null>(null);
+  const [showSizeError, setShowSizeError] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { addItem } = useCart();
 
   // Safety checks
   const productName = product?.name || "Premium Jacket";
   const productPrice = product?.price || 0;
-  const productDesc = product?.description || "This jacket is built for daily wear with durable, water-resistant fabric and a comfortable fit that adapts to your movement.";
+  const productDesc = product?.description || "Crafted for durability and designed to adapt to your daily movement.";
   
   const { scrollY } = useScroll();
 
@@ -49,12 +56,20 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
     offset: ["start start", "end end"]
   });
 
-  // Desktop Only Parallax Values
+  // Parallax Values
   const imageScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.1]);
   const imageOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0.4]);
   const bgTextY = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const contentOpacity = useTransform(scrollYProgress, [0.05, 0.2], [0, 1]);
   const contentY = useTransform(scrollYProgress, [0.05, 0.2], [50, 0]);
+
+  const { scrollYProgress: heroScrollProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "start end"]
+  });
+
+  // Hero Content Fade/Scale
+  const heroContentOpacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const heroContentScale = useTransform(scrollY, [0, 400], [1, 0.9]);
 
   const images = product?.images && product.images.length > 0 
     ? product.images 
@@ -62,15 +77,21 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
 
   const handleAddToCart = () => {
     if (!selectedSize) {
+      setShowSizeError(true);
       document.getElementById('buy-panel')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => setShowSizeError(false), 2000);
       return;
     }
+    
+    // Add to global cart store
+    addItem(product, selectedSize);
+    
     setIsAdded(true);
     setTimeout(() => setIsAdded(false), 2000);
   };
 
   return (
-    <div ref={containerRef} className="bg-[#0B0B0B] text-white min-h-[200vh] selection:bg-accent selection:text-black font-inter overflow-x-hidden">
+    <div ref={containerRef} className="bg-[#0B0B0B] text-white min-h-[200vh] selection:bg-accent selection:text-black font-inter">
       
       {/* 01. THE IMMERSIVE HERO */}
       <section className="relative lg:sticky lg:top-0 h-[80vh] md:h-screen w-full flex items-center justify-center overflow-hidden bg-black">
@@ -81,7 +102,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
 
         {/* Massive Background Typography */}
         <motion.div 
-          style={{ y: bgTextY } as any}
+          style={{ y: bgTextY, opacity: heroContentOpacity } as any}
           className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none whitespace-nowrap hidden lg:flex"
         >
           <h2 className="text-[18vw] font-black uppercase tracking-tighter text-white/[0.03] leading-none select-none">
@@ -106,7 +127,10 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
           />
         </motion.div>
 
-        <div className="absolute bottom-12 md:bottom-20 inset-x-8 md:inset-x-24 flex flex-col md:flex-row items-end justify-between z-20 gap-6">
+        <motion.div 
+          style={{ opacity: heroContentOpacity, scale: heroContentScale } as any}
+          className="absolute bottom-12 md:bottom-20 inset-x-8 md:inset-x-24 flex flex-col md:flex-row items-end justify-between z-20 gap-6"
+        >
            <div className="flex flex-col w-full md:w-auto">
              <motion.h1 
                initial={{ opacity: 0, y: 20 }}
@@ -124,20 +148,20 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
            >
              <span className="text-2xl md:text-5xl font-black text-white tracking-tighter">${productPrice}</span>
            </motion.div>
-        </div>
+        </motion.div>
       </section>
 
       {/* 02. PRODUCT DETAILS SECTION */}
       <section className="relative z-30 container max-w-[1500px] mx-auto px-6 py-16 md:py-32">
-        <motion.div 
-          style={{ 
-            y: mounted && typeof window !== 'undefined' && window.innerWidth > 1024 ? contentY : 0 
-          } as any}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24"
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
           
           {/* Left Side: Content Block */}
-          <div className="lg:col-span-7 flex flex-col gap-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="lg:col-span-7 flex flex-col gap-12"
+          >
             <div className="space-y-6">
               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white">
                 Built for Everyday Performance
@@ -145,10 +169,8 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
               <p className="text-accent text-lg md:text-2xl font-medium tracking-tight">
                 Designed for comfort. Made to last.
               </p>
-              <p className="text-white/70 text-lg md:text-xl font-light leading-relaxed max-w-2xl">
+              <p className="text-white/70 text-lg md:text-xl font-light leading-relaxed max-w-2xl whitespace-pre-line">
                 {productDesc}
-                <br /><br />
-                Crafted for durability and designed to adapt to your daily movement, this piece offers reliable protection and timeless style.
               </p>
             </div>
 
@@ -192,19 +214,97 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                </div>
             </div>
 
-            {/* Gallery Preview */}
-            <div className="grid grid-cols-2 gap-4 pt-12">
-              {images.slice(1, 3).map((img: string, i: number) => (
-                <div key={i} className="relative aspect-[4/3] bg-[#1A1A1A] rounded-[2rem] overflow-hidden border border-white/5">
-                  <Image src={img} alt="Detail" fill className="object-cover opacity-80" />
-                </div>
-              ))}
+            {/* ENHANCED IMAGE GALLERY SECTION */}
+            <div className="pt-12 space-y-6">
+              <div className="flex items-end justify-between">
+                <span className="text-[10px] font-bold text-accent uppercase tracking-[0.5em]">Gallery // Perspective</span>
+                <span className="text-[10px] font-bold text-white/20 uppercase tracking-[0.2em]">Click to expand</span>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
+                {images.slice(1, 5).map((img: string, i: number) => (
+                  <motion.div 
+                    key={i} 
+                    whileHover={{ scale: 0.98 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setActiveImage(img)}
+                    className="group relative aspect-[4/3] bg-[#1A1A1A] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-white/5 cursor-zoom-in shadow-2xl"
+                  >
+                    <Image 
+                      src={img} 
+                      alt={`Detail ${i}`} 
+                      fill 
+                      className="object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110" 
+                    />
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+                    <div className="absolute bottom-6 right-6 p-3 rounded-full bg-black/40 backdrop-blur-md border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-500">
+                      <Maximize2 size={16} className="text-white" />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
-          </div>
+
+            {/* DIMENSIONAL BLUEPRINT (SIZE TABLE) */}
+            <div className="pt-16 md:pt-24 space-y-8">
+              <div className="flex flex-col gap-2">
+                <span className="text-[10px] font-bold text-accent uppercase tracking-[0.5em]">Dimensional Archive</span>
+                <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white">Size Blueprint</h3>
+              </div>
+
+              <div className="overflow-hidden rounded-[2rem] md:rounded-[3rem] border border-white/10 bg-[#151515] shadow-2xl">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="bg-white/[0.03] border-b border-white/5">
+                        <th className="px-6 md:px-10 py-6 md:py-8 text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Size</th>
+                        <th className="px-6 md:px-10 py-6 md:py-8 text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Chest (In)</th>
+                        <th className="px-6 md:px-10 py-6 md:py-8 text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Sleeve (In)</th>
+                        <th className="px-6 md:px-10 py-6 md:py-8 text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Length (In)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {[
+                        { s: "S", c: "38-40", sl: "33-34", l: "26.5" },
+                        { s: "M", c: "41-43", sl: "34-35", l: "27.5" },
+                        { s: "L", c: "44-46", sl: "35-36", l: "28.5" },
+                        { s: "XL", c: "47-49", sl: "36-37", l: "29.5" }
+                      ].map((row, i) => (
+                        <motion.tr 
+                          key={i}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: i * 0.1 }}
+                          className="group border-b border-white/5 last:border-0 hover:bg-white/[0.02] transition-colors"
+                        >
+                          <td className="px-6 md:px-10 py-6 md:py-8">
+                             <span className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl bg-white/5 border border-white/10 text-sm font-black group-hover:bg-accent group-hover:text-black group-hover:border-accent transition-all duration-500">
+                               {row.s}
+                             </span>
+                          </td>
+                          <td className="px-6 md:px-10 py-6 md:py-8 text-sm md:text-base font-bold text-white/80">{row.c}</td>
+                          <td className="px-6 md:px-10 py-6 md:py-8 text-sm md:text-base font-bold text-white/80">{row.sl}</td>
+                          <td className="px-6 md:px-10 py-6 md:py-8 text-sm md:text-base font-bold text-white/80">{row.l}</td>
+                        </motion.tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-4 p-6 rounded-3xl bg-white/[0.02] border border-white/5">
+                <Ruler className="text-accent" size={20} />
+                <p className="text-[10px] md:text-xs text-white/40 font-medium uppercase tracking-widest leading-loose">
+                  * All measurements are taken in inches with the garment laid flat. For the most accurate fit, we recommend measuring a jacket you already own.
+                </p>
+              </div>
+            </div>
+          </motion.div>
 
           {/* Right Side: Action Panel */}
-          <div className="lg:col-span-5 relative" id="buy-panel">
-            <div className="lg:sticky lg:top-32 space-y-10 bg-[#1A1A1A] p-10 md:p-14 rounded-[3rem] border border-white/10 shadow-2xl">
+          <div className="lg:col-span-5 relative h-full" id="buy-panel">
+            <div className="lg:sticky lg:top-32 h-fit space-y-10 bg-[#1A1A1A] p-10 md:p-14 rounded-[3rem] border border-white/10 shadow-2xl">
               <div className="space-y-4">
                 <h2 className="text-3xl font-black uppercase tracking-tight text-white">Select Size</h2>
                 <div className="h-[1px] w-full bg-white/10" />
@@ -241,16 +341,23 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                 <button 
                   onClick={handleAddToCart}
                   className={cn(
-                    "w-full h-20 rounded-[2rem] flex items-center justify-center gap-4 text-base font-black uppercase tracking-[0.2em] transition-all duration-500 shadow-2xl",
+                    "w-full h-20 rounded-[2rem] flex items-center justify-center gap-4 text-base font-black uppercase tracking-[0.2em] transition-all duration-500 shadow-2xl cursor-pointer",
                     isAdded 
                       ? "bg-green-500 text-white" 
-                      : selectedSize 
-                        ? "bg-accent text-black hover:-translate-y-1" 
-                        : "bg-white text-black opacity-90 hover:bg-white/100"
+                      : showSizeError
+                        ? "bg-red-500/20 text-red-500 border border-red-500/50"
+                        : selectedSize 
+                          ? "bg-accent text-black hover:-translate-y-1" 
+                          : "bg-white text-black opacity-90 hover:bg-white/100"
                   )}
                 >
-                  {isAdded ? "Added to Cart" : "Add to Cart"}
-                  <ShoppingBag size={22} />
+                  {isAdded ? (
+                    <>Added to Cart <CheckCircle2 size={22} /></>
+                  ) : showSizeError ? (
+                    <>Please Select a Size <AlertCircle size={22} /></>
+                  ) : (
+                    <>Add to Cart <ShoppingBag size={22} /></>
+                  )}
                 </button>
                 
                 {/* Trust Info */}
@@ -269,19 +376,57 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                    </div>
                 </div>
               </div>
-            </div>
           </div>
-        </motion.div>
-      </section>
+        </div>
+      </div>
+    </section>
 
-      {/* STICKY BAR */}
+      {/* LIGHTBOX MODAL */}
+      <AnimatePresence>
+        {activeImage && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/95 backdrop-blur-2xl p-4 md:p-12"
+            onClick={() => setActiveImage(null)}
+          >
+            <motion.button 
+              whileHover={{ scale: 1.1, rotate: 90 }}
+              whileTap={{ scale: 0.9 }}
+              className="absolute top-8 right-8 z-[1001] w-12 h-12 rounded-full bg-white/10 flex items-center justify-center border border-white/20 text-white hover:bg-white hover:text-black transition-colors"
+              onClick={() => setActiveImage(null)}
+            >
+              <X size={24} />
+            </motion.button>
+
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.8, opacity: 0, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-[1200px] aspect-square md:aspect-video rounded-[2rem] md:rounded-[4rem] overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.8)]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image 
+                src={activeImage} 
+                alt="Enlarged view" 
+                fill 
+                className="object-contain md:object-cover" 
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* STICKY BAR (MOBILE ONLY) */}
       <AnimatePresence>
         {showStickyBar && (
           <motion.div 
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
-            className="fixed bottom-4 md:bottom-6 inset-x-4 md:inset-x-6 z-[100] flex justify-center"
+            className="fixed bottom-4 md:bottom-6 inset-x-4 md:inset-x-6 z-[100] flex lg:hidden justify-center"
           >
             <div className="w-full max-w-3xl bg-[#1A1A1A]/90 backdrop-blur-3xl border border-white/20 rounded-[1.5rem] md:rounded-[2rem] p-2 md:p-4 flex items-center justify-between shadow-2xl overflow-hidden">
               <div className="flex items-center gap-3 md:gap-4 px-2 md:px-4 min-w-0">
@@ -299,18 +444,89 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
               <button 
                 onClick={handleAddToCart}
                 className={cn(
-                  "px-4 md:px-8 h-10 md:h-12 rounded-xl md:rounded-2xl flex items-center gap-2 md:gap-3 text-[9px] md:text-xs font-black uppercase tracking-widest transition-all flex-shrink-0 whitespace-nowrap",
-                  isAdded ? "bg-green-500 text-white" : "bg-white text-black hover:bg-accent"
+                  "px-4 md:px-8 h-10 md:h-12 rounded-xl md:rounded-2xl flex items-center gap-2 md:gap-3 text-[9px] md:text-xs font-black uppercase tracking-widest transition-all flex-shrink-0 whitespace-nowrap cursor-pointer",
+                  isAdded 
+                    ? "bg-green-500 text-white" 
+                    : showSizeError
+                      ? "bg-red-500/20 text-red-500"
+                      : "bg-white text-black hover:bg-accent"
                 )}
               >
-                <span className="hidden sm:inline">{isAdded ? "Added" : "Add to Cart"}</span>
-                <span className="sm:hidden">{isAdded ? "Added" : "Add"}</span>
-                <ShoppingBag size={14} className="md:size-[16px]" />
+                <span className="hidden sm:inline">
+                  {isAdded ? "Added" : showSizeError ? "Select Size" : "Add to Cart"}
+                </span>
+                <span className="sm:hidden">
+                  {isAdded ? "Added" : showSizeError ? "Size!" : "Add"}
+                </span>
+                {isAdded ? (
+                  <CheckCircle2 size={14} className="md:size-[16px]" />
+                ) : showSizeError ? (
+                  <AlertCircle size={14} className="md:size-[16px]" />
+                ) : (
+                  <ShoppingBag size={14} className="md:size-[16px]" />
+                )}
               </button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* 03. RELATED PRODUCTS */}
+      {relatedProducts && relatedProducts.length > 0 && (
+        <section className="bg-black py-32 md:py-48 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(201,162,39,0.05),transparent_70%)]" />
+          
+          <div className="container max-w-[1500px] mx-auto px-6 relative z-10">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 md:mb-24">
+              <div className="space-y-4">
+                <span className="text-[10px] font-bold text-accent uppercase tracking-[0.5em]">You May Also Like</span>
+                <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white">The Legacy Collection</h2>
+              </div>
+              <a href="/shop" className="text-[10px] font-black uppercase tracking-[0.4em] text-white/40 hover:text-accent transition-colors border-b border-white/10 pb-2">
+                View All Gear
+              </a>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {relatedProducts.map((p: any) => (
+                <motion.a 
+                  key={p.id}
+                  href={`/jacket/${p.slug}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="group block"
+                >
+                  <div className="relative aspect-[4/5] bg-[#111111] rounded-[2rem] overflow-hidden border border-white/5 mb-6">
+                    <Image 
+                      src={p.images?.[0] || "/assets/placeholder.webp"} 
+                      alt={p.name} 
+                      fill 
+                      className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" 
+                    />
+                    <div className="absolute top-6 right-6">
+                       <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                          <ShoppingBag size={16} className="text-white" />
+                       </div>
+                    </div>
+                  </div>
+                  <div className="space-y-2 px-2">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-sm font-black uppercase tracking-tight text-white group-hover:text-accent transition-colors">
+                        {p.name.split(" ").slice(0, 2).join(" ")}
+                      </h3>
+                      <span className="text-sm font-bold text-white/40">${p.price}</span>
+                    </div>
+                    <p className="text-[10px] font-bold text-white/20 uppercase tracking-widest">
+                      {p.category?.name || "Gear"} Archive
+                    </p>
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <footer className="py-24 border-t border-white/10 flex flex-col items-center gap-4 bg-black relative z-40">
          <h4 className="text-xl font-black uppercase tracking-tighter">Jacket Junction</h4>

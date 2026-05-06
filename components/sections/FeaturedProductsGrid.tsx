@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Eye, Plus, Check } from "lucide-react";
+import { Eye, Plus, Check, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useCart } from "@/lib/cart-store";
 
 const featuredProducts = [
   {
@@ -150,11 +151,21 @@ const FeaturedProductsGrid = ({ products }: FeaturedProductsGridProps) => {
 const ProductCard = ({ product, index }: { product: ProductType; index: number }) => {
   const [selectedSize, setSelectedSize] = useState("");
   const [isAdded, setIsAdded] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const { addItem } = useCart();
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!selectedSize) return;
+    
+    if (!selectedSize) {
+      setShowError(true);
+      setTimeout(() => setShowError(false), 2000);
+      return;
+    }
+    
+    // Add to global cart store
+    addItem(product, selectedSize);
     
     setIsAdded(true);
     setTimeout(() => setIsAdded(false), 2000);
@@ -230,22 +241,25 @@ const ProductCard = ({ product, index }: { product: ProductType; index: number }
             
             <button
               onClick={handleAddToCart}
-              disabled={!selectedSize}
               className={cn(
                 "w-full py-3 md:py-4 rounded-xl flex items-center justify-center gap-3 text-[10px] md:text-xs font-black uppercase tracking-widest transition-all duration-300 cursor-pointer",
                 isAdded 
                   ? "bg-green-500 text-white" 
-                  : selectedSize 
-                    ? "bg-white text-black hover:bg-accent" 
-                    : "bg-white/10 text-white/30 cursor-not-allowed border border-white/5 backdrop-blur-md"
+                  : showError
+                    ? "bg-red-500/20 text-red-500 border border-red-500/50"
+                    : selectedSize 
+                      ? "bg-white text-black hover:bg-accent" 
+                      : "bg-white/10 text-white/30 border border-white/5 backdrop-blur-md"
               )}
             >
               {isAdded ? (
                 <>Added <Check size={16} /></>
+              ) : showError ? (
+                <>Select a Size <AlertCircle size={16} /></>
               ) : selectedSize ? (
                 <>Add to Cart <Plus size={16} /></>
               ) : (
-                <>Select Size to Add <Plus size={16} /></>
+                <>Add to Cart <Plus size={16} /></>
               )}
             </button>
           </div>

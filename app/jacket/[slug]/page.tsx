@@ -11,17 +11,22 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   
-  const product = await (prisma as any).product.findFirst({
-    where: { slug: slug },
-    include: { category: true }
-  });
+  try {
+    const product = await (prisma as any).product.findFirst({
+      where: { slug: slug },
+      include: { category: true }
+    });
 
-  if (!product) return { title: "Product Not Found" };
+    if (!product) return { title: "Product Not Found" };
 
-  return {
-    title: `${(product as any).name} | Jacket Junction Archives`,
-    description: (product as any).description,
-  };
+    return {
+      title: `${(product as any).name} | Jacket Junction Archives`,
+      description: (product as any).description,
+    };
+  } catch (error) {
+    console.error("Metadata Database Error:", error);
+    return { title: "Jacket Details | Jacket Junction Archives" };
+  }
 }
 
 export async function generateStaticParams() {
@@ -42,22 +47,36 @@ export async function generateStaticParams() {
 export default async function ProductPage({ params }: PageProps) {
   const { slug } = await params;
 
-  const product = await (prisma as any).product.findFirst({
-    where: { slug: slug },
-    include: {
-      category: true,
-    },
-  });
+  try {
+    const product = await (prisma as any).product.findFirst({
+      where: { slug: slug },
+      include: {
+        category: true,
+      },
+    });
 
-  if (!product) {
+    // Fetch related products from the same category
+    const relatedProducts = await (prisma as any).product.findMany({
+      where: {
+        categoryId: (product as any).categoryId,
+        NOT: {
+          id: (product as any).id,
+        },
+      },
+      take: 4,
+      include: {
+        category: true,
+      },
+    });
+
+    return (
+      <main className="min-h-screen bg-[#0B0B0B] text-white selection:bg-accent selection:text-black font-inter">
+        <Navbar />
+        <ProductDetailClient product={product} relatedProducts={relatedProducts} />
+      </main>
+    );
+  } catch (error) {
+    console.error("Runtime Database Error:", error);
     notFound();
   }
-
-  return (
-    <main className="min-h-screen bg-[#0B0B0B] text-white selection:bg-accent selection:text-black font-inter overflow-x-hidden">
-      <Navbar />
-      
-      <ProductDetailClient product={product} />
-    </main>
-  );
 }

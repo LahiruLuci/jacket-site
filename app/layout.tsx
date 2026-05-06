@@ -28,6 +28,8 @@ export const metadata: Metadata = {
   description: "The epitome of premium motorcycle gear. Artisanal craftsmanship meets peak protection. Discover the Jacket Junction collection.",
 };
 
+import { CartProvider } from "@/lib/cart-store";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,9 +38,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${sora.variable} ${inter.variable} ${playfair.variable} dark`}>
       <body className="antialiased selection:bg-accent selection:text-white" suppressHydrationWarning>
-        <Preloader />
-        {children}
-        <Footer />
+        <CartProvider>
+          <Preloader />
+          {children}
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

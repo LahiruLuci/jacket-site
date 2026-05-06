@@ -1,4 +1,4 @@
-// Updated for SEO Slugs
+// Updated for SEO Slugs and Order Snapshotting
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
@@ -49,23 +49,37 @@ model User {
 }
 
 model Order {
-  id          String      @id @default(uuid())
-  userId      String
-  user        User        @relation(fields: [userId], references: [id])
-  totalAmount Float
-  status      String      @default("pending") // pending, paid, shipped, delivered
-  createdAt   DateTime    @default(now())
-  items       OrderItem[]
+  id              String      @id @default(uuid())
+  userId          String?     // Optional to support guest checkout
+  user            User?       @relation(fields: [userId], references: [id])
+  customerName    String
+  customerEmail   String
+  customerPhone   String
+  customerAddress String
+  totalAmount     Float
+  status          String      @default("pending") // pending, paid, shipped, delivered, cancelled
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  items           OrderItem[]
 }
 
 model OrderItem {
-  id        String  @id @default(uuid())
-  orderId   String
-  order     Order   @relation(fields: [orderId], references: [id])
-  productId String
-  product   Product @relation(fields: [productId], references: [id])
-  quantity  Int
-  price     Float
+  id           String  @id @default(uuid())
+  orderId      String
+  order        Order   @relation(fields: [orderId], references: [id])
+  productId    String? // Nullable in case product is deleted later
+  product      Product? @relation(fields: [productId], references: [id])
+  
+  // Snapshot data (To preserve order history accuracy)
+  productName  String
+  productSlug  String
+  productImage String
+  size         String
+  quantity     Int
+  unitPrice    Float
+  lineTotal    Float
+
+  @@index([orderId])
 }
 
 model Review {

@@ -6,11 +6,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { ShoppingCart, Search, Menu, X, User } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useCart } from "@/lib/cart-store";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { getCartCount } = useCart();
+  const cartCount = getCartCount();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,6 +43,10 @@ const Navbar = () => {
     { name: "Sizing", href: "/sizing" },
     { name: "Journal", href: "/journal" },
   ];
+
+  const formatCount = (count: number) => {
+    return count < 10 ? `0${count}` : count;
+  };
 
   return (
     <nav
@@ -98,16 +105,19 @@ const Navbar = () => {
           
           <div className="h-8 w-[1px] bg-white/10 hidden sm:block" />
 
-          <button className="flex items-center gap-3 md:gap-5 group bg-white/10 md:bg-white/5 hover:bg-white/10 px-4 md:px-6 py-2.5 md:py-3 rounded-full border border-white/10 md:border-white/5 transition-all duration-300">
+          <Link 
+            href="/cart"
+            className="flex items-center gap-3 md:gap-5 group bg-white/10 md:bg-white/5 hover:bg-white/10 px-4 md:px-6 py-2.5 md:py-3 rounded-full border border-white/10 md:border-white/5 transition-all duration-300"
+          >
             <div className="hidden sm:flex flex-col items-end">
               <span className="text-[11px] md:text-xs font-black uppercase tracking-widest text-white">Cart</span>
-              <span className="text-[9px] md:text-[11px] text-accent font-bold">00 UNITS</span>
+              <span className="text-[9px] md:text-[11px] text-accent font-bold">{formatCount(cartCount)} UNITS</span>
             </div>
             <div className="relative">
               <ShoppingCart strokeWidth={2} className="w-6 h-6 md:w-7 md:h-7 text-white group-hover:text-accent transition-colors" />
-              <span className="absolute -top-3 -right-3 w-5.5 h-5.5 md:w-6 md:h-6 bg-accent text-black text-[10px] md:text-[11px] font-bold rounded-full flex items-center justify-center border-2 border-[#0B0B0B]">0</span>
+              <span className="absolute -top-3 -right-3 w-5.5 h-5.5 md:w-6 md:h-6 bg-accent text-black text-[10px] md:text-[11px] font-bold rounded-full flex items-center justify-center border-2 border-[#0B0B0B]">{cartCount}</span>
             </div>
-          </button>
+          </Link>
 
           <button 
             className="lg:hidden text-white p-2 hover:bg-white/5 rounded-lg transition-colors z-[210]"
@@ -200,7 +210,7 @@ const Navbar = () => {
                       Cart
                     </span>
                     <span className="text-[10px] font-bold tracking-[0.3em] text-accent uppercase">
-                      {pathname === "/cart" ? "Currently Viewing" : "00 Items / View Bag"}
+                      {pathname === "/cart" ? "Currently Viewing" : `${formatCount(cartCount)} Items // View Bag`}
                     </span>
                   </div>
                 </Link>
