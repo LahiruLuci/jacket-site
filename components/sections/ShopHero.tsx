@@ -25,7 +25,7 @@ export default function ShopHero() {
     >
       
       {/* Background ambient lighting */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#C9A227]/5 blur-[200px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/5 blur-[200px] rounded-full pointer-events-none" />
 
       {/* Hero Header Region */}
       <div className="relative z-20 w-full max-w-[1600px] mx-auto px-6 md:px-12 mb-16 md:mb-32 flex flex-col lg:flex-row justify-between lg:items-end gap-16">
@@ -38,13 +38,13 @@ export default function ShopHero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex items-center gap-4 mb-8"
           >
-            <div className="w-12 h-[1px] bg-[#C9A227]" />
-            <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.5em] text-[#C9A227]">
-              Complete Arsenal
+            <div className="w-12 h-[1px] bg-accent" />
+            <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.5em] text-accent">
+              Our Collection
             </span>
           </motion.div>
           
-          <h1 className="text-6xl md:text-8xl lg:text-[130px] font-black uppercase tracking-tighter text-white leading-[0.85] flex flex-col">
+          <h1 className="text-6xl md:text-8xl lg:text-[130px] font-bold uppercase tracking-tight text-white leading-[0.85] flex flex-col">
             <motion.span 
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -57,7 +57,7 @@ export default function ShopHero() {
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[#C9A227] mt-2 md:mt-4 pl-0 md:pl-24" 
+              className="text-accent mt-2 md:mt-4 pl-0 md:pl-24" 
               style={{ fontFamily: "var(--font-serif)", fontWeight: "400", fontStyle: "italic", textTransform: "none", letterSpacing: "normal" }}
             >
               Gear.
@@ -73,7 +73,7 @@ export default function ShopHero() {
           className="flex flex-col lg:items-end gap-8 max-w-sm"
         >
           <p className="text-white/50 text-sm md:text-base font-light leading-relaxed lg:text-right">
-            Explore the entire uncompromised archive. From titanium-woven track suits to ballistic urban commute shells. Built exclusively for survival.
+            Explore the entire uncompromised archive. From titanium-woven track suits to ballistic urban commute shells. Built for performance, refined for life.
           </p>
           
           <div className="flex items-center gap-4 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] text-white/30 border border-white/10 px-6 py-4 rounded-full w-fit">
@@ -103,7 +103,7 @@ export default function ShopHero() {
             <span className="text-white text-[9px] font-bold uppercase tracking-widest bg-black/60 backdrop-blur-md px-3 py-1.5 border border-white/10 text-white/80">
                Apex Series
             </span>
-            <ScanLine size={16} className="text-[#C9A227] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <ScanLine size={16} className="text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </div>
         </motion.div>
 

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import { motion, useSpring, AnimatePresence } from "framer-motion";
@@ -29,12 +29,13 @@ import Link from "next/link";
 const feed = [
   {
     id: 1,
-    handle: "@vanguard_rider",
+    handle: "@jacket_rider",
     likes: "12.4k",
     comments: "342",
     img: "/assets/splitshire-biker-407123_1920.webp",
     gridClass: "md:col-span-8 md:row-span-2 h-[400px] md:h-[600px]",
   },
+// ... (rest of feed)
   {
     id: 2,
     handle: "@milan_stealth",
@@ -119,18 +120,16 @@ export default function CommunityFeed() {
         {/* Section Header */}
         <div className="text-center mb-16 md:mb-24 flex flex-col items-center">
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-[1px] bg-[#C9A227]" />
-            <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-[#C9A227]">
-              The Global Syndicate
+            <div className="w-12 h-[1px] bg-accent" />
+            <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-accent">
+              The Jacket Junction Community
             </span>
-            <div className="w-12 h-[1px] bg-[#C9A227]" />
+            <div className="w-12 h-[1px] bg-accent" />
           </div>
           
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter text-white leading-none mb-6">
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tight text-white leading-none mb-6">
             Join The <br className="md:hidden" />
-            <span className="text-transparent" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.4)" }}>
-              Movement.
-            </span>
+            <span className="text-accent">Movement.</span>
           </h2>
           
           <p className="text-white/40 text-sm md:text-base max-w-lg font-light leading-relaxed">
@@ -200,14 +199,14 @@ export default function CommunityFeed() {
           <Link
             href="https://instagram.com"
             target="_blank"
-            className="group flex items-center gap-4 bg-transparent border border-white/20 hover:border-[#C9A227] px-8 py-5 rounded-full transition-all duration-500 overflow-hidden relative"
+            className="group flex items-center gap-4 bg-transparent border border-white/20 hover:border-accent px-8 py-5 rounded-full transition-all duration-500 overflow-hidden relative"
           >
             {/* Hover Background Sweep */}
-            <div className="absolute inset-0 bg-[#C9A227] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]" />
+            <div className="absolute inset-0 bg-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]" />
             
             <div className="relative z-10 flex items-center gap-3 group-hover:text-black transition-colors duration-500">
               <Instagram size={20} />
-              <span className="text-xs font-black uppercase tracking-[0.2em]">Explore Community</span>
+              <span className="text-xs font-bold uppercase tracking-[0.2em]">Explore Community</span>
             </div>
           </Link>
         </div>

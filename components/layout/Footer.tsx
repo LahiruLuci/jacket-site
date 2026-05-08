@@ -46,8 +46,8 @@ export default function Footer() {
             <div className="lg:col-span-5 flex flex-col justify-between">
                <div>
                   <h3 className="text-4xl font-bold uppercase tracking-tight mb-6 leading-none">
-                    Vanguard <br />
-                    Premium.
+                    Jacket <br />
+                    Junction.
                   </h3>
                   <p className="text-white/40 text-sm leading-relaxed max-w-sm mb-12">
                      Engineering the absolute pinnacle of motorcycle protection. Combining technical excellence with modern aesthetic for the contemporary rider.
@@ -112,7 +112,7 @@ export default function Footer() {
                  className="text-[14vw] font-bold text-center tracking-tighter uppercase leading-[0.8] bg-clip-text text-transparent bg-[url('/assets/peterlesliemorris-motorcycle-1829461_1920.webp')] bg-cover bg-center bg-no-repeat bg-fixed opacity-70 group-hover:opacity-100 transition-opacity duration-1000"
                >
                   <span className="block transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105">
-                     Vanguard
+                     Jacket Junction
                   </span>
                </h1>
                
@@ -127,7 +127,7 @@ export default function Footer() {
 
             {/* Copyright & Legal */}
             <div className="w-full flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-[10px] uppercase tracking-widest text-white/30 font-bold">
-               <p>© {new Date().getFullYear()} Vanguard Premium. All rights reserved.</p>
+               <p>© {new Date().getFullYear()} Jacket Junction. All rights reserved.</p>
                <div className="flex gap-6 mt-4 md:mt-0">
                   <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
                   <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>

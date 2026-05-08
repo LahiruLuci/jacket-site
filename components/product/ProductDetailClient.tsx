@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { 
   ShoppingBag, 
   Ruler, 
@@ -30,7 +30,6 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
   const [isAdded, setIsAdded] = useState(false);
   const [showStickyBar, setShowStickyBar] = useState(false);
   const [activeImage, setActiveImage] = useState<string | null>(null);
-  const [showSizeError, setShowSizeError] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const { addItem } = useCart();
 
@@ -38,6 +37,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
   const productName = product?.name || "Premium Jacket";
   const productPrice = product?.price || 0;
   const productDesc = product?.description || "Crafted for durability and designed to adapt to your daily movement.";
+  const productSubtitle = product?.subtitle || "";
   
   const { scrollY } = useScroll();
 
@@ -45,11 +45,11 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
 
   useEffect(() => {
     setMounted(true);
-    const unsubscribe = scrollY.onChange((latest) => {
-      setShowStickyBar(latest > 800);
-    });
-    return () => unsubscribe();
-  }, [scrollY]);
+  }, []);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setShowStickyBar(latest > 800);
+  });
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -76,12 +76,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
     : ["/assets/placeholder.webp"];
 
   const handleAddToCart = () => {
-    if (!selectedSize) {
-      setShowSizeError(true);
-      document.getElementById('buy-panel')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      setTimeout(() => setShowSizeError(false), 2000);
-      return;
-    }
+    if (!selectedSize) return;
     
     // Add to global cart store
     addItem(product, selectedSize);
@@ -106,7 +101,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
           className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none whitespace-nowrap hidden lg:flex"
         >
           <h2 className="text-[18vw] font-black uppercase tracking-tighter text-white/[0.03] leading-none select-none">
-            {product.name}
+            {productName}
           </h2>
         </motion.div>
 
@@ -137,9 +132,9 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
                animate={{ opacity: 1, y: 0 }}
                className="text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-black uppercase tracking-tighter leading-[0.8] text-white"
              >
-               {product.name}
+               {productName}
              </motion.h1>
-             {product.subtitle && (
+             {productSubtitle && (
                <motion.span
                  initial={{ opacity: 0, y: 10 }}
                  animate={{ opacity: 1, y: 0 }}
@@ -350,21 +345,20 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
               <div className="space-y-8">
                 <button 
                   onClick={handleAddToCart}
+                  disabled={!selectedSize && !isAdded}
                   className={cn(
-                    "w-full h-20 rounded-[2rem] flex items-center justify-center gap-4 text-base font-black uppercase tracking-[0.2em] transition-all duration-500 shadow-2xl cursor-pointer",
+                    "w-full h-20 rounded-[2rem] flex items-center justify-center gap-4 text-base font-black uppercase tracking-[0.2em] transition-all duration-500 shadow-2xl",
                     isAdded 
-                      ? "bg-green-500 text-white" 
-                      : showSizeError
-                        ? "bg-red-500/20 text-red-500 border border-red-500/50"
-                        : selectedSize 
-                          ? "bg-accent text-black hover:-translate-y-1" 
-                          : "bg-white text-black opacity-90 hover:bg-white/100"
+                      ? "bg-green-500 text-white cursor-default" 
+                      : !selectedSize 
+                        ? "bg-white/5 text-white/20 border border-white/10 cursor-not-allowed"
+                        : "bg-accent text-black hover:-translate-y-1 cursor-pointer"
                   )}
                 >
                   {isAdded ? (
                     <>Added to Cart <CheckCircle2 size={22} /></>
-                  ) : showSizeError ? (
-                    <>Please Select a Size <AlertCircle size={22} /></>
+                  ) : !selectedSize ? (
+                    <>Select Size First <AlertCircle size={22} /></>
                   ) : (
                     <>Add to Cart <ShoppingBag size={22} /></>
                   )}
@@ -438,13 +432,13 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
             exit={{ y: 100, opacity: 0 }}
             className="fixed bottom-4 md:bottom-6 inset-x-4 md:inset-x-6 z-[100] flex lg:hidden justify-center"
           >
-            <div className="w-full max-w-3xl bg-[#1A1A1A]/90 backdrop-blur-3xl border border-white/20 rounded-[1.5rem] md:rounded-[2rem] p-2 md:p-4 flex items-center justify-between shadow-2xl overflow-hidden">
+            <div className="w-full max-w-3xl bg-[#EAE8E4]/90 backdrop-blur-3xl border border-black/10 rounded-[1.5rem] md:rounded-[2rem] p-2 md:p-4 flex items-center justify-between shadow-2xl overflow-hidden">
               <div className="flex items-center gap-3 md:gap-4 px-2 md:px-4 min-w-0">
                 <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-xl overflow-hidden border border-white/10 flex-shrink-0">
                   <Image src={images[0]} alt={productName} fill className="object-cover" />
                 </div>
                 <div className="flex flex-col min-w-0">
-                   <span className="text-[10px] md:text-sm font-black uppercase tracking-tight text-white truncate w-full max-w-[120px] sm:max-w-[200px]">
+                   <span className="text-[10px] md:text-sm font-black uppercase tracking-tight text-[#2D2D2D] truncate w-full max-w-[120px] sm:max-w-[200px]">
                      {productName.split(" ").slice(0, 2).join(" ")}
                    </span>
                    <span className="text-[10px] md:text-sm font-bold text-accent">${productPrice}</span>
@@ -453,24 +447,25 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
 
               <button 
                 onClick={handleAddToCart}
+                disabled={!selectedSize && !isAdded}
                 className={cn(
-                  "px-4 md:px-8 h-10 md:h-12 rounded-xl md:rounded-2xl flex items-center gap-2 md:gap-3 text-[9px] md:text-xs font-black uppercase tracking-widest transition-all flex-shrink-0 whitespace-nowrap cursor-pointer",
+                  "px-4 md:px-8 h-10 md:h-12 rounded-xl md:rounded-2xl flex items-center gap-2 md:gap-3 text-[9px] md:text-xs font-black uppercase tracking-widest transition-all flex-shrink-0 whitespace-nowrap",
                   isAdded 
-                    ? "bg-green-500 text-white" 
-                    : showSizeError
-                      ? "bg-red-500/20 text-red-500"
-                      : "bg-white text-black hover:bg-accent"
+                    ? "bg-green-500 text-white cursor-default" 
+                    : !selectedSize
+                      ? "bg-black/5 text-black/20 border border-black/5 cursor-not-allowed"
+                      : "bg-[#2D2D2D] text-white hover:bg-black cursor-pointer"
                 )}
               >
                 <span className="hidden sm:inline">
-                  {isAdded ? "Added" : showSizeError ? "Select Size" : "Add to Cart"}
+                  {isAdded ? "Added" : !selectedSize ? "Select Size First" : "Add to Cart"}
                 </span>
                 <span className="sm:hidden">
-                  {isAdded ? "Added" : showSizeError ? "Size!" : "Add"}
+                  {isAdded ? "Added" : !selectedSize ? "Select Size" : "Add"}
                 </span>
                 {isAdded ? (
                   <CheckCircle2 size={14} className="md:size-[16px]" />
-                ) : showSizeError ? (
+                ) : !selectedSize ? (
                   <AlertCircle size={14} className="md:size-[16px]" />
                 ) : (
                   <ShoppingBag size={14} className="md:size-[16px]" />

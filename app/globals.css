@@ -7,8 +7,8 @@
   --primary-alt: #161616;
   --secondary: #F5F5F3;
   --secondary-alt: #EFEDE8;
-  --accent: #2F5DFF; /* Modern Blue */
-  --accent-luxury: #B08D57; /* Optional Gold */
+  --accent: #B08D57; /* Luxury Gold */
+  --accent-secondary: #7A6A58; /* Earth Bronze */
   --text-muted: #666666;
   
   /* Dark Mode specific (for dark sections) */
@@ -26,7 +26,7 @@
   --color-secondary: var(--secondary);
   --color-secondary-alt: var(--secondary-alt);
   --color-accent: var(--accent);
-  --color-accent-luxury: var(--accent-luxury);
+  --color-accent-secondary: var(--accent-secondary);
   --color-text-muted: var(--text-muted);
   
   --color-dark-bg: var(--dark-bg);
@@ -90,7 +90,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .accent-gradient {
-    background: linear-gradient(135deg, #2F5DFF 0%, #6082FF 100%);
+    background: linear-gradient(135deg, #B08D57 0%, #8E7043 100%);
   }
 
   .mask-reveal {

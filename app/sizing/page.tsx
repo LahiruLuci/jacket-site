@@ -87,17 +87,17 @@ export default function SizingPage() {
             >
               <div className="flex items-center gap-4 mb-4 md:mb-6 justify-center lg:justify-start">
                 <div className="w-8 md:w-12 h-[1px] bg-accent" />
-                <span className="text-[9px] md:text-xs font-bold uppercase tracking-[0.4em] text-accent">Anatomical Precision</span>
+                <span className="text-[9px] md:text-xs font-bold uppercase tracking-[0.4em] text-accent">Perfect Fit</span>
               </div>
-              <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-[0.9] mb-8">
-                Mastering <br /> <span className="text-stroke">The Fit.</span>
+              <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold uppercase tracking-tight leading-[0.9] mb-8">
+                Mastering <br /> <span className="text-accent">The Fit.</span>
               </h2>
               <p className="text-white/40 max-w-lg text-xs md:text-lg leading-relaxed mb-12 mx-auto lg:mx-0">
-                A jacket is only as lethal as its fit. Our sizing system is calibrated to the millimeter, ensuring ballistic protection remains perfectly positioned at all velocities.
+                A jacket is only as good as its fit. Our sizing system is meticulously designed to ensure comfort and protection remain perfectly positioned at all times.
               </p>
               
               <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-                <button className="px-8 py-4 bg-accent text-black text-xs font-bold uppercase tracking-widest hover:bg-white transition-colors duration-500">
+                <button className="px-8 py-4 bg-accent text-white text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-colors duration-500">
                   Calculate My Size
                 </button>
                 <button className="px-8 py-4 border border-white/10 hover:border-white/30 text-xs font-bold uppercase tracking-widest transition-colors duration-500">
@@ -135,7 +135,7 @@ export default function SizingPage() {
                 >
                   <button 
                     onMouseEnter={() => setActiveNode(node)}
-                    className="w-4 h-4 md:w-6 md:h-6 bg-accent rounded-full animate-pulse shadow-[0_0_20px_#C9A227] flex items-center justify-center"
+                    className="w-4 h-4 md:w-6 md:h-6 bg-accent rounded-full animate-pulse shadow-[0_0_20px_rgba(176,141,87,0.4)] flex items-center justify-center"
                   >
                     <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-black rounded-full" />
                   </button>
@@ -171,7 +171,7 @@ export default function SizingPage() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
             <div className="max-w-xl">
               <span className="text-accent text-[10px] font-bold uppercase tracking-[0.4em] mb-4 block">The Matrix</span>
-              <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-6">Global Standards. <br /> Absolute Zero.</h3>
+              <h3 className="text-4xl md:text-6xl font-bold uppercase tracking-tight leading-none mb-6">Global Standards. <br /> Absolute Zero.</h3>
               <p className="text-white/40 text-sm leading-relaxed">
                 Toggle between Metric and Imperial systems. Our charts are calibrated across EU, US, and Japanese standards to ensure universal fidelity.
               </p>
@@ -182,7 +182,7 @@ export default function SizingPage() {
                 onClick={() => setActiveUnit("cm")}
                 className={cn(
                   "px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300",
-                  activeUnit === "cm" ? "bg-accent text-black" : "text-white/40"
+                  activeUnit === "cm" ? "bg-accent text-white" : "text-white/40"
                 )}
               >
                 Metric (CM)
@@ -191,7 +191,7 @@ export default function SizingPage() {
                 onClick={() => setActiveUnit("in")}
                 className={cn(
                   "px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300",
-                  activeUnit === "in" ? "bg-accent text-black" : "text-white/40"
+                  activeUnit === "in" ? "bg-accent text-white" : "text-white/40"
                 )}
               >
                 Imperial (IN)
@@ -212,7 +212,7 @@ export default function SizingPage() {
               <tbody className="divide-y divide-white/5">
                 {SIZING_DATA.map((row) => (
                   <tr key={row.size} className="group hover:bg-white/[0.02] transition-colors">
-                    <td className="py-8 px-4 text-2xl font-black text-white group-hover:text-accent transition-colors">{row.size}</td>
+                    <td className="py-8 px-4 text-2xl font-bold text-white group-hover:text-accent transition-colors">{row.size}</td>
                     <td className="py-8 px-4 text-sm font-mono text-white/60">{activeUnit === "cm" ? row.chest : `${(parseInt(row.chest.split('-')[0])*0.39).toFixed(1)}-${(parseInt(row.chest.split('-')[1])*0.39).toFixed(1)}`}</td>
                     <td className="py-8 px-4 text-sm font-mono text-white/60">{activeUnit === "cm" ? row.waist : `${(parseInt(row.waist.split('-')[0])*0.39).toFixed(1)}-${(parseInt(row.waist.split('-')[1])*0.39).toFixed(1)}`}</td>
                     <td className="py-8 px-4 text-sm font-mono text-white/60">{activeUnit === "cm" ? row.sleeve : `${(parseInt(row.sleeve.split('-')[0])*0.39).toFixed(1)}-${(parseInt(row.sleeve.split('-')[1])*0.39).toFixed(1)}`}</td>
@@ -228,7 +228,7 @@ export default function SizingPage() {
       <section className="py-24 md:py-40">
         <div className="container">
           <div className="text-center mb-20">
-            <h3 className="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-6">Choose Your <span className="text-stroke">Stance.</span></h3>
+            <h3 className="text-5xl md:text-8xl font-bold uppercase tracking-tight mb-6">Choose Your <span className="text-accent italic font-normal">Stance.</span></h3>
             <div className="w-20 h-1 bg-accent mx-auto" />
           </div>
 
@@ -237,7 +237,7 @@ export default function SizingPage() {
               { 
                 title: "Race Fit", 
                 subtitle: "Second Skin", 
-                desc: "Aggressively pre-curved for the tuck position. Extremely snug, zero drag, maximum armor stability.",
+                desc: "Aggressively pre-curved for the tuck position. Snug, zero drag, maximum armor stability.",
                 icon: <Zap size={24} />
               },
               { 
@@ -273,7 +273,7 @@ export default function SizingPage() {
                     {fit.icon}
                   </div>
                   <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-accent mb-2 block">{fit.subtitle}</span>
-                  <h4 className="text-3xl font-black uppercase tracking-tighter text-white mb-4">{fit.title}</h4>
+                  <h4 className="text-3xl font-bold uppercase tracking-tight text-white mb-4">{fit.title}</h4>
                   <p className="text-white/40 text-xs leading-relaxed max-w-xs group-hover:text-white/80 transition-colors duration-500">
                     {fit.desc}
                   </p>
@@ -288,14 +288,14 @@ export default function SizingPage() {
       <section className="py-24 md:py-32 bg-accent">
         <div className="container flex flex-col md:flex-row items-center justify-between gap-12">
           <div className="max-w-2xl text-center md:text-left">
-            <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-black leading-none mb-6">
-              Still Unsure About Your <br /> Calibration?
+            <h3 className="text-4xl md:text-6xl font-bold uppercase tracking-tight text-white leading-none mb-6">
+              Need Assistance With <br /> Your Measurements?
             </h3>
-            <p className="text-black/60 font-medium text-sm md:text-base max-w-lg">
-              Our master tailors are available for digital consultation to ensure your jacket performs exactly as engineered.
+            <p className="text-white/80 font-medium text-sm md:text-base max-w-lg">
+              Our specialists are available for digital consultation to ensure your jacket fits exactly as intended.
             </p>
           </div>
-          <button className="px-10 py-5 bg-black text-white text-xs font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-500 shadow-2xl flex items-center gap-4 group">
+          <button className="px-10 py-5 bg-white text-black text-xs font-bold uppercase tracking-[0.3em] hover:bg-black hover:text-white transition-all duration-500 shadow-2xl flex items-center gap-4 group">
             Contact Specialist <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
           </button>
         </div>
@@ -304,7 +304,7 @@ export default function SizingPage() {
       {/* FOOTER MINI */}
       <footer className="py-12 bg-black border-t border-white/5">
         <div className="container flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-[8px] tracking-[0.5em] text-white/20 uppercase font-bold">Archives // 2024 Edition</p>
+          <p className="text-[8px] tracking-[0.5em] text-white/20 uppercase font-bold">Archives // 2025 Edition</p>
           <div className="flex gap-8">
             <Link href="#" className="text-[8px] tracking-[0.3em] uppercase text-white/40 hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="#" className="text-[8px] tracking-[0.3em] uppercase text-white/40 hover:text-white transition-colors">Shipping Ops</Link>

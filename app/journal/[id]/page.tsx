@@ -120,7 +120,7 @@ export default function JournalDetailPage() {
                 className="my-20 p-8 md:p-12 bg-[#161718] border-l-4 border-accent relative overflow-hidden group"
               >
                 <Quote size={80} className="absolute -top-4 -right-4 text-white/5 opacity-20 group-hover:scale-110 transition-transform duration-700" />
-                <p className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white leading-tight italic">
+                <p className="text-2xl md:text-3xl font-bold uppercase tracking-tight text-white leading-tight italic">
                   "Engineering for the slide means engineering for survival. This is why every seam is a statement of intent."
                 </p>
                 <div className="mt-6 flex items-center gap-4">
@@ -130,13 +130,13 @@ export default function JournalDetailPage() {
               </motion.div>
 
               <div className="text-white/60 text-lg md:text-xl leading-relaxed font-light mb-12">
-                As we continue to push the boundaries of what is possible in rider protection, the Journal remains our platform for transparency. Every material choice, every stitch pattern, and every molecular adjustment is documented here for the vanguard.
+                As we continue to push the boundaries of what is possible in rider protection, the Journal remains our platform for transparency. Every material choice, every stitch pattern, and every molecular adjustment is documented here for our community.
               </div>
             </article>
 
             {/* Tags */}
             <div className="flex flex-wrap gap-4 mt-20 pt-12 border-t border-white/5">
-              {["Ballistic", "Calibration", "Tokyo", "Vanguard"].map(tag => (
+              {["Ballistic", "Measurements", "Tokyo", "JacketJunction"].map(tag => (
                 <span key={tag} className="px-4 py-2 bg-white/5 rounded-full text-[9px] font-bold uppercase tracking-widest text-white/40 hover:bg-accent hover:text-black transition-all cursor-pointer">
                   #{tag}
                 </span>
@@ -160,7 +160,7 @@ export default function JournalDetailPage() {
                 </div>
                 <div className="flex justify-between items-end border-b border-white/5 pb-4">
                   <span className="text-[10px] font-bold text-white/30 uppercase tracking-widest">Authority</span>
-                  <span className="text-[10px] font-mono text-white/80 uppercase">Vanguard Team</span>
+                  <span className="text-[10px] font-mono text-white/80 uppercase">Jacket Junction Team</span>
                 </div>
               </div>
 
@@ -178,7 +178,7 @@ export default function JournalDetailPage() {
       <section className="py-24 md:py-40 border-t border-white/5 bg-[#111213]">
         <div className="container">
           <div className="flex justify-between items-end mb-16">
-            <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter">Related <span className="text-stroke">Intel.</span></h3>
+            <h3 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter">Related <span className="text-accent italic font-normal">Intel.</span></h3>
             <Link href="/journal" className="text-accent text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:translate-x-2 transition-transform">
               View All <ChevronRight size={14} />
             </Link>
@@ -208,7 +208,7 @@ export default function JournalDetailPage() {
       {/* FOOTER MINI */}
       <footer className="py-12 bg-black border-t border-white/5">
         <div className="container flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-[8px] tracking-[0.5em] text-white/20 uppercase font-bold">Archives // 2024 Edition</p>
+          <p className="text-[8px] tracking-[0.5em] text-white/20 uppercase font-bold">Archives // 2025 Edition</p>
           <div className="flex gap-8">
             <Link href="#" className="text-[8px] tracking-[0.3em] uppercase text-white/40 hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="#" className="text-[8px] tracking-[0.3em] uppercase text-white/40 hover:text-white transition-colors">Shipping Ops</Link>

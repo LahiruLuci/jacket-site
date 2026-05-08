@@ -24,18 +24,19 @@ export default async function ShopPage() {
     const categories = await prisma.category.findMany();
 
     return (
-      <main className="min-h-screen bg-[#0B0B0B] text-white selection:bg-accent selection:text-black font-inter overflow-x-hidden">
+      <main className="min-h-screen bg-[#F5F5F3] text-[#111111] selection:bg-accent selection:text-white font-inter overflow-x-hidden">
         <Navbar />
         
         <ShopClient initialProducts={products} categories={categories} />
 
         {/* Footer Mini */}
-        <footer className="py-12 bg-black border-t border-white/5 mt-auto">
-          <div className="container flex flex-col md:flex-row justify-between items-center gap-8">
-            <p className="text-[8px] tracking-[0.5em] text-white/20 uppercase font-bold">Archives // 2024 Edition</p>
-            <div className="flex gap-8">
-              <span className="text-[8px] tracking-[0.3em] uppercase text-white/40">Privacy Policy</span>
-              <span className="text-[8px] tracking-[0.3em] uppercase text-white/40">Global Dispatch</span>
+        <footer className="py-16 bg-white border-t border-black/5 mt-auto">
+          <div className="container flex flex-col md:flex-row justify-between items-center gap-8 px-6">
+            <p className="text-[10px] tracking-[0.4em] text-black/20 uppercase font-bold">Jacket Junction Archives // 2024</p>
+            <div className="flex gap-12">
+              <span className="text-[10px] tracking-[0.2em] uppercase text-black/40 hover:text-black cursor-pointer transition-colors">Privacy</span>
+              <span className="text-[10px] tracking-[0.2em] uppercase text-black/40 hover:text-black cursor-pointer transition-colors">Shipping</span>
+              <span className="text-[10px] tracking-[0.2em] uppercase text-black/40 hover:text-black cursor-pointer transition-colors">Terms</span>
             </div>
           </div>
         </footer>
@@ -44,31 +45,32 @@ export default async function ShopPage() {
   } catch (error) {
     console.error("Database Connection Error:", error);
     return (
-      <main className="min-h-screen bg-[#0B0B0B] text-white flex flex-col items-center justify-center p-8 text-center min-h-screen pt-32">
+      <main className="min-h-screen bg-[#F5F5F3] text-[#111111] flex flex-col items-center justify-center p-8 text-center pt-32">
         <Navbar />
         <div className="max-w-md">
-          <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6">System <span className="text-accent">Offline.</span></h1>
-          <p className="text-white/40 text-sm md:text-lg leading-relaxed mb-8">
-            The Armory database is currently disconnected. We are unable to initialize the kinetic inventory at this moment.
+          <div className="w-20 h-20 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-8">
+            <AlertCircle size={40} className="text-black/20" />
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold uppercase tracking-tighter mb-6">Service <span className="text-accent">Maintenance.</span></h1>
+          <p className="text-black/40 text-sm md:text-base leading-relaxed mb-10">
+            Our archives are currently undergoing a scheduled synchronization. We'll be back online shortly to provide your premium utility gear.
           </p>
-          <div className="flex flex-col gap-4">
-            <div className="p-6 bg-white/5 rounded-2xl border border-white/10 text-left">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-accent mb-4">Connection Required:</p>
-              <ul className="text-[11px] text-white/60 space-y-3 list-none">
-                <li className="flex items-center gap-3">
-                  <div className="w-1.5 h-1.5 bg-accent rounded-full" /> 
-                  Add Neon <code className="text-white font-mono">DATABASE_URL</code> to .env
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-1.5 h-1.5 bg-accent rounded-full" /> 
-                  Run <code className="text-white font-mono">npx prisma db push</code>
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-1.5 h-1.5 bg-accent rounded-full" /> 
-                  Run <code className="text-white font-mono">node prisma/seed.js</code>
-                </li>
-              </ul>
-            </div>
+          <div className="p-8 bg-white rounded-3xl border border-black/5 text-left shadow-xl">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-accent mb-6">Technical Status:</p>
+            <ul className="text-[11px] text-black/60 space-y-4 list-none">
+              <li className="flex items-start gap-4">
+                <div className="w-1.5 h-1.5 bg-accent rounded-full mt-1 shrink-0" /> 
+                <span>Verify <code className="bg-black/5 px-2 py-0.5 rounded text-black">DATABASE_URL</code> in environment configuration.</span>
+              </li>
+              <li className="flex items-start gap-4">
+                <div className="w-1.5 h-1.5 bg-accent rounded-full mt-1 shrink-0" /> 
+                <span>Ensure local schema is synchronized with <code className="bg-black/5 px-2 py-0.5 rounded text-black">prisma db push</code>.</span>
+              </li>
+              <li className="flex items-start gap-4">
+                <div className="w-1.5 h-1.5 bg-accent rounded-full mt-1 shrink-0" /> 
+                <span>Initialize primary inventory with <code className="bg-black/5 px-2 py-0.5 rounded text-black">prisma/seed.js</code>.</span>
+              </li>
+            </ul>
           </div>
         </div>
       </main>

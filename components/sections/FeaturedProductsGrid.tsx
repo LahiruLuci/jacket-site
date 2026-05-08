@@ -30,9 +30,9 @@ const featuredProducts = [
     category: "Elite Series"
   },
   {
-    id: "vanguard-titan",
-    slug: "vanguard-titan-racing",
-    name: "Vanguard Titan",
+    id: "junction-titan",
+    slug: "junction-titan-racing",
+    name: "Junction Titan",
     subtitle: "Racing Grade",
     price: 1450,
     image: "/assets/sohag_hawlader-ai-generated-9034981_1920.webp",
@@ -160,18 +160,11 @@ const FeaturedProductsGrid = ({ products }: FeaturedProductsGridProps) => {
 const ProductCard = ({ product, index }: { product: ProductType; index: number }) => {
   const [selectedSize, setSelectedSize] = useState("");
   const [isAdded, setIsAdded] = useState(false);
-  const [showError, setShowError] = useState(false);
   const { addItem } = useCart();
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
-    if (!selectedSize) {
-      setShowError(true);
-      setTimeout(() => setShowError(false), 2000);
-      return;
-    }
     
     addItem(product, selectedSize);
     setIsAdded(true);
@@ -259,18 +252,19 @@ const ProductCard = ({ product, index }: { product: ProductType; index: number }
             {/* Add to Cart Button */}
             <button
               onClick={handleAddToCart}
+              disabled={!selectedSize && !isAdded}
               className={cn(
-                "w-full py-4 rounded-lg flex items-center justify-center gap-3 text-xs font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer",
+                "w-full py-4 rounded-lg flex items-center justify-center gap-3 text-xs font-bold uppercase tracking-widest transition-all duration-300",
                 isAdded 
-                  ? "bg-green-600 text-white" 
-                  : showError
-                    ? "bg-red-500 text-white"
-                    : "bg-primary text-white hover:bg-accent"
+                  ? "bg-green-600 text-white cursor-default" 
+                  : !selectedSize
+                    ? "bg-black/10 text-black/40 border border-black/5 cursor-not-allowed"
+                    : "bg-primary text-white hover:bg-accent cursor-pointer"
               )}
             >
               {isAdded ? (
                 <>Added to Cart <Check size={16} /></>
-              ) : showError ? (
+              ) : !selectedSize ? (
                 <>Select Size First <AlertCircle size={16} /></>
               ) : (
                 <>Add to Cart <Plus size={16} /></>

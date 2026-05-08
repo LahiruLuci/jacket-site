@@ -57,52 +57,51 @@ export default function Preloader() {
                  
                  {/* Top Word: Slides in from left */}
                  <div className="overflow-hidden">
-                    <motion.h1 
-                       initial={{ x: "-100%" }}
-                       animate={{ x: "0%" }}
-                       exit={{ y: -50, opacity: 0 }}
-                       transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
-                       className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter text-white leading-tight"
-                    >
-                       Jacket /
-                    </motion.h1>
-                 </div>
+                     <motion.h1 
+                        initial={{ x: "-100%" }}
+                        animate={{ x: "0%" }}
+                        exit={{ y: -50, opacity: 0 }}
+                        transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
+                        className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tight text-white leading-tight"
+                     >
+                        Jacket
+                     </motion.h1>
+                  </div>
 
-                 {/* Golden Scanning Line */}
-                 <motion.div 
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    exit={{ scaleX: 0, opacity: 0 }}
-                    transition={{ duration: 1.5, delay: 0.8, ease: "circOut" }}
-                    className="w-[40vw] md:w-[250px] h-[2px] bg-[#C9A227] my-6 shadow-[0_0_20px_#C9A227]"
-                 />
+                  {/* Luxury Scanning Line */}
+                  <motion.div 
+                     initial={{ scaleX: 0 }}
+                     animate={{ scaleX: 1 }}
+                     exit={{ scaleX: 0, opacity: 0 }}
+                     transition={{ duration: 1.5, delay: 0.8, ease: "circOut" }}
+                     className="w-[40vw] md:w-[250px] h-[2px] bg-accent my-6 shadow-[0_0_15px_rgba(176,141,87,0.3)]"
+                  />
 
-                 {/* Bottom Word: Slides in from right */}
-                 <div className="overflow-hidden">
-                    <motion.h1 
-                       initial={{ x: "100%" }}
-                       animate={{ x: "0%" }}
-                       exit={{ y: 50, opacity: 0 }}
-                       transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
-                       className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter text-white/10 leading-tight"
-                       style={{ WebkitTextStroke: "1px rgba(255,255,255,0.4)" }}
-                    >
-                       Junction
-                    </motion.h1>
-                 </div>
+                  {/* Bottom Word: Slides in from right */}
+                  <div className="overflow-hidden">
+                     <motion.h1 
+                        initial={{ x: "100%" }}
+                        animate={{ x: "0%" }}
+                        exit={{ y: 50, opacity: 0 }}
+                        transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
+                        className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tight text-white/20 leading-tight"
+                     >
+                        Junction
+                     </motion.h1>
+                  </div>
 
-                 {/* Micro Identity Script */}
-                 <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ delay: 1.8, duration: 0.5 }}
-                    className="mt-12 text-[10px] font-bold uppercase tracking-[0.8em] text-[#C9A227] flex items-center gap-6"
-                 >
-                    <div className="w-12 h-[1px] bg-[#C9A227]/30" />
-                    EST. 2024 // APEX
-                    <div className="w-12 h-[1px] bg-[#C9A227]/30" />
-                 </motion.div>
+                  {/* Micro Identity Script */}
+                  <motion.div 
+                     initial={{ opacity: 0 }}
+                     animate={{ opacity: 1 }}
+                     exit={{ opacity: 0 }}
+                     transition={{ delay: 1.8, duration: 0.5 }}
+                     className="mt-12 text-[10px] font-bold uppercase tracking-[0.8em] text-accent flex items-center gap-6"
+                  >
+                     <div className="w-12 h-[1px] bg-accent/30" />
+                     EST. 2025 // PREMIUM GEAR
+                     <div className="w-12 h-[1px] bg-accent/30" />
+                  </motion.div>
 
               </div>
 

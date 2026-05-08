@@ -45,12 +45,12 @@ export default function AboutPage() {
             transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
           >
             <span className="text-accent text-[10px] md:text-xs font-bold uppercase tracking-[0.5em] mb-8 block">Archives // MMXXIV</span>
-            <h1 className="text-4xl sm:text-6xl md:text-[120px] lg:text-[160px] font-black uppercase tracking-tighter leading-[0.9] mb-8 md:mb-12">
-              Beyond <br /> <span className="text-stroke" style={{ WebkitTextStroke: "1px rgba(201, 162, 39, 0.6)", color: "rgba(201, 162, 39, 0.05)" }}>Defensive.</span>
+            <h1 className="text-4xl sm:text-6xl md:text-[120px] lg:text-[160px] font-bold uppercase tracking-tighter leading-[0.9] mb-8 md:mb-12">
+              Beyond <br /> <span className="text-accent italic font-normal">Defensive.</span>
             </h1>
             <div className="max-w-2xl mx-auto border-t border-white/10 pt-12">
               <p className="text-white/60 text-lg md:text-2xl font-light leading-relaxed">
-                We don't build clothing. We engineer mechanical layers for the high-velocity vanguard.
+                We don't build clothing. We engineer mechanical layers for the high-velocity individual.
               </p>
             </div>
           </motion.div>
@@ -172,8 +172,8 @@ export default function AboutPage() {
         <div className="absolute inset-0 grid-pattern opacity-10" />
         
         <div className="container relative z-10 flex flex-col items-center text-center">
-          <h2 className="text-5xl md:text-[100px] font-black uppercase tracking-tighter text-black leading-none mb-12">
-            Join The <br /> Vanguard.
+          <h2 className="text-5xl md:text-[100px] font-bold uppercase tracking-tighter text-black leading-none mb-12">
+            Join The <br /> Community.
           </h2>
           <p className="text-black/60 max-w-xl text-lg font-medium mb-12">
             The Archives are always expanding. Stay informed on the latest ballistic breakthroughs and cultural field notes.
@@ -192,7 +192,7 @@ export default function AboutPage() {
       {/* FOOTER MINI */}
       <footer className="py-12 bg-black border-t border-white/5">
         <div className="container flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-[8px] tracking-[0.5em] text-white/20 uppercase font-bold">Archives // 2024 Edition</p>
+          <p className="text-[8px] tracking-[0.5em] text-white/20 uppercase font-bold">Archives // 2025 Edition</p>
           <div className="flex gap-8">
             <Link href="#" className="text-[8px] tracking-[0.3em] uppercase text-white/40 hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="#" className="text-[8px] tracking-[0.3em] uppercase text-white/40 hover:text-white transition-colors">Shipping Ops</Link>

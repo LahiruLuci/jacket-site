@@ -105,12 +105,12 @@ export default function JournalDetailClient({ article, relatedArticles }: { arti
               </motion.div>
 
               <div className="text-white/60 text-lg md:text-xl leading-relaxed font-light mb-12">
-                As we continue to push the boundaries of what is possible in rider protection, the Journal remains our platform for transparency. Every material choice, every stitch pattern, and every molecular adjustment is documented here for the vanguard.
+                As we continue to push the boundaries of what is possible in rider protection, the Journal remains our platform for transparency. Every material choice, every stitch pattern, and every molecular adjustment is documented here for our community.
               </div>
             </article>
 
             <div className="flex flex-wrap gap-4 mt-20 pt-12 border-t border-white/5">
-              {["Ballistic", "Calibration", "Tokyo", "Vanguard"].map(tag => (
+              {["Ballistic", "Measurements", "Tokyo", "JacketJunction"].map(tag => (
                 <span key={tag} className="px-4 py-2 bg-white/5 rounded-full text-[9px] font-bold uppercase tracking-widest text-white/40 hover:bg-accent hover:text-black transition-all cursor-pointer">
                   #{tag}
                 </span>
@@ -133,7 +133,7 @@ export default function JournalDetailClient({ article, relatedArticles }: { arti
                 </div>
                 <div className="flex justify-between items-end border-b border-white/5 pb-4">
                   <span className="text-[10px] font-bold text-white/30 uppercase tracking-widest">Authority</span>
-                  <span className="text-[10px] font-mono text-white/80 uppercase">Vanguard Team</span>
+                  <span className="text-[10px] font-mono text-white/80 uppercase">Jacket Junction Team</span>
                 </div>
               </div>
 

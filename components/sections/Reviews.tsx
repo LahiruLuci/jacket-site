@@ -9,7 +9,7 @@ const reviewsRow1 = [
   {
     name: "Marcus T.",
     role: "Ducati Panigale V4 Rider",
-    text: "I've worn gear from every major European brand. Nothing, and I mean absolutely nothing, fits or protects like the Vanguard Stealth. It's on another planet.",
+    text: "I've worn gear from every major European brand. Nothing, and I mean absolutely nothing, fits or protects like the Junction Stealth. It's on another planet.",
     rating: 5,
   },
   {
@@ -87,7 +87,7 @@ const SpotlightCard = ({ review }: { review: any }) => {
         className="pointer-events-none absolute -inset-px transition-opacity duration-500 z-0"
         style={{
           opacity,
-          background: `radial-gradient(500px circle at ${position.x}px ${position.y}px, rgba(201,162,39,0.12), transparent 40%)`,
+          background: `radial-gradient(500px circle at ${position.x}px ${position.y}px, rgba(176, 141, 87, 0.12), transparent 40%)`,
         }}
       />
       
@@ -99,7 +99,7 @@ const SpotlightCard = ({ review }: { review: any }) => {
         <div className="flex justify-between items-start mb-8">
           <div className="flex gap-1">
             {[...Array(review.rating)].map((_, i) => (
-              <Star key={i} size={14} className="fill-[#C9A227] text-[#C9A227]" />
+              <Star key={i} size={14} className="fill-accent text-accent" />
             ))}
           </div>
           <Quote size={40} className="text-white/5 opacity-50 rotate-180" />
@@ -115,7 +115,7 @@ const SpotlightCard = ({ review }: { review: any }) => {
           </div>
           <div>
             <h4 className="text-white text-sm font-bold uppercase tracking-wide">{review.name}</h4>
-            <p className="text-[#C9A227] text-[10px] font-bold uppercase tracking-widest mt-0.5">
+            <p className="text-accent text-[10px] font-bold uppercase tracking-widest mt-0.5">
               {review.role}
             </p>
           </div>
@@ -178,11 +178,11 @@ export default function Reviews() {
           style={{ y: headerY }}
           className="text-center mb-20 px-6"
         >
-          <span className="text-[#C9A227] text-[10px] font-bold uppercase tracking-[0.5em] mb-4 block">
-            The Syndicate Approves
+          <span className="text-accent text-[10px] font-bold uppercase tracking-[0.5em] mb-4 block">
+            Testimonials
           </span>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-white">
-            The <span className="text-transparent" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.4)" }}>Verdict.</span>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-white">
+            Client <span className="text-accent">Verdict.</span>
           </h2>
         </motion.div>
 

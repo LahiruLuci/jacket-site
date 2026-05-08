@@ -49,23 +49,23 @@ const Navbar = () => {
         "fixed top-0 left-0 right-0 z-[100] transition-all duration-500",
         isScrolled 
           ? "py-3 bg-white/80 backdrop-blur-xl border-b border-black/5 shadow-sm" 
-          : "py-6 md:py-8 bg-transparent"
+          : "py-6 md:py-8 bg-gradient-to-b from-black/60 via-black/20 to-transparent"
       )}
     >
       <div className="container mx-auto flex items-center justify-between px-6">
-        {/* Logo - Vanguard */}
+        {/* Logo - Jacket Junction */}
         <Link href="/" className="flex flex-col group border-l-2 border-accent pl-4 md:pl-6 py-1 relative">
           <span className={cn(
             "text-lg md:text-2xl font-bold tracking-tight leading-none uppercase transition-colors",
-            isScrolled ? "text-primary" : "text-primary md:text-white"
+            isScrolled ? "text-primary" : "text-white"
           )}>
-            Vanguard <span className="text-accent">Premium</span>
+            Jacket <span className="text-accent">Junction</span>
           </span>
           <div className="flex items-center gap-2 mt-1">
             <span className={cn(
               "text-[8px] font-bold tracking-[0.3em] uppercase transition-colors",
-              isScrolled ? "text-text-muted" : "text-text-muted md:text-white/40"
-            )}>EST. 2025 // PERFORMANCE</span>
+              isScrolled ? "text-text-muted" : "text-white/40"
+            )}>EST. 2025 // PREMIUM GEAR</span>
           </div>
         </Link>
 
@@ -223,7 +223,7 @@ const Navbar = () => {
                   <span className="text-sm font-bold text-primary">Global Dispatch</span>
                 </div>
               </div>
-              <p className="text-[9px] tracking-widest text-text-muted uppercase font-bold text-center">Vanguard Premium // 2025</p>
+              <p className="text-[9px] tracking-widest text-text-muted uppercase font-bold text-center">Jacket Junction // 2025</p>
             </div>
           </motion.div>
         )}

@@ -192,7 +192,7 @@ export default function Newsletter() {
             >
               <div className="flex justify-between items-start">
                 <div className="flex flex-col gap-1 text-accent">
-                  <h4 className="text-2xl font-bold tracking-tight uppercase">Vanguard</h4>
+                  <h4 className="text-2xl font-bold tracking-tight uppercase">Jacket Junction</h4>
                   <span className="text-[8px] tracking-[0.4em] uppercase font-bold text-white/40">Premium Membership</span>
                 </div>
                 <div className="w-10 h-10 border border-accent/20 rounded-lg flex items-center justify-center">
@@ -202,7 +202,7 @@ export default function Newsletter() {
 
               <div className="space-y-4">
                 <div className="text-[10px] text-white/20 font-mono tracking-[0.3em]">
-                  MEMBER ID: 2025-VNG-PREMIUM
+                  MEMBER ID: 2025-JJ-PREMIUM
                 </div>
                 <div className="text-lg md:text-2xl font-bold text-white tracking-[0.1em] uppercase">
                   Exclusive Privilege

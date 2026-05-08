@@ -6,12 +6,12 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Check, Plus, SlidersHorizontal } from "lucide-react";
 
-// Massive high-end mockup data referencing the Vanguard/Kinetic theme
+// Massive high-end mockup data referencing the Jacket Junction theme
 const products = [
   { 
     id: 1, 
-    slug: "vanguard-titan-racing-suit",
-    name: "Vanguard Titan Racing Suit", 
+    slug: "junction-titan-racing-suit",
+    name: "Junction Titan Racing Suit", 
     price: 1450, 
     category: "Race", 
     material: "Leather", 
@@ -217,17 +217,17 @@ function ProductCard({ product }: { product: any }) {
            <div className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-[9px] uppercase tracking-widest font-bold px-3 py-1.5 rounded-full shadow-lg">
              {product.category}
            </div>
-           {product.badge && (
-             <div className="bg-[#C9A227] text-black text-[9px] uppercase tracking-widest font-black px-3 py-1.5 rounded-full shadow-lg">
+            {product.badge && (
+             <div className="bg-accent text-white text-[9px] uppercase tracking-widest font-bold px-3 py-1.5 rounded-full shadow-lg">
                {product.badge}
              </div>
-           )}
+            )}
          </div>
 
          {/* Interventional Hover CTA (Action Drawer) */}
          <div className="absolute inset-x-4 bottom-4 flex translate-y-[120%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] z-20">
-            <button className="w-full bg-white backdrop-blur-xl text-[#161718] font-black uppercase tracking-[0.2em] text-[10px] md:text-xs py-4 md:py-5 flex items-center justify-center gap-3 hover:bg-[#C9A227] transition-colors rounded-[16px] shadow-2xl">
-               Add To Arsenal <Plus size={16} />
+            <button className="w-full bg-white backdrop-blur-xl text-[#161718] font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs py-4 md:py-5 flex items-center justify-center gap-3 hover:bg-accent hover:text-white transition-colors rounded-[16px] shadow-2xl">
+               Acquire Piece <Plus size={16} />
             </button>
          </div>
       </div>
@@ -235,14 +235,14 @@ function ProductCard({ product }: { product: any }) {
       {/* High Contrast Typography Block */}
       <div className="flex justify-between items-start px-2">
          <div className="flex flex-col gap-1.5">
-            <h3 className="text-base md:text-lg lg:text-xl font-bold uppercase tracking-tighter text-white group-hover:text-[#C9A227] transition-colors">
+            <h3 className="text-base md:text-lg lg:text-xl font-bold uppercase tracking-tight text-white group-hover:text-accent transition-colors">
               {product.name}
             </h3>
             <span className="text-white/40 text-[10px] font-bold tracking-widest uppercase">
               {product.material} <span className="mx-2 text-white/20">/</span> {product.season}
             </span>
          </div>
-         <span className="text-white font-mono text-lg md:text-xl font-black mt-1">
+         <span className="text-white font-mono text-lg md:text-xl font-bold mt-1">
            ${product.price}
          </span>
       </div>
@@ -281,7 +281,7 @@ function FilterDropdown({ label, options, current, onChange }: { label: string, 
                   onClick={() => { onChange(opt); setOpen(false); }}
                   className={`w-full text-left px-4 py-3 text-[10px] uppercase tracking-widest font-bold rounded-xl transition-all flex justify-between items-center ${
                     current === opt 
-                      ? 'bg-[#C9A227] text-black shadow-md' 
+                      ? 'bg-accent text-white shadow-md' 
                       : 'text-white/60 hover:text-white hover:bg-white/5 hover:pl-6'
                   }`}
                 >
