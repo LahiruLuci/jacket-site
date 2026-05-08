@@ -112,7 +112,7 @@ const FeaturedProductsGrid = ({ products }: FeaturedProductsGridProps) => {
   const displayProducts = products && products.length > 0 ? products : featuredProducts;
 
   return (
-    <section id="featured-products" className="bg-secondary py-24 md:py-32 px-6">
+    <section id="featured-products" className="bg-secondary py-20 md:py-32 px-6">
       <div className="max-w-[1600px] mx-auto">
         {/* Section Header */}
         <div className="flex flex-col mb-16 md:mb-20">
@@ -131,7 +131,7 @@ const FeaturedProductsGrid = ({ products }: FeaturedProductsGridProps) => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-6xl font-bold uppercase tracking-tight text-primary mb-6"
+            className="text-3xl md:text-5xl font-bold uppercase tracking-tight text-primary mb-6"
           >
             Featured <span className="text-accent">Products.</span>
           </motion.h2>
@@ -140,14 +140,14 @@ const FeaturedProductsGrid = ({ products }: FeaturedProductsGridProps) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-text-muted text-base md:text-lg max-w-2xl leading-relaxed"
+            className="text-text-muted text-sm md:text-base max-w-2xl leading-relaxed"
           >
-            Explore our most sought-after pieces, where technical precision meets timeless aesthetic. Engineered for performance, designed for the modern individual.
+            Explore our most sought-after pieces, where technical precision meets timeless aesthetic. Engineered for performance.
           </motion.p>
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 md:gap-y-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-4 md:gap-x-8 gap-y-10 md:gap-y-16">
           {displayProducts.map((product, idx) => (
             <ProductCard key={product.id} product={product} index={idx} />
           ))}
@@ -181,24 +181,24 @@ const ProductCard = ({ product, index }: { product: ProductType; index: number }
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="group flex flex-col h-full bg-white border border-black/5 rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+      className="group flex flex-col h-full bg-[#FBFBFA] border border-black/[0.03] rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
     >
       {/* Image Area */}
-      <div className="relative aspect-[4/5] overflow-hidden bg-secondary">
+      <div className="relative aspect-[4/5] overflow-hidden bg-white/50">
         <Image
           src={productImage}
           alt={product.name}
           fill
-          className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
+          className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110"
         />
         
         {/* Quick View Button */}
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 flex items-center justify-center">
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.03] transition-colors duration-500 flex items-center justify-center">
           <Link 
             href={`/jacket/${product.slug}`}
-            className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 shadow-lg hover:bg-accent hover:text-white"
+            className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 shadow-lg hover:bg-accent hover:text-white"
           >
-            <Eye size={20} />
+            <Eye size={18} />
           </Link>
         </div>
 
@@ -211,33 +211,33 @@ const ProductCard = ({ product, index }: { product: ProductType; index: number }
       </div>
 
       {/* Info Area */}
-      <div className="p-6 md:p-8 flex flex-col flex-1">
-        <div className="mb-6">
-          <span className="text-[10px] font-bold text-accent uppercase tracking-widest block mb-2">{categoryName}</span>
+      <div className="p-5 md:p-6 flex flex-col flex-1">
+        <div className="mb-5">
+          <span className="text-[9px] font-bold text-accent uppercase tracking-widest block mb-1.5">{categoryName}</span>
           <div className="flex justify-between items-start">
-            <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight text-primary leading-tight">
+            <h3 className="text-lg md:text-xl font-bold uppercase tracking-tight text-primary leading-tight">
               {product.name}
             </h3>
-            <span className="text-xl font-bold text-primary">${product.price}</span>
+            <span className="text-lg font-bold text-primary">${product.price}</span>
           </div>
-          <p className="text-sm text-text-muted mt-2">
+          <p className="text-[12px] text-text-muted mt-1.5">
             {product.subtitle || "Premium technical outerwear"}
           </p>
         </div>
 
         {/* Interaction Area */}
-        <div className="mt-auto pt-6 border-t border-black/5">
+        <div className="mt-auto pt-5 border-t border-black/5">
           <div className="flex flex-col gap-4">
             {/* Size Selector */}
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider">Sizes:</span>
-              <div className="flex gap-2">
+              <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Sizes:</span>
+              <div className="flex gap-1.5">
                 {productSizes.map((size: string) => (
                   <button
                     key={size}
                     onClick={(e) => { e.preventDefault(); setSelectedSize(size); }}
                     className={cn(
-                      "w-8 h-8 rounded-full border text-[10px] font-bold transition-all flex items-center justify-center cursor-pointer",
+                      "w-7 h-7 rounded-full border text-[9px] font-bold transition-all flex items-center justify-center cursor-pointer",
                       selectedSize === size 
                         ? "bg-primary border-primary text-white" 
                         : "bg-transparent border-black/10 text-primary hover:border-accent hover:text-accent"
@@ -254,7 +254,7 @@ const ProductCard = ({ product, index }: { product: ProductType; index: number }
               onClick={handleAddToCart}
               disabled={!selectedSize && !isAdded}
               className={cn(
-                "w-full py-4 rounded-lg flex items-center justify-center gap-3 text-xs font-bold uppercase tracking-widest transition-all duration-300",
+                "w-full py-3.5 rounded-full flex items-center justify-center gap-3 text-[10px] font-bold uppercase tracking-widest transition-all duration-300",
                 isAdded 
                   ? "bg-green-600 text-white cursor-default" 
                   : !selectedSize
@@ -263,11 +263,11 @@ const ProductCard = ({ product, index }: { product: ProductType; index: number }
               )}
             >
               {isAdded ? (
-                <>Added to Cart <Check size={16} /></>
+                <>Added <Check size={14} /></>
               ) : !selectedSize ? (
-                <>Select Size First <AlertCircle size={16} /></>
+                <>Select Size <AlertCircle size={14} /></>
               ) : (
-                <>Add to Cart <Plus size={16} /></>
+                <>Add to Cart <Plus size={14} /></>
               )}
             </button>
           </div>

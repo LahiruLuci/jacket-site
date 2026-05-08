@@ -56,7 +56,7 @@ export default function Technology() {
   const [active, setActive] = useState(0);
 
   return (
-    <section className="relative bg-secondary py-12 md:py-32 border-y border-black/5 overflow-hidden">
+    <section className="relative bg-secondary py-12 md:py-20 border-y border-black/5 overflow-hidden">
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
@@ -67,7 +67,7 @@ export default function Technology() {
             <span className="text-accent text-[11px] font-bold uppercase tracking-[0.4em] mb-4 md:mb-6 block">
               Advanced Engineering
             </span>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-primary leading-[0.95]">
+            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight text-primary leading-[0.95]">
               Technical <br />
               <span className="text-accent">Precision.</span>
             </h2>
@@ -96,7 +96,7 @@ export default function Technology() {
 
                     <div className="flex-1 w-full">
                       <h3
-                        className={`text-xl md:text-3xl font-bold uppercase tracking-tight transition-all duration-500 transform ${
+                        className={`text-lg md:text-2xl font-bold uppercase tracking-tight transition-all duration-500 transform ${
                           isActive
                             ? "text-primary translate-x-0"
                             : "text-text-muted group-hover:text-primary"

@@ -89,7 +89,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
     <div ref={containerRef} className="bg-[#0B0B0B] text-white min-h-[200vh] selection:bg-accent selection:text-black font-inter">
       
       {/* 01. THE IMMERSIVE HERO */}
-      <section className="relative lg:sticky lg:top-0 h-[80vh] md:h-screen w-full flex items-center justify-center overflow-hidden bg-black">
+      <section className="relative lg:sticky lg:top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-black">
         <div className="absolute inset-0 z-0">
            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] bg-accent/10 rounded-full blur-[160px] opacity-40" />
            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0B0B0B_85%)]" />
@@ -100,7 +100,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
           style={{ y: bgTextY, opacity: heroContentOpacity } as any}
           className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none whitespace-nowrap hidden lg:flex"
         >
-          <h2 className="text-[18vw] font-black uppercase tracking-tighter text-white/[0.03] leading-none select-none">
+          <h2 className="text-[12vw] font-black uppercase tracking-tighter text-white/[0.03] leading-none select-none">
             {productName}
           </h2>
         </motion.div>
@@ -130,7 +130,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
              <motion.h1 
                initial={{ opacity: 0, y: 20 }}
                animate={{ opacity: 1, y: 0 }}
-               className="text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-black uppercase tracking-tighter leading-[0.8] text-white"
+               className="text-3xl sm:text-4xl md:text-5xl lg:text-[60px] font-black uppercase tracking-tighter leading-[0.8] text-white"
              >
                {productName}
              </motion.h1>
@@ -151,13 +151,13 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
              animate={{ opacity: 1, scale: 1 }}
              className="flex flex-col items-end"
            >
-             <span className="text-2xl md:text-5xl font-black text-white tracking-tighter">${productPrice}</span>
+             <span className="text-xl md:text-4xl font-black text-white tracking-tighter">${productPrice}</span>
            </motion.div>
         </motion.div>
       </section>
 
       {/* 02. PRODUCT DETAILS SECTION */}
-      <section className="relative z-30 container max-w-[1500px] mx-auto px-6 py-16 md:py-32">
+      <section className="relative z-30 container max-w-[1500px] mx-auto px-6 py-12 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
           
           {/* Left Side: Content Block */}
@@ -168,7 +168,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
             className="lg:col-span-7 flex flex-col gap-12"
           >
             <div className="space-y-6">
-              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white">
+              <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tighter text-white">
                 Built for Everyday Performance
               </h2>
               <p className="text-accent text-lg md:text-2xl font-medium tracking-tight">
@@ -254,7 +254,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
             <div className="pt-16 md:pt-24 space-y-8">
               <div className="flex flex-col gap-2">
                 <span className="text-[10px] font-bold text-accent uppercase tracking-[0.5em]">Dimensional Archive</span>
-                <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white">Size Blueprint</h3>
+                <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tighter text-white">Size Blueprint</h3>
               </div>
 
               <div className="overflow-hidden rounded-[2rem] md:rounded-[3rem] border border-white/10 bg-[#151515] shadow-2xl">
@@ -311,7 +311,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
           <div className="lg:col-span-5 relative h-full" id="buy-panel">
             <div className="lg:sticky lg:top-32 h-fit space-y-10 bg-[#1A1A1A] p-10 md:p-14 rounded-[3rem] border border-white/10 shadow-2xl">
               <div className="space-y-4">
-                <h2 className="text-3xl font-black uppercase tracking-tight text-white">Select Size</h2>
+                <h2 className="text-2xl font-black uppercase tracking-tight text-white">Select Size</h2>
                 <div className="h-[1px] w-full bg-white/10" />
               </div>
 
@@ -329,9 +329,9 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
                       key={size}
                       onClick={() => setSelectedSize(size)}
                       className={cn(
-                        "h-16 rounded-2xl border flex items-center justify-center transition-all duration-500 text-lg font-black",
+                        "h-14 rounded-full border flex items-center justify-center transition-all duration-500 text-base font-black cursor-pointer",
                         selectedSize === size 
-                          ? "bg-white text-black border-white shadow-xl scale-105" 
+                          ? "bg-white text-black border-white shadow-xl" 
                           : "bg-black/40 border-white/10 text-white/40 hover:border-white/40 hover:text-white"
                       )}
                     >
@@ -343,24 +343,24 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
 
               {/* Add to Cart */}
               <div className="space-y-8">
-                <button 
+                 <button 
                   onClick={handleAddToCart}
                   disabled={!selectedSize && !isAdded}
                   className={cn(
-                    "w-full h-20 rounded-[2rem] flex items-center justify-center gap-4 text-base font-black uppercase tracking-[0.2em] transition-all duration-500 shadow-2xl",
+                    "w-full h-16 rounded-full flex items-center justify-center gap-4 text-sm font-black uppercase tracking-[0.2em] transition-all duration-500 shadow-2xl",
                     isAdded 
                       ? "bg-green-500 text-white cursor-default" 
                       : !selectedSize 
                         ? "bg-white/5 text-white/20 border border-white/10 cursor-not-allowed"
-                        : "bg-accent text-black hover:-translate-y-1 cursor-pointer"
+                        : "bg-accent text-black hover:-translate-y-0.5 cursor-pointer"
                   )}
                 >
                   {isAdded ? (
-                    <>Added to Cart <CheckCircle2 size={22} /></>
+                    <>Added <CheckCircle2 size={18} /></>
                   ) : !selectedSize ? (
-                    <>Select Size First <AlertCircle size={22} /></>
+                    <>Select Size <AlertCircle size={18} /></>
                   ) : (
-                    <>Add to Cart <ShoppingBag size={22} /></>
+                    <>Add to Cart <ShoppingBag size={18} /></>
                   )}
                 </button>
                 
@@ -478,14 +478,14 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
 
       {/* 03. RELATED PRODUCTS */}
       {relatedProducts && relatedProducts.length > 0 && (
-        <section className="bg-black py-32 md:py-48 relative overflow-hidden">
+        <section className="bg-black py-24 md:py-32 relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(201,162,39,0.05),transparent_70%)]" />
           
           <div className="container max-w-[1500px] mx-auto px-6 relative z-10">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 md:mb-24">
               <div className="space-y-4">
                 <span className="text-[10px] font-bold text-accent uppercase tracking-[0.5em]">You May Also Like</span>
-                <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white">The Legacy Collection</h2>
+                <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tighter text-white">The Legacy Collection</h2>
               </div>
               <a href="/shop" className="text-[10px] font-black uppercase tracking-[0.4em] text-white/40 hover:text-accent transition-colors border-b border-white/10 pb-2">
                 View All Gear

@@ -40,7 +40,7 @@ export default function BrandValues() {
   return (
     <section ref={targetRef} className="relative h-[300vh] bg-secondary">
       {/* Sticky container that locks during scroll */}
-      <div className="sticky top-0 h-screen flex items-center pt-24 md:pt-32 overflow-hidden bg-secondary">
+      <div className="sticky top-0 h-screen flex items-center pt-20 md:pt-32 overflow-hidden bg-secondary">
         {/* Absolute Section Header */}
         <div className="absolute top-12 md:top-20 left-8 md:left-16 lg:left-24 z-[30] pointer-events-none">
           <div className="flex items-center gap-4 mb-4">
@@ -84,7 +84,7 @@ export default function BrandValues() {
                         <h4 className="text-[10px] font-bold tracking-[0.3em] uppercase text-accent mb-2 md:mb-4">
                           {val.subtitle}
                         </h4>
-                        <h3 className="text-3xl md:text-5xl lg:text-7xl font-bold uppercase tracking-tight text-primary mb-2 lg:mb-8 leading-[0.95]">
+                        <h3 className="text-2xl md:text-4xl lg:text-5xl font-bold uppercase tracking-tight text-primary mb-2 lg:mb-6 leading-[0.95]">
                           {val.title.split(" ")[0]} <br />
                           {val.title.split(" ")[1]}
                         </h3>

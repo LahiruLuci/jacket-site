@@ -51,7 +51,7 @@ export default function CategoryShowcase() {
   }, []);
 
   return (
-    <section className="w-full bg-secondary-alt py-24 md:py-32 relative overflow-hidden">
+    <section className="w-full bg-secondary-alt py-20 md:py-32 relative overflow-hidden">
       {/* Background Subtle Accent */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/5 blur-[150px] rounded-full pointer-events-none" />
 
@@ -71,7 +71,7 @@ export default function CategoryShowcase() {
                 Purpose Built
               </span>
             </div>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-primary leading-[0.9]">
+            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight text-primary leading-[0.9]">
               Designed for <br />
               <span className="text-accent">Every Journey.</span>
             </h2>
@@ -137,7 +137,7 @@ export default function CategoryShowcase() {
                   <div className="flex flex-col justify-end">
                     <div className="relative">
                       <h3
-                        className={`text-3xl md:text-4xl lg:text-5xl font-bold uppercase text-white whitespace-nowrap transition-all duration-500 transform ${
+                        className={`text-2xl md:text-3xl lg:text-4xl font-bold uppercase text-white whitespace-nowrap transition-all duration-500 transform ${
                           isActive
                             ? "translate-y-0 opacity-100"
                             : "translate-y-8 opacity-0 hidden lg:block"

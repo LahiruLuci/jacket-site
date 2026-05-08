@@ -35,7 +35,7 @@ function InnovationHero() {
   }, []);
 
   return (
-    <section className="relative w-full h-[90vh] overflow-hidden flex flex-col items-center justify-center border-b border-black/5">
+    <section className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center border-b border-black/5">
       
       {/* Photographic Background */}
       <div className="absolute inset-0 z-0">

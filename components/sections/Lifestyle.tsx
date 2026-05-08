@@ -38,14 +38,14 @@ export default function Lifestyle() {
   return (
     <section 
       ref={containerRef} 
-      className="py-12 md:py-32 bg-background relative overflow-hidden"
+      className="py-12 md:py-20 bg-background relative overflow-hidden"
     >
       {/* Massive Background Typography */}
       <motion.div
         style={{ y: pyText }}
         className="absolute inset-0 flex justify-center pointer-events-none opacity-[0.03] select-none z-0 overflow-hidden"
       >
-        <h2 className="text-[25vw] font-bold leading-none whitespace-nowrap mt-20 text-primary">
+        <h2 className="text-[15vw] font-bold leading-none whitespace-nowrap mt-20 text-primary">
           JOURNEY
         </h2>
       </motion.div>
@@ -61,7 +61,7 @@ export default function Lifestyle() {
                 Our Community
               </span>
             </div>
-            <h3 className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tight text-primary leading-[0.95]">
+            <h3 className="text-4xl md:text-6xl font-bold uppercase tracking-tight text-primary leading-[0.95]">
               Beyond <br />
               <span className="text-accent">The Road.</span>
             </h3>

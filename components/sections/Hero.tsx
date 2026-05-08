@@ -77,7 +77,7 @@ export default function Hero() {
   const slide = slides[current];
 
   return (
-    <section className="relative w-full h-[90vh] min-h-[600px] overflow-hidden bg-dark-bg">
+    <section className="relative w-full h-screen min-h-[550px] overflow-hidden bg-dark-bg">
 
       {/* Background Images */}
       <AnimatePresence initial={false} mode="sync">
@@ -126,7 +126,7 @@ export default function Hero() {
             key={`headline-${current}`}
             {...fadeUp}
             transition={{ duration: 0.6, delay: 0.2, ease: ease }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold uppercase leading-[0.95] tracking-tight text-white mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[0.95] tracking-tight text-white mb-4"
           >
             {slide.headline.map((line, i) =>
               line === slide.accent ? (
@@ -144,7 +144,7 @@ export default function Hero() {
             key={`sub-${current}`}
             {...fadeUp}
             transition={{ duration: 0.6, delay: 0.35, ease: ease }}
-            className="text-white/60 text-sm md:text-base max-w-[460px] leading-relaxed mb-8 md:mb-10 font-medium"
+            className="text-white/50 text-[13px] md:text-sm max-w-[400px] leading-relaxed mb-6 md:mb-8 font-medium"
           >
             {slide.sub}
           </motion.p>
@@ -158,15 +158,15 @@ export default function Hero() {
           className="flex flex-wrap items-center gap-4"
         >
           <Link
-            href="/#featured-products"
-            className="group flex items-center gap-3 bg-accent hover:bg-accent/90 text-white font-bold text-xs uppercase tracking-widest px-10 py-5 transition-all duration-300"
+            href="/shop"
+            className="group flex items-center gap-3 bg-accent hover:bg-accent/90 text-white font-bold text-[10px] uppercase tracking-widest px-8 py-4 transition-all duration-300 rounded-full"
           >
             Explore Collection
-            <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform duration-300" />
+            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
           </Link>
           <Link
             href="/about"
-            className="backdrop-blur-md bg-white/5 border border-white/20 hover:bg-white/10 text-white font-bold text-xs uppercase tracking-widest px-10 py-5 transition-all duration-300"
+            className="backdrop-blur-md bg-white/5 border border-white/20 hover:bg-white/10 text-white font-bold text-[10px] uppercase tracking-widest px-8 py-4 transition-all duration-300 rounded-full"
           >
             Our Story
           </Link>

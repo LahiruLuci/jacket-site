@@ -24,7 +24,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-dark-bg text-white pt-32 pb-8 overflow-hidden z-20 mt-[-1px]">
+    <footer className="relative bg-dark-bg text-white pt-24 pb-8 overflow-hidden z-20 mt-[-1px]">
       
       {/* Background Graphic */}
       <div className="absolute inset-0 z-0 opacity-[0.1] pointer-events-none">
@@ -40,17 +40,17 @@ export default function Footer() {
       <div className="max-w-[1600px] mx-auto px-6 md:px-12 relative z-10 flex flex-col min-h-[70vh] justify-between">
         
         {/* Top Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 mb-24 border-b border-white/10 pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 mb-16 border-t border-white/10 pt-20">
             
             {/* Brand Intro Column */}
             <div className="lg:col-span-5 flex flex-col justify-between">
                <div>
-                  <h3 className="text-4xl font-bold uppercase tracking-tight mb-6 leading-none">
+                  <h3 className="text-2xl font-bold uppercase tracking-tight mb-4 leading-none">
                     Jacket <br />
                     Junction.
                   </h3>
-                  <p className="text-white/40 text-sm leading-relaxed max-w-sm mb-12">
-                     Engineering the absolute pinnacle of motorcycle protection. Combining technical excellence with modern aesthetic for the contemporary rider.
+                  <p className="text-white/30 text-[13px] leading-relaxed max-w-xs mb-10">
+                     Engineering the absolute pinnacle of motorcycle protection. Technical excellence for the contemporary rider.
                   </p>
                </div>
                
@@ -109,7 +109,7 @@ export default function Footer() {
               onClick={scrollToTop}
             >
                <h1 
-                 className="text-[14vw] font-bold text-center tracking-tighter uppercase leading-[0.8] bg-clip-text text-transparent bg-[url('/assets/peterlesliemorris-motorcycle-1829461_1920.webp')] bg-cover bg-center bg-no-repeat bg-fixed opacity-70 group-hover:opacity-100 transition-opacity duration-1000"
+                 className="text-[10vw] font-bold text-center tracking-tighter uppercase leading-[0.8] bg-clip-text text-transparent bg-[url('/assets/peterlesliemorris-motorcycle-1829461_1920.webp')] bg-cover bg-center bg-no-repeat bg-fixed opacity-40 group-hover:opacity-100 transition-opacity duration-1000"
                >
                   <span className="block transform transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105">
                      Jacket Junction

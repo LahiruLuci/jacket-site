@@ -100,7 +100,7 @@ export default function ShopClient({ initialProducts, categories }: ShopClientPr
     <div className="bg-[#F5F5F3] min-h-screen text-[#111111] selection:bg-accent selection:text-white font-inter">
       
       {/* 1. SHOP HERO BANNER */}
-      <section className="relative h-[60vh] md:h-[70vh] w-full overflow-hidden bg-[#161616]">
+      <section className="relative h-screen w-full overflow-hidden bg-[#161616]">
         <Image 
           src="/assets/stocksnap-dark-2598357_1920.webp" 
           alt="Premium Collection" 
@@ -117,14 +117,14 @@ export default function ShopClient({ initialProducts, categories }: ShopClientPr
             className="max-w-2xl"
           >
             <span className="text-[10px] md:text-xs font-bold text-accent uppercase tracking-[0.5em] mb-4 block">New Season Arrival</span>
-            <h1 className="text-5xl md:text-8xl font-bold uppercase tracking-tighter text-white mb-6 leading-none">
+            <h1 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter text-white mb-6 leading-none">
               Premium <br /> Utility Jackets
             </h1>
-            <p className="text-white/70 text-sm md:text-xl font-light leading-relaxed mb-10 max-w-lg">
+            <p className="text-white/60 text-sm md:text-lg font-light leading-relaxed mb-10 max-w-lg">
               Designed for daily comfort, durability, and modern style. Engineered for the urban landscape.
             </p>
             <div className="flex gap-4">
-               <button onClick={() => document.getElementById('collection')?.scrollIntoView({ behavior: 'smooth' })} className="px-8 py-4 bg-white text-black text-xs font-bold uppercase tracking-widest hover:bg-accent hover:text-white transition-all rounded-sm shadow-xl">
+               <button onClick={() => document.getElementById('collection')?.scrollIntoView({ behavior: 'smooth' })} className="px-8 py-4 bg-white text-black text-[10px] font-bold uppercase tracking-widest hover:bg-accent hover:text-white transition-all rounded-full shadow-xl cursor-pointer">
                  Explore Archives
                </button>
             </div>
@@ -133,8 +133,8 @@ export default function ShopClient({ initialProducts, categories }: ShopClientPr
       </section>
 
       {/* 2. FILTER + SORT BAR (STICKY) */}
-      <div className="sticky top-[80px] z-[80] w-full bg-white/80 backdrop-blur-3xl border-y border-black/5 shadow-sm">
-        <div className="container py-4 flex items-center justify-between px-6">
+      <div className="sticky top-[73px] z-[80] w-full bg-white/90 backdrop-blur-3xl border-y border-black/5 shadow-sm">
+        <div className="container py-3 flex items-center justify-between px-6">
           <button 
             onClick={() => setIsFilterDrawerOpen(true)}
             className="flex items-center gap-3 px-4 py-2 hover:bg-black/5 rounded-full transition-all md:hidden"
@@ -183,7 +183,7 @@ export default function ShopClient({ initialProducts, categories }: ShopClientPr
         </div>
       </div>
 
-      <div className="container px-6 py-16 md:py-24" id="collection">
+      <div className="container px-6 py-12 md:py-20" id="collection">
         <div className="flex flex-col lg:flex-row gap-16">
           
           {/* DESKTOP SIDEBAR FILTER */}
@@ -265,9 +265,9 @@ export default function ShopClient({ initialProducts, categories }: ShopClientPr
               <section className="space-y-12">
                 <div className="flex flex-col gap-2">
                   <span className="text-[10px] font-bold text-accent uppercase tracking-[0.4em]">Curated // Elite</span>
-                  <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter text-[#111111]">Best Sellers</h2>
+                  <h2 className="text-2xl md:text-4xl font-bold uppercase tracking-tighter text-[#111111]">Best Sellers</h2>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-8 md:gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                    {bestSellers.map(p => (
                      <ProductCard 
                        key={p.id} 
@@ -284,7 +284,7 @@ export default function ShopClient({ initialProducts, categories }: ShopClientPr
             <section className="space-y-12">
               <div className="flex flex-col gap-2">
                 <span className="text-[10px] font-bold text-accent uppercase tracking-[0.4em]">Full Archives</span>
-                <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter text-[#111111]">
+                <h2 className="text-2xl md:text-4xl font-bold uppercase tracking-tighter text-[#111111]">
                   {activeCategory === "All" ? "All Collections" : `${activeCategory} Series`}
                 </h2>
               </div>
@@ -306,7 +306,7 @@ export default function ShopClient({ initialProducts, categories }: ShopClientPr
                   </button>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-16">
                   {regularProducts.map(p => (
                     <ProductCard 
                       key={p.id} 
@@ -454,13 +454,13 @@ function ProductCard({ product, onQuickView, isLarge = false }: { product: Produ
         )}>
           <button 
             onClick={onQuickView}
-            className="w-full h-12 bg-white text-black text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-accent hover:text-white transition-all shadow-xl"
+            className="w-full h-11 bg-white text-black text-[9px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-accent hover:text-white transition-all shadow-xl rounded-full cursor-pointer"
           >
             Quick View <Eye size={14} />
           </button>
           <Link 
             href={`/jacket/${product.slug}`}
-            className="w-full h-12 bg-black/80 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-black transition-all shadow-xl"
+            className="w-full h-11 bg-black/80 backdrop-blur-md text-white text-[9px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-black transition-all shadow-xl rounded-full"
           >
             View Details <ArrowRight size={14} />
           </Link>
@@ -537,7 +537,7 @@ function QuickViewModal({ product, onClose }: { product: Product, onClose: () =>
         <div className="w-full md:w-1/2 p-10 md:p-14 flex flex-col">
           <div className="mb-10">
             <span className="text-[10px] font-bold text-accent uppercase tracking-widest mb-4 block">{product.category.name}</span>
-            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter text-[#111111] mb-6 leading-none">{product.name}</h2>
+            <h2 className="text-2xl md:text-4xl font-bold uppercase tracking-tighter text-[#111111] mb-6 leading-none">{product.name}</h2>
             <p className="text-sm text-black/60 leading-relaxed max-w-sm">
               {product.description.slice(0, 180)}...
             </p>
@@ -567,14 +567,14 @@ function QuickViewModal({ product, onClose }: { product: Product, onClose: () =>
 
              <div className="space-y-4">
                <div className="flex justify-between items-end mb-4">
-                 <span className="text-3xl font-bold tracking-tighter text-[#111111]">${product.price}</span>
-                 <span className="text-[10px] font-bold text-green-600 uppercase tracking-widest">In Stock</span>
+                 <span className="text-2xl font-bold tracking-tighter text-[#111111]">${product.price}</span>
+                 <span className="text-[9px] font-bold text-green-600 uppercase tracking-widest">In Stock</span>
                </div>
                <button 
                  onClick={handleAddToCart}
                  disabled={!selectedSize && !isAdded}
                  className={cn(
-                   "w-full h-16 rounded-2xl flex items-center justify-center gap-4 text-xs font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-xl",
+                   "w-full h-14 rounded-full flex items-center justify-center gap-4 text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-xl",
                    isAdded 
                     ? "bg-green-600 text-white cursor-default" 
                     : !selectedSize
@@ -583,11 +583,11 @@ function QuickViewModal({ product, onClose }: { product: Product, onClose: () =>
                  )}
                >
                  {isAdded ? (
-                   <>Added to Cart <CheckCircle2 size={18} /></>
+                   <>Added <CheckCircle2 size={16} /></>
                  ) : !selectedSize ? (
-                   <>Select Size First <AlertCircle size={18} /></>
+                   <>Select Size <AlertCircle size={16} /></>
                  ) : (
-                   <>Add to Cart <ShoppingBag size={18} /></>
+                   <>Add to Cart <ShoppingBag size={16} /></>
                  )}
                </button>
                <Link href={`/jacket/${product.slug}`} className="block text-center text-[10px] font-bold uppercase tracking-widest text-black/40 hover:text-black transition-colors pt-2">Full Specifications</Link>

@@ -60,7 +60,7 @@ const WhyChooseUs = () => {
                 </span>
               </div>
               
-              <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tight text-primary leading-[0.95] mb-8">
+              <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight text-primary leading-[0.95] mb-6">
                 Engineered <br />
                 For The <br />
                 <span className="text-accent">Modern Road.</span>
@@ -72,10 +72,10 @@ const WhyChooseUs = () => {
 
               <Link 
                 href="/shop"
-                className="group inline-flex items-center gap-4 bg-primary text-white px-10 py-5 text-xs font-bold uppercase tracking-[0.2em] hover:bg-accent transition-all duration-300 rounded-lg shadow-lg"
+                className="group inline-flex items-center gap-4 bg-primary text-white px-8 py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-accent transition-all duration-300 rounded-full shadow-lg"
               >
                 Shop the Collection
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
           </div>
@@ -114,7 +114,7 @@ const FeatureCard = ({ feature, index }: { feature: any; index: number }) => {
         <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-3 block">
           {feature.label}
         </span>
-        <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight text-primary mb-4 leading-tight">
+        <h3 className="text-lg md:text-xl font-bold uppercase tracking-tight text-primary mb-3 leading-tight">
           {feature.title}
         </h3>
         <p className="text-text-muted text-sm md:text-base leading-relaxed">

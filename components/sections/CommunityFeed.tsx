@@ -94,7 +94,7 @@ export default function CommunityFeed() {
   }, [isHoveringGrid, cursorX, cursorY]);
 
   return (
-    <section className="relative bg-[#111213] py-24 md:py-40 z-10 w-full overflow-hidden border-t border-white/5 cursor-default">
+    <section className="relative bg-[#111213] py-24 md:py-32 z-10 w-full overflow-hidden border-t border-white/5 cursor-default">
       
       {/* Custom Global Cursor (Only visible when hovering grid) */}
       <AnimatePresence>
@@ -127,7 +127,7 @@ export default function CommunityFeed() {
             <div className="w-12 h-[1px] bg-accent" />
           </div>
           
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tight text-white leading-none mb-6">
+          <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight text-white leading-none mb-6">
             Join The <br className="md:hidden" />
             <span className="text-accent">Movement.</span>
           </h2>

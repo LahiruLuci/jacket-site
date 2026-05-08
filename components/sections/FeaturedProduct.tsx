@@ -47,7 +47,7 @@ export default function FeaturedProduct({ product }: FeaturedProductProps) {
   return (
     <section 
       ref={containerRef} 
-      className="relative bg-[#111213] min-h-screen py-32 md:py-48 overflow-hidden z-10"
+      className="relative bg-[#111213] min-h-screen py-24 md:py-32 overflow-hidden z-10"
     >
       {/* Dynamic Aura Background */}
       <motion.div 
@@ -62,7 +62,7 @@ export default function FeaturedProduct({ product }: FeaturedProductProps) {
           <span className="text-accent text-[10px] font-bold uppercase tracking-[0.5em] mb-4 block">
             The Masterpiece
           </span>
-          <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight text-white">
+          <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight text-white">
             Featured <span className="text-accent">Archive.</span>
           </h2>
         </div>
@@ -113,9 +113,9 @@ export default function FeaturedProduct({ product }: FeaturedProductProps) {
               </span>
               
               <Link href={`/jacket/${activeProduct.slug}`}>
-                <h3 className="text-4xl md:text-5xl text-white font-bold uppercase tracking-tight leading-[1.1] mb-6 hover:text-accent transition-colors">
+                <h3 className="text-3xl md:text-4xl text-white font-bold uppercase tracking-tight leading-[1.1] mb-5 hover:text-accent transition-colors">
                   {activeProduct.name.split(" ").slice(0, 2).join(" ")} <br />
-                  <span className="text-accent italic font-normal text-2xl md:text-3xl block mt-2">
+                  <span className="text-accent italic font-normal text-xl md:text-2xl block mt-1">
                     {activeProduct.name.split(" ").slice(2).join(" ")}
                   </span>
                 </h3>

@@ -48,15 +48,15 @@ const Navbar = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-[100] transition-all duration-500",
         isScrolled 
-          ? "py-3 bg-white/80 backdrop-blur-xl border-b border-black/5 shadow-sm" 
-          : "py-6 md:py-8 bg-gradient-to-b from-black/60 via-black/20 to-transparent"
+          ? "py-2 bg-white/90 backdrop-blur-xl border-b border-black/5 shadow-sm" 
+          : "py-4 md:py-6 bg-gradient-to-b from-black/60 via-black/20 to-transparent"
       )}
     >
       <div className="container mx-auto flex items-center justify-between px-6">
         {/* Logo - Jacket Junction */}
         <Link href="/" className="flex flex-col group border-l-2 border-accent pl-4 md:pl-6 py-1 relative">
           <span className={cn(
-            "text-lg md:text-2xl font-bold tracking-tight leading-none uppercase transition-colors",
+            "text-base md:text-xl font-bold tracking-tight leading-none uppercase transition-colors",
             isScrolled ? "text-primary" : "text-white"
           )}>
             Jacket <span className="text-accent">Junction</span>
@@ -70,20 +70,20 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden lg:flex items-center gap-2">
+        <div className="hidden lg:flex items-center gap-1">
           {navLinks.map((link, idx) => {
             const isActive = pathname === link.href;
             return (
               <React.Fragment key={link.name}>
                 <Link
                   href={link.href}
-                  className="px-6 py-2 group relative overflow-hidden"
+                  className="px-4 py-2 group relative overflow-hidden"
                 >
                   <span className={cn(
-                    "text-[11px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 relative z-10",
+                    "text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 relative z-10",
                     isActive 
-                      ? "text-primary" 
-                      : isScrolled ? "text-text-muted group-hover:text-primary" : "text-white group-hover:text-white"
+                      ? (isScrolled ? "text-primary" : "text-accent") 
+                      : isScrolled ? "text-text-muted group-hover:text-primary" : "text-white group-hover:text-accent"
                   )}>
                     {link.name}
                   </span>
@@ -114,16 +114,16 @@ const Navbar = () => {
           <button 
             onClick={openDrawer}
             className={cn(
-              "flex items-center gap-2 md:gap-3 group px-4 md:px-6 py-2 md:py-2.5 rounded-lg border transition-all duration-300 cursor-pointer flex-shrink-0",
+              "flex items-center gap-2 md:gap-3 group px-4 md:px-5 py-2 md:py-2 rounded-full border transition-all duration-300 cursor-pointer flex-shrink-0",
               isScrolled 
                 ? "bg-primary text-white border-transparent hover:bg-accent" 
                 : "bg-white/10 text-white border-white/20 hover:bg-white/20"
             )}
           >
-            <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-widest">
+            <span className="text-[10px] md:text-[10px] font-bold uppercase tracking-widest">
               Cart ({cartCount})
             </span>
-            <ShoppingCart strokeWidth={2} className="w-4 h-4 md:w-5 md:h-5" />
+            <ShoppingCart strokeWidth={2} className="w-4 h-4 md:w-4 md:h-4" />
           </button>
 
           <button 
@@ -146,9 +146,9 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed inset-0 bg-white z-[200] flex flex-col lg:hidden"
+            className="fixed inset-0 bg-secondary z-[200] flex flex-col lg:hidden"
           >
-            <div className="p-8 flex justify-between items-center border-b border-black/5">
+            <div className="p-6 md:p-8 flex justify-between items-center border-b border-black/5">
               <span className="text-lg font-bold tracking-tight text-primary uppercase">Navigation</span>
             </div>
 

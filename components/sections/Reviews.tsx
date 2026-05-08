@@ -135,7 +135,7 @@ export default function Reviews() {
   const headerY = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   return (
-    <section ref={sectionRef} className="relative bg-[#161718] py-32 md:py-48 overflow-hidden z-10">
+    <section ref={sectionRef} className="relative bg-[#161718] py-24 md:py-32 overflow-hidden z-10">
       
       {/* Dynamic CSS Variables & Keyframes natively injected */}
       <style dangerouslySetInnerHTML={{__html: `
@@ -181,7 +181,7 @@ export default function Reviews() {
           <span className="text-accent text-[10px] font-bold uppercase tracking-[0.5em] mb-4 block">
             Testimonials
           </span>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-white">
+          <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight text-white">
             Client <span className="text-accent">Verdict.</span>
           </h2>
         </motion.div>

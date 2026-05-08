@@ -61,7 +61,7 @@ export default function Newsletter() {
   return (
     <section 
       ref={containerRef} 
-      className="relative bg-dark-bg py-24 md:py-32 overflow-hidden border-t border-white/5 flex items-center justify-center"
+      className="relative bg-dark-bg py-20 md:py-24 overflow-hidden border-t border-white/5 flex items-center justify-center"
     >
       {/* Background Ambience */}
       <div className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none">
@@ -85,7 +85,7 @@ export default function Newsletter() {
             </span>
           </div>
 
-          <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tight text-white leading-[0.95] mb-8">
+          <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight text-white leading-[0.95] mb-6">
             Join The <br />
             <span className="text-accent">Insider.</span>
           </h2>
