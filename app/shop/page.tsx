@@ -1,6 +1,7 @@
 import Navbar from "@/components/layout/Navbar";
 import prisma from "@/lib/prisma";
 import ShopClient from "@/components/shop/ShopClient";
+import { AlertCircle } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
