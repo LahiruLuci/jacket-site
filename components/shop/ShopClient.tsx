@@ -60,6 +60,7 @@ export default function ShopClient({ initialProducts, categories }: ShopClientPr
   const [sortOrder, setSortOrder] = useState("Newest");
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
 
   // Filter Logic
   const filteredProducts = useMemo(() => {
@@ -105,7 +106,7 @@ export default function ShopClient({ initialProducts, categories }: ShopClientPr
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#161616]" />
         
-        <div className="container relative z-10 h-full flex flex-col justify-center px-6 pt-24 md:pt-32">
+        <div className="container relative z-10 h-full flex flex-col justify-center px-6 pt-32 md:pt-40">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -124,8 +125,8 @@ export default function ShopClient({ initialProducts, categories }: ShopClientPr
       </section>
 
       {/* 2. FILTER + SORT SECTION */}
-      <div className="sticky top-[64px] md:top-[73px] z-[80] w-full bg-white/95 backdrop-blur-xl border-b border-black/5">
-        <div className="container py-2.5 md:py-4 flex items-center justify-between px-6">
+      <div className="sticky top-[80px] md:top-[96px] z-[80] w-full bg-white/95 backdrop-blur-xl border-b border-black/5 transition-all duration-300">
+        <div className="container py-3 md:py-5 flex items-center justify-between px-6">
           <div className="flex items-center gap-6">
             <button 
               onClick={() => setIsFilterDrawerOpen(true)}
@@ -146,27 +147,48 @@ export default function ShopClient({ initialProducts, categories }: ShopClientPr
           <div className="flex items-center gap-4 md:gap-8">
             <div className="flex items-center gap-3">
               <span className="text-[10px] font-bold text-black/40 uppercase tracking-widest hidden sm:inline">Sort By:</span>
-              <div className="relative group">
-                <select 
-                  value={sortOrder}
-                  onChange={(e) => setSortOrder(e.target.value)}
-                  className="appearance-none bg-transparent border-none text-[10px] font-black uppercase tracking-widest focus:ring-0 cursor-pointer text-[#111111] pr-6"
+              <div className="relative">
+                <div 
+                  onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
+                  className="flex items-center gap-3 px-6 py-2.5 border border-black rounded-full cursor-pointer hover:bg-black hover:text-white transition-all group/sort min-w-[140px] justify-between"
                 >
-                  <option value="Newest">Newest</option>
-                  <option value="Best Selling">Best Selling</option>
-                  <option value="Price: Low to High">Price: Low to High</option>
-                  <option value="Price: High to Low">Price: High to Low</option>
-                </select>
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <ChevronRight size={12} className="rotate-90 text-black/40" />
+                  <span className="text-[10px] font-black uppercase tracking-widest">{sortOrder}</span>
+                  <ChevronRight size={12} className={cn("transition-transform duration-300 text-black/40 group-hover/sort:text-white", isSortDropdownOpen ? "-rotate-90" : "rotate-90")} />
                 </div>
+                {/* Custom Dropdown Overlay */}
+                <AnimatePresence>
+                  {isSortDropdownOpen && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      className="absolute top-full right-0 mt-2 w-56 bg-white border border-black/5 rounded-2xl shadow-2xl z-[100] overflow-hidden"
+                    >
+                      {["Newest", "Best Selling", "Price: Low to High", "Price: High to Low"].map((option) => (
+                        <button
+                          key={option}
+                          onClick={() => {
+                            setSortOrder(option);
+                            setIsSortDropdownOpen(false);
+                          }}
+                          className={cn(
+                            "w-full text-left px-6 py-4 text-[10px] font-bold uppercase tracking-widest transition-colors",
+                            sortOrder === option ? "bg-accent text-white" : "hover:bg-black/5 text-black/60 hover:text-black"
+                          )}
+                        >
+                          {option}
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="container px-6 py-16 md:py-24 scroll-mt-40" id="collection">
+      <div className="container px-6 py-10 md:py-16 scroll-mt-32" id="collection">
         <div className="flex flex-col lg:flex-row gap-20 items-start">
           
           {/* DESKTOP SIDEBAR FILTER */}
@@ -243,11 +265,11 @@ export default function ShopClient({ initialProducts, categories }: ShopClientPr
           </aside>
 
           {/* MAIN CONTENT AREA */}
-          <div className="flex-1 space-y-24 md:space-y-32">
+          <div className="flex-1 space-y-16 md:space-y-24">
             
             {/* 3. FEATURED COLLECTION */}
             {bestSellers.length > 0 && activeCategory === "All" && (
-              <section className="space-y-12 bg-[#EFEDE8] -mx-6 px-6 py-16 md:rounded-[2.5rem] md:mx-0 md:px-12">
+              <section className="space-y-12 bg-[#EFEDE8] -mx-6 px-6 py-12 md:rounded-[2.5rem] md:mx-0 md:px-12">
                 <div className="flex flex-col gap-2">
                   <span className="text-[10px] font-bold text-accent uppercase tracking-[0.4em]">Curated Spotlight</span>
                   <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-tighter text-[#111111]">The Elite Series</h2>
