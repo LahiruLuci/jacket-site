@@ -54,18 +54,18 @@ export default function CartDrawer() {
             className="fixed top-0 right-0 h-full w-full max-w-[450px] bg-[#EAE8E4] border-l border-black/5 z-[210] flex flex-col shadow-2xl"
           >
             {/* Header */}
-            <div className="p-8 flex items-center justify-between border-b border-black/5 bg-white/20 backdrop-blur-3xl sticky top-0 z-20">
+            <div className="p-6 md:p-8 flex items-center justify-between border-b border-black/5 bg-white/20 backdrop-blur-3xl sticky top-0 z-20">
               <div className="flex flex-col">
-                <span className="text-2xl font-bold uppercase tracking-tighter text-[#2D2D2D]">Your Collection</span>
+                <span className="text-xl md:text-2xl font-bold uppercase tracking-tighter text-[#2D2D2D]">Your Collection</span>
                 <span className="text-[10px] font-bold text-accent uppercase tracking-widest mt-1">
                   {count} {count === 1 ? 'Item' : 'Items'} // <span className="italic font-normal opacity-60 text-[#2D2D2D]">Procured</span>
                 </span>
               </div>
               <button 
                 onClick={closeDrawer}
-                className="w-12 h-12 flex items-center justify-center rounded-full bg-black/5 hover:bg-black/10 text-[#2D2D2D] transition-all duration-300 border border-black/10 hover:border-black/20 cursor-pointer"
+                className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-black/5 hover:bg-black/10 text-[#2D2D2D] transition-all duration-300 border border-black/10 hover:border-black/20 cursor-pointer"
               >
-                <X size={20} />
+                <X size={18} />
               </button>
             </div>
 
@@ -91,7 +91,7 @@ export default function CartDrawer() {
                 items.map((item) => (
                   <div key={item.id} className="flex gap-6 group relative pb-8 border-b border-black/5 last:border-0 last:pb-0">
                     {/* Image Container */}
-                    <div className="relative w-28 h-36 bg-white rounded-2xl overflow-hidden border border-black/5 flex-shrink-0 shadow-lg">
+                    <div className="relative w-24 h-32 md:w-28 md:h-36 bg-white rounded-2xl overflow-hidden border border-black/5 flex-shrink-0 shadow-lg">
                       <Image 
                         src={item.image} 
                         alt={item.name} 
@@ -108,9 +108,10 @@ export default function CartDrawer() {
                           <span className="text-[9px] font-bold text-accent uppercase tracking-[0.2em] px-2 py-1 bg-accent/5 rounded-md border border-accent/10">Size {item.size}</span>
                           <button 
                             onClick={() => removeItem(item.id)}
-                            className="text-black/20 hover:text-red-500 transition-all duration-300 hover:scale-110 cursor-pointer"
+                            className="w-8 h-8 md:w-auto md:h-auto md:bg-transparent bg-black/5 rounded-full flex items-center justify-center text-black/40 hover:text-red-500 transition-all duration-300 hover:scale-110 cursor-pointer shadow-sm md:shadow-none"
+                            title="Remove item"
                           >
-                            <Trash2 size={14} />
+                            <Trash2 size={12} className="md:w-3.5 md:h-3.5" />
                           </button>
                         </div>
                         <h4 className="text-base font-bold uppercase tracking-tight leading-tight text-[#2D2D2D]/80 group-hover:text-[#2D2D2D] transition-colors">
@@ -152,17 +153,17 @@ export default function CartDrawer() {
 
             {/* Footer */}
             {items.length > 0 && (
-              <div className="p-8 border-t border-black/5 bg-[#EAE8E4] space-y-6">
-                <div className="space-y-5">
+              <div className="p-6 md:p-8 border-t border-black/5 bg-[#EAE8E4] space-y-4 md:space-y-6">
+                <div className="space-y-3 md:space-y-5">
                   <div className="flex justify-between items-end">
                     <span className="text-[11px] font-bold text-black/40 uppercase tracking-[0.3em]">Acquisition Total</span>
-                    <span className="text-2xl font-bold tracking-tighter text-[#2D2D2D] leading-none">${total.toLocaleString()}</span>
+                    <span className="text-xl md:text-2xl font-bold tracking-tighter text-[#2D2D2D] leading-none">${total.toLocaleString()}</span>
                   </div>
                   
-                  <div className="flex items-center gap-4 py-4 px-6 rounded-2xl bg-black/[0.03] border border-black/5">
+                  <div className="flex items-center gap-3 py-3 px-5 rounded-2xl bg-black/[0.03] border border-black/5">
                      <div className="flex items-center gap-3 text-accent">
-                        <Truck size={16} />
-                        <span className="text-[10px] font-bold uppercase tracking-widest italic">Complimentary Shipping</span>
+                        <Truck size={14} />
+                        <span className="text-[9px] font-bold uppercase tracking-widest italic">Complimentary Shipping</span>
                      </div>
                   </div>
                 </div>
@@ -170,15 +171,15 @@ export default function CartDrawer() {
                 <Link 
                   href="/checkout"
                   onClick={closeDrawer}
-                  className="group w-full h-20 bg-accent text-white rounded-[2rem] flex items-center justify-center gap-4 text-sm font-bold uppercase tracking-[0.2em] hover:-translate-y-1 active:scale-[0.98] transition-all shadow-[0_30px_60px_rgba(176,141,87,0.3)] cursor-pointer"
+                  className="group w-full h-14 md:h-16 bg-accent text-white rounded-2xl md:rounded-[2rem] flex items-center justify-center gap-4 text-xs md:text-sm font-bold uppercase tracking-[0.2em] hover:-translate-y-1 active:scale-[0.98] transition-all shadow-xl cursor-pointer"
                 >
-                  Secure Checkout <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform duration-500" />
+                  Secure Checkout <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform duration-500" />
                 </Link>
 
-                <div className="flex justify-center pt-2">
+                <div className="flex justify-center pt-1">
                   <button 
                     onClick={closeDrawer}
-                    className="text-[11px] font-bold text-black/30 uppercase tracking-[0.3em] hover:text-[#2D2D2D] transition-all duration-300 relative group/btn"
+                    className="text-[10px] md:text-[11px] font-bold text-black/30 uppercase tracking-[0.3em] hover:text-[#2D2D2D] transition-all duration-300 relative group/btn"
                   >
                     Continue Shopping
                     <div className="absolute -bottom-1 left-0 w-full h-[1px] bg-black/10 origin-right scale-x-0 group-hover/btn:scale-x-100 group-hover/btn:origin-left transition-transform duration-500" />

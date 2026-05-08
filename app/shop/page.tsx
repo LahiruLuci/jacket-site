@@ -25,7 +25,7 @@ export default async function ShopPage() {
     const categories = await prisma.category.findMany();
 
     return (
-      <main className="min-h-screen bg-[#F5F5F3] text-[#111111] selection:bg-accent selection:text-white font-inter overflow-x-hidden">
+      <main className="min-h-screen bg-[#F5F5F3] text-[#111111] selection:bg-accent selection:text-white font-inter">
         <Navbar />
         
         <ShopClient initialProducts={products} categories={categories} />

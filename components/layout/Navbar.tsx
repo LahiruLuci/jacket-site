@@ -114,16 +114,23 @@ const Navbar = () => {
           <button 
             onClick={openDrawer}
             className={cn(
-              "flex items-center gap-2 md:gap-3 group px-4 md:px-5 py-2 md:py-2 rounded-full border transition-all duration-300 cursor-pointer flex-shrink-0",
+              "relative flex items-center justify-center w-10 h-10 md:w-auto md:h-auto md:px-5 md:py-2 rounded-full border transition-all duration-300 cursor-pointer flex-shrink-0",
               isScrolled 
-                ? "bg-primary text-white border-transparent hover:bg-accent" 
-                : "bg-white/10 text-white border-white/20 hover:bg-white/20"
+                ? "bg-primary text-white border-transparent md:hover:bg-accent" 
+                : "bg-accent md:bg-white/10 text-white border-transparent md:border-white/20 md:hover:bg-white/20 shadow-lg md:shadow-none"
             )}
           >
-            <span className="text-[10px] md:text-[10px] font-bold uppercase tracking-widest">
+            <span className="hidden md:block text-[10px] font-bold uppercase tracking-widest mr-3">
               Cart ({cartCount})
             </span>
-            <ShoppingCart strokeWidth={2} className="w-4 h-4 md:w-4 md:h-4" />
+            <div className="relative">
+              <ShoppingCart strokeWidth={2} className="w-4 h-4 md:w-4 md:h-4" />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-white text-black text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center md:hidden shadow-sm">
+                  {cartCount}
+                </span>
+              )}
+            </div>
           </button>
 
           <button 
@@ -146,13 +153,13 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed inset-0 bg-secondary z-[200] flex flex-col lg:hidden"
+            className="fixed inset-0 bg-secondary z-[200] flex flex-col lg:hidden overflow-y-auto"
           >
             <div className="p-6 md:p-8 flex justify-between items-center border-b border-black/5">
               <span className="text-lg font-bold tracking-tight text-primary uppercase">Navigation</span>
             </div>
 
-            <div className="flex-1 flex flex-col justify-center p-8 gap-8">
+            <div className="flex-1 flex flex-col justify-center p-8 gap-6">
               {navLinks.map((link, idx) => {
                 const isActive = pathname === link.href;
                 return (
@@ -168,11 +175,11 @@ const Navbar = () => {
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       <span className={cn(
-                        "text-[10px] font-bold tracking-widest",
+                        "text-[9px] font-bold tracking-widest",
                         isActive ? "text-accent" : "text-text-muted"
                       )}>0{idx + 1}</span>
                       <span className={cn(
-                        "text-4xl md:text-5xl font-bold uppercase tracking-tight transition-all duration-300",
+                        "text-2xl md:text-5xl font-bold uppercase tracking-tight transition-all duration-300",
                         isActive ? "text-accent" : "text-primary group-hover:text-accent"
                       )}>
                         {link.name}
@@ -195,14 +202,14 @@ const Navbar = () => {
                   }}
                   className="flex items-center gap-6 w-full text-left"
                 >
-                  <div className="w-16 h-16 rounded-2xl bg-accent text-white flex items-center justify-center shadow-lg">
-                    <ShoppingCart size={32} strokeWidth={2} />
+                  <div className="w-14 h-14 rounded-2xl bg-accent text-white flex items-center justify-center shadow-lg">
+                    <ShoppingCart size={24} strokeWidth={2} />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-3xl font-bold uppercase tracking-tight text-primary">
+                    <span className="text-xl font-bold uppercase tracking-tight text-primary">
                       Cart ({cartCount})
                     </span>
-                    <span className="text-[10px] font-bold tracking-widest text-accent uppercase">
+                    <span className="text-[8px] font-bold tracking-widest text-accent uppercase">
                       View your selection
                     </span>
                   </div>
