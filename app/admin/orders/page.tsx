@@ -46,7 +46,7 @@ export default async function AdminOrdersPage() {
         </div>
 
         <div className="grid grid-cols-1 gap-8">
-          {orders.map((order) => (
+          {(orders as any[]).map((order: any) => (
             <div 
               key={order.id} 
               className="bg-[#111111] border border-white/10 rounded-[2.5rem] p-8 md:p-12 hover:border-accent/30 transition-all group overflow-hidden relative"
@@ -99,14 +99,15 @@ export default async function AdminOrdersPage() {
                 <div className="lg:col-span-5 space-y-6">
                    <h3 className="text-xs font-black uppercase tracking-widest text-white/40 border-b border-white/5 pb-4 mb-4">Archived Items</h3>
                    <div className="space-y-6 max-h-[200px] overflow-y-auto pr-4 scrollbar-thin scrollbar-thumb-white/10">
-                      {order.items.map((item) => (
+                      {(order.items as any[]).map((item: any) => (
                         <div key={item.id} className="flex items-center gap-6">
                            <div className="relative w-12 h-16 rounded-xl overflow-hidden bg-black flex-shrink-0">
                               <Image src={item.productImage} alt={item.productName} fill className="object-cover" />
                            </div>
                            <div className="flex-1 min-w-0">
                               <p className="text-[10px] font-bold text-accent uppercase tracking-widest mb-1">Size {item.size}</p>
-                              <p className="text-xs font-black uppercase tracking-tight text-white truncate">{item.productName}</p>
+                              <p className="text-xs font-black uppercase tracking-tight text-white">{item.productName}</p>
+                              {item.productSubtitle && <p className="text-[9px] text-white/40 font-bold uppercase tracking-widest">{item.productSubtitle}</p>}
                               <p className="text-[10px] text-white/40 font-bold uppercase tracking-widest mt-1">
                                 {item.quantity} × ${item.unitPrice.toLocaleString()}
                               </p>

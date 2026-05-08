@@ -42,7 +42,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-[#161718] text-white">
+    <main className="min-h-screen bg-background text-foreground">
       <Navbar />
       <Hero />
       <FeaturedProductsGrid products={formattedProducts} />

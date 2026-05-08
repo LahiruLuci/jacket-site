@@ -32,6 +32,7 @@ type Product = {
   id: string;
   slug: string;
   name: string;
+  subtitle: string | null;
   description: string;
   price: number;
   images: string[];
@@ -387,6 +388,11 @@ function ProductCard({ product, index }: { product: Product, index: number }) {
               <h3 className="text-xl md:text-4xl font-black uppercase tracking-tighter leading-[0.9] md:leading-[0.8] group-hover:text-accent transition-all duration-500">
                 {product.name}
               </h3>
+              {product.subtitle && (
+                <p className="text-[10px] md:text-sm font-bold text-white/40 uppercase tracking-[0.3em] mt-2 group-hover:text-white/60 transition-colors">
+                  {product.subtitle}
+                </p>
+              )}
             </div>
             <div className="text-right whitespace-nowrap">
               <span className="text-lg md:text-3xl font-black text-white block mb-1">

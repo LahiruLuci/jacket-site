@@ -106,7 +106,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
           className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none whitespace-nowrap hidden lg:flex"
         >
           <h2 className="text-[18vw] font-black uppercase tracking-tighter text-white/[0.03] leading-none select-none">
-            {productName.split(" ").slice(0, 2).join(" ")}
+            {product.name}
           </h2>
         </motion.div>
 
@@ -137,8 +137,18 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
                animate={{ opacity: 1, y: 0 }}
                className="text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-black uppercase tracking-tighter leading-[0.8] text-white"
              >
-               {productName.split(" ").slice(0, 2).join(" ")}
+               {product.name}
              </motion.h1>
+             {product.subtitle && (
+               <motion.span
+                 initial={{ opacity: 0, y: 10 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 transition={{ delay: 0.1 }}
+                 className="text-sm md:text-lg font-bold text-accent uppercase tracking-[0.3em] mt-4 block"
+               >
+                 {product.subtitle}
+               </motion.span>
+             )}
            </div>
            
            <motion.div 

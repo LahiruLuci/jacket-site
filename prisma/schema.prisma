@@ -15,6 +15,7 @@ model Product {
   id          String   @id @default(uuid())
   slug        String   @unique
   name        String
+  subtitle    String?
   description String
   price       Float
   images      String[]
@@ -72,6 +73,7 @@ model OrderItem {
   
   // Snapshot data (To preserve order history accuracy)
   productName  String
+  productSubtitle String?
   productSlug  String
   productImage String
   size         String

@@ -12,7 +12,8 @@ const featuredProducts = [
   {
     id: "shadow-black",
     slug: "shadow-guard-all-weather-performance-jacket",
-    name: "Shadow Guard All-Weather Performance Jacket",
+    name: "Shadow Guard",
+    subtitle: "All-Weather Jacket",
     price: 599,
     image: "/assets/black-jacket/black-jacket.webp",
     sizes: ["S", "M", "L", "XL", "XXL"],
@@ -21,7 +22,8 @@ const featuredProducts = [
   {
     id: "interceptor-nv",
     slug: "navy-guard-water-resistant-utility-jacket",
-    name: "Navy Guard Water-Resistant Utility Jacket",
+    name: "Navy Guard",
+    subtitle: "Utility Jacket",
     price: 799,
     image: "/assets/navy-blue-jacket/navy-blue-jacket.webp",
     sizes: ["S", "M", "L", "XL", "XXL"],
@@ -30,7 +32,8 @@ const featuredProducts = [
   {
     id: "vanguard-titan",
     slug: "vanguard-titan-racing",
-    name: "Vanguard Titan Racing",
+    name: "Vanguard Titan",
+    subtitle: "Racing Grade",
     price: 1450,
     image: "/assets/sohag_hawlader-ai-generated-9034981_1920.webp",
     sizes: ["S", "M", "L", "XL"],
@@ -39,7 +42,8 @@ const featuredProducts = [
   {
     id: "stealth-commuter",
     slug: "stealth-commuter-shell",
-    name: "Stealth Commuter Shell",
+    name: "Stealth Commuter",
+    subtitle: "City Shell",
     price: 850,
     image: "/assets/derneuemann-jacket-2821961_1920.webp",
     sizes: ["M", "L", "XL"],
@@ -48,7 +52,8 @@ const featuredProducts = [
   {
     id: "apex-kinetic",
     slug: "apex-kinetic-armor",
-    name: "Apex Kinetic Armor",
+    name: "Apex Kinetic",
+    subtitle: "Kinetic Armor",
     price: 1200,
     image: "/assets/image (1).webp",
     sizes: ["S", "M", "L", "XL"],
@@ -57,7 +62,8 @@ const featuredProducts = [
   {
     id: "heritage-cafe",
     slug: "heritage-cafe-racer",
-    name: "Heritage Cafe Racer",
+    name: "Heritage Cafe",
+    subtitle: "Classic Leather",
     price: 950,
     image: "/assets/peterlesliemorris-motorcycle-1829461_1920.webp",
     sizes: ["S", "M", "L"],
@@ -66,7 +72,8 @@ const featuredProducts = [
   {
     id: "velocity-air",
     slug: "velocity-air-mesh",
-    name: "Velocity Air Mesh",
+    name: "Velocity Air",
+    subtitle: "Mesh Performance",
     price: 600,
     image: "/assets/splitshire-biker-407123_1920.webp",
     sizes: ["S", "M", "L", "XL"],
@@ -75,7 +82,8 @@ const featuredProducts = [
   {
     id: "nomad-goretex",
     slug: "nomad-gore-tex-pro",
-    name: "Nomad Gore-Tex Pro",
+    name: "Nomad Gore-Tex",
+    subtitle: "All-Terrain Pro",
     price: 1100,
     image: "/assets/stocksnap-dark-2598357_1920.webp",
     sizes: ["M", "L", "XL"],
@@ -87,6 +95,7 @@ interface ProductType {
   id: string;
   slug: string;
   name: string;
+  subtitle?: string;
   price: number;
   image?: string;
   images?: string[];
@@ -103,7 +112,7 @@ const FeaturedProductsGrid = ({ products }: FeaturedProductsGridProps) => {
   const displayProducts = products && products.length > 0 ? products : featuredProducts;
 
   return (
-    <section id="featured-products" className="bg-[#0B0B0B] py-24 md:py-32 px-6">
+    <section id="featured-products" className="bg-secondary py-24 md:py-32 px-6">
       <div className="max-w-[1600px] mx-auto">
         {/* Section Header */}
         <div className="flex flex-col mb-16 md:mb-20">
@@ -113,8 +122,8 @@ const FeaturedProductsGrid = ({ products }: FeaturedProductsGridProps) => {
             viewport={{ once: true }}
             className="flex items-center gap-4 mb-6"
           >
-            <div className="w-12 h-[1px] bg-accent" />
-            <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.5em] text-accent">
+            <div className="w-12 h-[2px] bg-accent" />
+            <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-accent">
               Curated Selection
             </span>
           </motion.div>
@@ -122,23 +131,23 @@ const FeaturedProductsGrid = ({ products }: FeaturedProductsGridProps) => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white mb-4"
+            className="text-4xl md:text-6xl font-bold uppercase tracking-tight text-primary mb-6"
           >
-            Featured <span className="text-stroke text-white/10" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.2)" }}>Products.</span>
+            Featured <span className="text-accent">Products.</span>
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-white/40 text-sm md:text-base font-light max-w-lg"
+            className="text-text-muted text-base md:text-lg max-w-2xl leading-relaxed"
           >
-            Top picks built for performance and style. Engineered for the ride, styled for the lifestyle.
+            Explore our most sought-after pieces, where technical precision meets timeless aesthetic. Engineered for performance, designed for the modern individual.
           </motion.p>
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 md:gap-y-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 md:gap-y-16">
           {displayProducts.map((product, idx) => (
             <ProductCard key={product.id} product={product} index={idx} />
           ))}
@@ -164,133 +173,109 @@ const ProductCard = ({ product, index }: { product: ProductType; index: number }
       return;
     }
     
-    // Add to global cart store
     addItem(product, selectedSize);
-    
     setIsAdded(true);
     setTimeout(() => setIsAdded(false), 2000);
   };
 
-  // Handle differences between DB schema and hardcoded data
   const productImage = product.image || (product.images && product.images[0]) || "/assets/placeholder.webp";
   const productSizes = product.sizes || ["S", "M", "L", "XL"];
-  const categoryName = product.category || (product.category && product.category.name) || "Jacket";
+  const categoryName = typeof product.category === 'string' ? product.category : product.category?.name || "Jacket";
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="group flex flex-col h-full bg-[#111111] border border-white/5 rounded-3xl overflow-hidden transition-all duration-500 hover:border-white/20 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] cursor-pointer"
+      className="group flex flex-col h-full bg-white border border-black/5 rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
     >
       {/* Image Area */}
-      <div className="relative aspect-[4/5] overflow-hidden bg-[#161718]">
+      <div className="relative aspect-[4/5] overflow-hidden bg-secondary">
         <Image
           src={productImage}
           alt={product.name}
           fill
-          className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110"
+          className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
         />
         
-        {/* Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-30 group-hover:opacity-50 transition-opacity duration-500" />
-        
-        {/* Quick Actions (Floating) */}
-        <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 lg:group-hover:opacity-100 transition-all duration-500 translate-x-4 lg:group-hover:translate-x-0">
+        {/* Quick View Button */}
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 flex items-center justify-center">
           <Link 
             href={`/jacket/${product.slug}`}
-            className="w-10 h-10 bg-white/10 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-accent hover:text-black transition-all"
+            className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 shadow-lg hover:bg-accent hover:text-white"
           >
-            <Eye size={18} />
+            <Eye size={20} />
           </Link>
         </div>
 
-        {/* Size Selection HUD (Visible on hover or mobile) */}
-        <div className="absolute inset-x-4 bottom-4 z-20">
-          <div className="flex flex-col gap-3 opacity-100 lg:opacity-0 lg:translate-y-4 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 transition-all duration-500">
-            {/* Added Label for clarity */}
-            <div className="flex justify-center">
-              <span className="text-[8px] font-black tracking-[0.2em] text-white/60 bg-black/60 px-3 py-1 rounded-full backdrop-blur-md border border-white/5">
-                SELECT SIZE
-              </span>
-            </div>
-
-            <div className="flex gap-2 justify-center">
-              {productSizes.map((size: string) => (
-                <button
-                  key={size}
-                  onClick={(e) => { e.preventDefault(); setSelectedSize(size); }}
-                  className={cn(
-                    "w-9 h-9 md:w-11 md:h-11 rounded-full border text-[10px] md:text-xs font-bold transition-all flex items-center justify-center relative overflow-hidden cursor-pointer",
-                    selectedSize === size 
-                      ? "bg-accent border-accent text-black scale-110 shadow-[0_0_15px_rgba(201,162,39,0.5)]" 
-                      : "bg-black/60 border-white/20 text-white hover:border-white/50 backdrop-blur-md"
-                  )}
-                >
-                  {size}
-                  {selectedSize === size && (
-                    <motion.div 
-                      layoutId={`active-size-${product.id}`}
-                      className="absolute inset-0 bg-accent/20 animate-pulse"
-                    />
-                  )}
-                </button>
-              ))}
-            </div>
-            
-            <button
-              onClick={handleAddToCart}
-              className={cn(
-                "w-full py-3 md:py-4 rounded-xl flex items-center justify-center gap-3 text-[10px] md:text-xs font-black uppercase tracking-widest transition-all duration-300 cursor-pointer",
-                isAdded 
-                  ? "bg-green-500 text-white" 
-                  : showError
-                    ? "bg-red-500/20 text-red-500 border border-red-500/50"
-                    : selectedSize 
-                      ? "bg-white text-black hover:bg-accent" 
-                      : "bg-white/10 text-white/30 border border-white/5 backdrop-blur-md"
-              )}
-            >
-              {isAdded ? (
-                <>Added <Check size={16} /></>
-              ) : showError ? (
-                <>Select a Size <AlertCircle size={16} /></>
-              ) : selectedSize ? (
-                <>Add to Cart <Plus size={16} /></>
-              ) : (
-                <>Add to Cart <Plus size={16} /></>
-              )}
-            </button>
+        {/* Floating Size Badge on Mobile/Hover */}
+        {selectedSize && (
+          <div className="absolute top-4 left-4 bg-accent text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg">
+            Size: {selectedSize}
           </div>
-        </div>
+        )}
       </div>
 
       {/* Info Area */}
       <div className="p-6 md:p-8 flex flex-col flex-1">
-        <div className="flex justify-between items-start mb-4">
-          <div>
-            <span className="text-[9px] font-bold text-accent uppercase tracking-widest block mb-2">{categoryName}</span>
-            <h3 className="text-xl md:text-2xl font-black uppercase tracking-tighter leading-none text-white group-hover:text-accent transition-colors flex flex-col gap-1">
-              <span>{product.name.split(" ").slice(0, 2).join(" ")}</span>
-              <span className="text-sm md:text-base font-light text-white/50 lowercase italic tracking-wide">
-                {product.name.split(" ").slice(2).join(" ")}
-              </span>
+        <div className="mb-6">
+          <span className="text-[10px] font-bold text-accent uppercase tracking-widest block mb-2">{categoryName}</span>
+          <div className="flex justify-between items-start">
+            <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight text-primary leading-tight">
+              {product.name}
             </h3>
+            <span className="text-xl font-bold text-primary">${product.price}</span>
           </div>
-          <span className="text-lg md:text-xl font-black text-white">${product.price}</span>
+          <p className="text-sm text-text-muted mt-2">
+            {product.subtitle || "Premium technical outerwear"}
+          </p>
         </div>
 
-        <div className="mt-auto pt-4 flex items-center justify-between border-t border-white/5">
-          <Link 
-            href={`/jacket/${product.slug}`}
-            className="text-xs font-bold uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors"
-          >
-            View Details
-          </Link>
-          <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-            <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest">Available Now</span>
+        {/* Interaction Area */}
+        <div className="mt-auto pt-6 border-t border-black/5">
+          <div className="flex flex-col gap-4">
+            {/* Size Selector */}
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider">Sizes:</span>
+              <div className="flex gap-2">
+                {productSizes.map((size: string) => (
+                  <button
+                    key={size}
+                    onClick={(e) => { e.preventDefault(); setSelectedSize(size); }}
+                    className={cn(
+                      "w-8 h-8 rounded-full border text-[10px] font-bold transition-all flex items-center justify-center cursor-pointer",
+                      selectedSize === size 
+                        ? "bg-primary border-primary text-white" 
+                        : "bg-transparent border-black/10 text-primary hover:border-accent hover:text-accent"
+                    )}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Add to Cart Button */}
+            <button
+              onClick={handleAddToCart}
+              className={cn(
+                "w-full py-4 rounded-lg flex items-center justify-center gap-3 text-xs font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer",
+                isAdded 
+                  ? "bg-green-600 text-white" 
+                  : showError
+                    ? "bg-red-500 text-white"
+                    : "bg-primary text-white hover:bg-accent"
+              )}
+            >
+              {isAdded ? (
+                <>Added to Cart <Check size={16} /></>
+              ) : showError ? (
+                <>Select Size First <AlertCircle size={16} /></>
+              ) : (
+                <>Add to Cart <Plus size={16} /></>
+              )}
+            </button>
           </div>
         </div>
       </div>

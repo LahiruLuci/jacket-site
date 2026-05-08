@@ -51,34 +51,34 @@ export default function CategoryShowcase() {
   }, []);
 
   return (
-    <section className="w-full bg-[#161718] py-24 md:py-32 relative overflow-hidden">
+    <section className="w-full bg-secondary-alt py-24 md:py-32 relative overflow-hidden">
       {/* Background Subtle Accent */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#C9A227]/5 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/5 blur-[150px] rounded-full pointer-events-none" />
 
       {/* Header Area */}
       <div className="px-8 md:px-16 lg:px-24 mb-16 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
           className="flex flex-col lg:flex-row lg:items-end justify-between gap-8"
         >
           <div>
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-[1px] bg-[#C9A227]" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-[#C9A227]">
+              <div className="w-12 h-[2px] bg-accent" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-accent">
                 Purpose Built
               </span>
             </div>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-white leading-[0.9]">
-              Built for Every <br />
-              <span className="text-transparent" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.4)" }}>Situation.</span>
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-primary leading-[0.9]">
+              Designed for <br />
+              <span className="text-accent">Every Journey.</span>
             </h2>
           </div>
 
-          <p className="text-white/50 max-w-md text-sm md:text-base leading-relaxed font-light">
-            Functional gear for your daily life. Whether you are commuting, riding, or exploring the outdoors, we have the perfect jacket for you.
+          <p className="text-text-muted max-w-md text-base leading-relaxed">
+            Technical outerwear that bridges the gap between performance and lifestyle. Engineered for those who demand excellence in every environment.
           </p>
         </motion.div>
       </div>
@@ -95,7 +95,7 @@ export default function CategoryShowcase() {
                 onMouseEnter={() => setActive(index)}
                 onClick={() => setActive(index)}
                 ref={(el) => { cardRefs.current[index] = el; }}
-                className="relative overflow-hidden cursor-pointer group transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+                className="relative overflow-hidden cursor-pointer group transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] rounded-2xl"
                 style={{
                   flex: isActive ? 6 : 1,
                   minHeight: isActive ? "350px" : "140px",
@@ -109,23 +109,23 @@ export default function CategoryShowcase() {
                   className={`object-cover transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] ${
                     isActive
                       ? "scale-105 opacity-100"
-                      : "scale-100 opacity-40 grayscale blur-[2px]"
-                  } lg:group-hover:grayscale-0 lg:group-hover:blur-none lg:group-hover:opacity-70`}
+                      : "scale-100 opacity-60 grayscale-[0.5]"
+                  }`}
                 />
 
                 {/* Overlays */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/10 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
 
                 {/* Content Overlay */}
                 <div className="absolute inset-0 p-6 md:p-8 lg:p-10 flex flex-col justify-between pointer-events-none">
                   {/* Top: Number & Arrow */}
                   <div className="flex justify-between items-start">
-                    <span className="text-sm font-black text-white/50 tracking-widest border border-white/10 px-3 py-1 bg-[#0A0B0C]/20 backdrop-blur-sm">
+                    <span className="text-sm font-bold text-white/40 tracking-widest border border-white/10 px-4 py-1.5 bg-black/20 backdrop-blur-md rounded-full">
                       {cat.number}
                     </span>
 
                     <div
-                      className={`w-12 h-12 rounded-full bg-[#C9A227] text-black flex items-center justify-center transition-all duration-500 transform ${
+                      className={`w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center transition-all duration-500 transform ${
                         isActive ? "scale-100 opacity-100" : "scale-50 opacity-0"
                       }`}
                     >
@@ -135,10 +135,9 @@ export default function CategoryShowcase() {
 
                   {/* Bottom: Title & Details */}
                   <div className="flex flex-col justify-end">
-                    {/* Horizontal Title - Visible when active */}
                     <div className="relative">
                       <h3
-                        className={`text-3xl md:text-4xl lg:text-5xl font-black uppercase text-white whitespace-nowrap transition-all duration-500 transform ${
+                        className={`text-3xl md:text-4xl lg:text-5xl font-bold uppercase text-white whitespace-nowrap transition-all duration-500 transform ${
                           isActive
                             ? "translate-y-0 opacity-100"
                             : "translate-y-8 opacity-0 hidden lg:block"
@@ -149,17 +148,17 @@ export default function CategoryShowcase() {
 
                       {/* Vertical Title - Visible when INACTIVE on Desktop */}
                       <h3
-                        className={`absolute left-0 bottom-0 text-2xl font-black uppercase text-white/50 tracking-widest origin-bottom-left -rotate-90 transition-all duration-500 hidden lg:block ${
+                        className={`absolute left-0 bottom-0 text-xl font-bold uppercase text-white/40 tracking-widest origin-bottom-left -rotate-90 transition-all duration-500 hidden lg:block ${
                           !isActive ? "opacity-100 visible" : "opacity-0 invisible"
                         }`}
-                        style={{ whiteSpace: "nowrap", bottom: "-20px" }}
+                        style={{ whiteSpace: "nowrap", bottom: "-10px" }}
                       >
                         {cat.short}
                       </h3>
                       
                       {/* Mobile title when inactive */}
                       <h3
-                        className={`text-2xl font-black uppercase text-white/70 transition-all duration-300 lg:hidden pb-4 ${
+                        className={`text-2xl font-bold uppercase text-white/70 transition-all duration-300 lg:hidden pb-4 ${
                           !isActive ? "block" : "hidden"
                         }`}
                       >
@@ -173,16 +172,15 @@ export default function CategoryShowcase() {
                         isActive ? "max-h-[200px] mt-4 opacity-100" : "max-h-0 mt-0 opacity-0"
                       }`}
                     >
-                      <p className="text-white/60 text-sm md:text-base max-w-[400px] leading-relaxed mb-6 hidden md:block">
+                      <p className="text-white/70 text-sm md:text-base max-w-[440px] leading-relaxed mb-6 hidden md:block">
                         {cat.desc}
                       </p>
 
                       <Link
                         href={`/shop?category=${cat.id}`}
-                        className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-[#C9A227] hover:text-white transition-colors duration-300 pointer-events-auto group/btn"
+                        className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] bg-white text-primary px-6 py-3 rounded-full hover:bg-accent hover:text-white transition-all duration-300 pointer-events-auto"
                       >
-                        Explore Collection
-                        <span className="w-8 h-[1px] bg-[#C9A227] group-hover/btn:w-12 transition-all duration-300" />
+                        Shop Collection
                       </Link>
                     </div>
                   </div>

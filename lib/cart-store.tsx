@@ -7,6 +7,7 @@ export interface CartItem {
   productId: string;
   slug: string;
   name: string;
+  subtitle?: string;
   image: string;
   price: number;
   size: string;
@@ -79,6 +80,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         productId: product.id,
         slug: product.slug,
         name: product.name,
+        subtitle: product.subtitle,
         image: product.images?.[0] || "/assets/placeholder.webp",
         price: product.price,
         size: size,

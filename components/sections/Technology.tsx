@@ -56,34 +56,24 @@ export default function Technology() {
   const [active, setActive] = useState(0);
 
   return (
-    <section className="relative bg-[#161718] py-12 md:py-32 border-y border-white/5 overflow-hidden">
-      {/* Deep Background Matrix Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
-
-      {/* Engineering Corner Accents */}
-      <div className="absolute inset-0 pointer-events-none hidden md:block">
-        <Plus className="absolute top-10 left-10 text-white/10" size={24} strokeWidth={1} />
-        <Plus className="absolute top-10 right-10 text-white/10" size={24} strokeWidth={1} />
-        <Plus className="absolute bottom-10 left-10 text-white/10" size={24} strokeWidth={1} />
-        <Plus className="absolute bottom-10 right-10 text-white/10" size={24} strokeWidth={1} />
-      </div>
+    <section className="relative bg-secondary py-12 md:py-32 border-y border-black/5 overflow-hidden">
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
       <div className="max-w-[1600px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 relative z-10 items-start">
-        {/* Left Side: The Interactive Schematic List */}
+        {/* Left Side: Technical Specifications List */}
         <div className="lg:col-span-5 flex flex-col">
           <div className="mb-10 md:mb-24">
-            <span className="text-[#C9A227] text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] mb-4 md:mb-6 block">
-              Advanced R&D Lab
+            <span className="text-accent text-[11px] font-bold uppercase tracking-[0.4em] mb-4 md:mb-6 block">
+              Advanced Engineering
             </span>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-white leading-[0.9]">
-              Safety <br />
-              <span className="text-transparent" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.4)" }}>
-                Engineering.
-              </span>
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-primary leading-[0.95]">
+              Technical <br />
+              <span className="text-accent">Precision.</span>
             </h2>
           </div>
 
-          <div className="flex flex-col w-full border-t border-white/10">
+          <div className="flex flex-col w-full border-t border-black/10">
             {techData.map((tech, i) => {
               const isActive = active === i;
               return (
@@ -91,14 +81,14 @@ export default function Technology() {
                   key={tech.id}
                   onMouseEnter={() => setActive(i)}
                   onClick={() => setActive(i)}
-                  className={`border-b border-white/10 py-6 md:py-8 lg:py-10 cursor-pointer transition-colors duration-500 group ${
-                    isActive ? "bg-white/[0.01]" : "hover:bg-white/[0.01]"
+                  className={`border-b border-black/5 py-6 md:py-8 lg:py-10 cursor-pointer transition-all duration-500 group ${
+                    isActive ? "bg-white shadow-lg z-10 scale-[1.02] rounded-xl my-2 border-none" : "hover:bg-white/40"
                   }`}
                 >
-                  <div className="flex items-start gap-4 md:gap-8 px-2 md:px-6">
+                  <div className="flex items-start gap-4 md:gap-8 px-6 md:px-8">
                     <span
-                      className={`text-xs md:text-sm font-black font-mono mt-1 md:mt-2 transition-colors duration-500 ${
-                        isActive ? "text-[#C9A227]" : "text-white/20"
+                      className={`text-xs md:text-sm font-bold font-mono mt-1 md:mt-2 transition-colors duration-500 ${
+                        isActive ? "text-accent" : "text-text-muted/30"
                       }`}
                     >
                       {tech.id}
@@ -106,16 +96,16 @@ export default function Technology() {
 
                     <div className="flex-1 w-full">
                       <h3
-                        className={`text-xl md:text-3xl font-black uppercase tracking-tight transition-all duration-500 transform ${
+                        className={`text-xl md:text-3xl font-bold uppercase tracking-tight transition-all duration-500 transform ${
                           isActive
-                            ? "text-white translate-x-0 md:translate-x-2"
-                            : "text-white/40 group-hover:text-white/60"
+                            ? "text-primary translate-x-0"
+                            : "text-text-muted group-hover:text-primary"
                         }`}
                       >
                         {tech.title}
                       </h3>
 
-                      {/* Expandable Accordion Body */}
+                      {/* Expandable Body */}
                       <motion.div
                         initial={false}
                         animate={{
@@ -126,21 +116,21 @@ export default function Technology() {
                         className="overflow-hidden"
                       >
                         <div className="pt-4 md:pt-6">
-                          <p className="text-white/50 text-xs md:text-sm leading-relaxed mb-6 md:mb-8 max-w-[400px]">
+                          <p className="text-text-muted text-sm md:text-base leading-relaxed mb-6 md:mb-8 max-w-[440px]">
                             {tech.desc}
                           </p>
 
-                          {/* Tech HUD Metrics */}
+                          {/* Tech Metrics */}
                           <div className="grid grid-cols-2 gap-4 md:gap-8 w-full max-w-sm">
                             {tech.metrics.map((metric) => (
                               <div
                                 key={metric.label}
-                                className="border-l border-[#C9A227]/30 pl-3 md:pl-4"
+                                className="border-l-2 border-accent/20 pl-4"
                               >
-                                <div className="text-[9px] md:text-[10px] uppercase font-bold tracking-widest text-[#C9A227] mb-1">
+                                <div className="text-[10px] uppercase font-bold tracking-widest text-accent mb-1">
                                   {metric.label}
                                 </div>
-                                <div className="text-lg md:text-2xl font-black text-white font-mono">
+                                <div className="text-xl md:text-2xl font-bold text-primary font-mono">
                                   {metric.value}
                                 </div>
                               </div>
@@ -156,77 +146,61 @@ export default function Technology() {
           </div>
         </div>
 
-        {/* Right Side: The Dynamic Heads-Up Display (HUD) */}
-        <div className="lg:col-span-7 relative h-[60vh] md:h-[800px] lg:h-[900px] w-full bg-[#1F2022] rounded-2xl border border-white/10 lg:sticky lg:top-24 mt-8 lg:mt-0">
+        {/* Right Side: Product Visualizer */}
+        <div className="lg:col-span-7 relative h-[60vh] md:h-[700px] lg:h-[800px] w-full bg-white rounded-3xl border border-black/5 lg:sticky lg:top-24 mt-8 lg:mt-0 shadow-2xl overflow-hidden">
           
-          <div className="absolute inset-2 md:inset-4 rounded-xl overflow-hidden bg-[#0A0B0C]">
-            <AnimatePresence>
+          <div className="absolute inset-0">
+            <AnimatePresence mode="wait">
               <motion.div
                 key={active}
-                initial={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
-                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                initial={{ opacity: 0, scale: 1.02 }}
+                animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.8 }}
                 className="absolute inset-0 z-0"
               >
                 <Image
                   src={techData[active].img}
                   alt={techData[active].title}
                   fill
-                  className="object-cover opacity-50 mix-blend-screen grayscale-[0.2]"
+                  className="object-cover"
                 />
-                
-                {/* HUD Gradient Shadow */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-black/90 via-transparent to-black/40" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white/40 via-transparent to-transparent" />
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Futuristic HUD Visualizer Overlays */}
-          <div className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center">
-            <div className="w-[85%] h-[85%] border border-white/5 relative">
-              {/* Corner brackets */}
-              <div className="absolute -top-[1px] -left-[1px] w-4 h-4 border-t border-l border-[#C9A227]/50" />
-              <div className="absolute -top-[1px] -right-[1px] w-4 h-4 border-t border-r border-[#C9A227]/50" />
-              <div className="absolute -bottom-[1px] -left-[1px] w-4 h-4 border-b border-l border-[#C9A227]/50" />
-              <div className="absolute -bottom-[1px] -right-[1px] w-4 h-4 border-b border-r border-[#C9A227]/50" />
+          {/* Technical Specification Overlays */}
+          <div className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center p-8 md:p-12">
+            <div className="w-full h-full relative">
+              {/* Corner Brackets */}
+              <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-accent" />
+              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-accent" />
 
-              {/* Center Targeting Reticle */}
-              <motion.div 
-                key={`reticle-${active}`}
-                initial={{ scale: 0.5, opacity: 0, rotate: -45 }}
-                animate={{ scale: 1, opacity: 1, rotate: 0 }}
-                transition={{ duration: 1, delay: 0.2 }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 border border-white/5 rounded-full flex items-center justify-center border-dashed"
-              >
-                <div className="w-32 h-32 md:w-48 md:h-48 border border-white/10 rounded-full flex items-center justify-center">
-                  <div className="absolute w-full h-[1px] bg-white/5" />
-                  <div className="absolute h-full w-[1px] bg-white/5" />
-                  <div className="w-2 h-2 bg-[#C9A227] rounded-full shadow-[0_0_15px_rgba(201,162,39,0.8)]" />
-                </div>
-              </motion.div>
-
-              {/* Dynamic Status Readout */}
-              <div className="absolute bottom-6 right-6 text-right overflow-hidden">
+              {/* Status Display */}
+              <div className="absolute bottom-0 left-0 bg-white/90 backdrop-blur-md p-6 border border-black/5 rounded-tr-2xl shadow-xl max-w-xs">
                 <motion.div
-                  key={`text-${active}`}
+                  key={`status-${active}`}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
                 >
-                  <div className="text-[#C9A227] font-mono text-[10px] md:text-xs mb-1 tracking-widest">
-                    MODULE_{techData[active].id} __ ACTIVE
+                  <div className="text-accent font-bold text-[10px] uppercase tracking-widest mb-1">
+                    Component Details
                   </div>
-                  <div className="text-white/30 font-mono text-[8px] md:text-[10px] tracking-widest">
-                    SYS.TYPE // {techData[active].category.toUpperCase()}
+                  <div className="text-primary font-bold text-lg uppercase tracking-tight leading-tight">
+                    {techData[active].category}
+                  </div>
+                  <div className="w-full h-[2px] bg-accent/20 mt-3 mb-2" />
+                  <div className="text-text-muted text-[10px] uppercase font-bold tracking-widest">
+                    Safety Certification: CE-LEVEL 2
                   </div>
                 </motion.div>
               </div>
 
-              {/* Top Left Serial Number */}
-              <div className="absolute top-6 left-6">
-                <div className="text-white/20 font-mono text-[8px] md:text-[10px] tracking-widest">
-                  JKT-JNC // {new Date().getFullYear()} // RND
+              {/* Top Right Reference */}
+              <div className="absolute top-0 right-0 text-right bg-white/90 backdrop-blur-md px-6 py-3 border border-black/5 rounded-bl-2xl">
+                <div className="text-primary font-mono text-[10px] font-bold tracking-widest">
+                  SERIES: PERFORMANCE // REV 04
                 </div>
               </div>
             </div>

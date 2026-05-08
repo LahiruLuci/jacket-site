@@ -77,7 +77,7 @@ export default function Hero() {
   const slide = slides[current];
 
   return (
-    <section className="relative w-full h-screen min-h-[600px] overflow-hidden bg-[#161718]">
+    <section className="relative w-full h-[90vh] min-h-[600px] overflow-hidden bg-dark-bg">
 
       {/* Background Images */}
       <AnimatePresence initial={false} mode="sync">
@@ -97,8 +97,8 @@ export default function Hero() {
             className="object-cover object-center"
           />
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/10" />
-          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#161718] to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-dark-bg/80 via-dark-bg/40 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-dark-bg to-transparent" />
         </motion.div>
       </AnimatePresence>
 
@@ -111,10 +111,10 @@ export default function Hero() {
             key={`badge-${current}`}
             {...fadeUp}
             transition={{ duration: 0.5, delay: 0.1, ease: ease }}
-            className="flex items-center gap-2 mb-6"
+            className="flex items-center gap-2 mb-4"
           >
-            <ShieldCheck size={14} className="text-[#C9A227]" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[#C9A227]">
+            <ShieldCheck size={14} className="text-accent" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent">
               {slide.badge}
             </span>
           </motion.div>
@@ -126,11 +126,11 @@ export default function Hero() {
             key={`headline-${current}`}
             {...fadeUp}
             transition={{ duration: 0.6, delay: 0.2, ease: ease }}
-            className="text-4xl sm:text-6xl md:text-7xl lg:text-[84px] font-black uppercase leading-[0.9] tracking-tight text-white mb-4 md:mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold uppercase leading-[0.95] tracking-tight text-white mb-6"
           >
             {slide.headline.map((line, i) =>
               line === slide.accent ? (
-                <span key={i} className="text-[#C9A227] block">{line}</span>
+                <span key={i} className="text-accent block">{line}</span>
               ) : (
                 <span key={i} className="block">{line}</span>
               )
@@ -144,7 +144,7 @@ export default function Hero() {
             key={`sub-${current}`}
             {...fadeUp}
             transition={{ duration: 0.6, delay: 0.35, ease: ease }}
-            className="text-white/55 text-xs md:text-base max-w-[420px] leading-relaxed mb-6 md:mb-10"
+            className="text-white/60 text-sm md:text-base max-w-[460px] leading-relaxed mb-8 md:mb-10 font-medium"
           >
             {slide.sub}
           </motion.p>
@@ -159,14 +159,14 @@ export default function Hero() {
         >
           <Link
             href="/#featured-products"
-            className="group flex items-center gap-3 bg-[#C9A227] hover:bg-[#b8911e] text-black font-bold text-xs uppercase tracking-widest px-8 py-4 transition-colors duration-300"
+            className="group flex items-center gap-3 bg-accent hover:bg-accent/90 text-white font-bold text-xs uppercase tracking-widest px-10 py-5 transition-all duration-300"
           >
-            Shop Now
+            Explore Collection
             <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform duration-300" />
           </Link>
           <Link
             href="/about"
-            className="border border-white/30 hover:border-white/70 text-white font-semibold text-xs uppercase tracking-widest px-8 py-4 transition-colors duration-300"
+            className="backdrop-blur-md bg-white/5 border border-white/20 hover:bg-white/10 text-white font-bold text-xs uppercase tracking-widest px-10 py-5 transition-all duration-300"
           >
             Our Story
           </Link>
@@ -174,47 +174,44 @@ export default function Hero() {
       </div>
 
       {/* Slide Counter + Navigation */}
-      <div className="absolute bottom-10 left-8 md:left-16 lg:left-24 z-20 flex items-center gap-6">
+      <div className="absolute bottom-12 left-8 md:left-16 lg:left-24 z-20 flex items-center gap-6">
         {/* Prev / Next */}
-        <button
-          onClick={prev}
-          aria-label="Previous slide"
-          className="w-10 h-10 border border-white/20 hover:border-[#C9A227] flex items-center justify-center text-white/50 hover:text-[#C9A227] transition-all duration-300"
-        >
-          <ChevronLeft size={18} />
-        </button>
-        <button
-          onClick={next}
-          aria-label="Next slide"
-          className="w-10 h-10 border border-white/20 hover:border-[#C9A227] flex items-center justify-center text-white/50 hover:text-[#C9A227] transition-all duration-300"
-        >
-          <ChevronRight size={18} />
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={prev}
+            aria-label="Previous slide"
+            className="w-12 h-12 border border-white/10 hover:border-accent flex items-center justify-center text-white/40 hover:text-white transition-all duration-300 rounded-full"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button
+            onClick={next}
+            aria-label="Next slide"
+            className="w-12 h-12 border border-white/10 hover:border-accent flex items-center justify-center text-white/40 hover:text-white transition-all duration-300 rounded-full"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
 
         {/* Progress dots */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3 px-4">
           {slides.map((_, i) => (
             <button
               key={i}
               onClick={() => goTo(i)}
               aria-label={`Go to slide ${i + 1}`}
               className="relative h-[2px] transition-all duration-500 cursor-pointer"
-              style={{ width: i === current ? 40 : 20, background: i === current ? "#C9A227" : "rgba(255,255,255,0.2)" }}
+              style={{ width: i === current ? 40 : 16, background: i === current ? "var(--accent)" : "rgba(255,255,255,0.15)" }}
             />
           ))}
         </div>
-
-        {/* Slide number */}
-        <span className="text-[10px] font-bold tracking-widest text-white/30 uppercase">
-          {String(current + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
-        </span>
       </div>
 
       {/* Right-side autoplay progress bar */}
-      <div className="absolute right-0 top-0 bottom-0 w-[3px] bg-white/5 z-20 hidden md:block">
+      <div className="absolute right-0 top-0 bottom-0 w-[2px] bg-white/5 z-20 hidden md:block">
         <motion.div
           key={current}
-          className="w-full bg-[#C9A227]"
+          className="w-full bg-accent"
           initial={{ height: "0%" }}
           animate={{ height: "100%" }}
           transition={{ duration: 5.5, ease: "linear" }}

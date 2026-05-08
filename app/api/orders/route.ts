@@ -30,7 +30,7 @@ export async function POST(req: Request) {
 
     let serverCalculatedTotal = 0;
     const orderItemsData = items.map((item: any) => {
-      const dbProduct = dbProducts.find(p => p.id === item.productId);
+      const dbProduct = dbProducts.find(p => p.id === item.productId) as any;
       
       if (!dbProduct) {
         throw new Error(`Product not found: ${item.productName}`);
@@ -43,6 +43,7 @@ export async function POST(req: Request) {
       return {
         productId: item.productId,
         productName: dbProduct.name,
+        productSubtitle: dbProduct.subtitle,
         productSlug: dbProduct.slug,
         productImage: dbProduct.images[0] || "/assets/placeholder.webp",
         size: item.size,
@@ -66,7 +67,7 @@ export async function POST(req: Request) {
           items: {
             create: orderItemsData
           }
-        }
+        } as any
       });
 
       // Update stock levels

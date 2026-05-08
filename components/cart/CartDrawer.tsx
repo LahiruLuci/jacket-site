@@ -111,6 +111,7 @@ export default function CartDrawer() {
                           </button>
                         </div>
                         <h4 className="text-sm font-black uppercase tracking-tight leading-tight">{item.name}</h4>
+                        {item.subtitle && <p className="text-[10px] text-white/40 font-medium uppercase tracking-wider">{item.subtitle}</p>}
                       </div>
 
                       {/* Controls & Price */}

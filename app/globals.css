@@ -1,14 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0B0B0B;
-  --foreground: #FFFFFF;
-  --primary: #0B0B0B;
-  --primary-alt: #111111;
-  --secondary: #2A2A2A;
-  --secondary-alt: #3A3A3A;
-  --accent: #C9A227; /* Luxury Gold */
-  --text-muted: #B3B3B3;
+  --background: #FFFFFF;
+  --foreground: #111111;
+  --primary: #111111;
+  --primary-alt: #161616;
+  --secondary: #F5F5F3;
+  --secondary-alt: #EFEDE8;
+  --accent: #2F5DFF; /* Modern Blue */
+  --accent-luxury: #B08D57; /* Optional Gold */
+  --text-muted: #666666;
+  
+  /* Dark Mode specific (for dark sections) */
+  --dark-bg: #111111;
+  --dark-bg-alt: #161616;
+  --dark-text: #FFFFFF;
+  --dark-text-muted: #B3B3B3;
 }
 
 @theme inline {
@@ -19,11 +26,16 @@
   --color-secondary: var(--secondary);
   --color-secondary-alt: var(--secondary-alt);
   --color-accent: var(--accent);
+  --color-accent-luxury: var(--accent-luxury);
   --color-text-muted: var(--text-muted);
+  
+  --color-dark-bg: var(--dark-bg);
+  --color-dark-bg-alt: var(--dark-bg-alt);
+  --color-dark-text: var(--dark-text);
+  --color-dark-text-muted: var(--dark-text-muted);
   
   --font-sora: 'Sora', sans-serif;
   --font-inter: 'Inter', sans-serif;
-  --font-serif: 'Playfair Display', serif;
 
   /* Custom Animations for Tech Page */
   --animate-scan: scan 3s linear infinite;
@@ -45,19 +57,20 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
-  letter-spacing: -0.01em;
+  font-family: var(--font-sora);
+  letter-spacing: -0.02em;
+  font-weight: 700;
 }
 
 .glass-panel {
-  background: rgba(42, 42, 42, 0.4);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .text-gradient {
-  background: linear-gradient(180deg, #FFFFFF 0%, #71717A 100%);
+  background: linear-gradient(180deg, #111111 0%, #666666 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -67,19 +80,17 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
     @media (min-width: 640px) {
-      padding-left: 2rem;
-      padding-right: 2rem;
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
     }
     max-width: 1600px;
   }
 
-  .gold-gradient {
-    background: linear-gradient(135deg, #C9A227 0%, #F5E0A3 50%, #C9A227 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .accent-gradient {
+    background: linear-gradient(135deg, #2F5DFF 0%, #6082FF 100%);
   }
 
   .mask-reveal {
@@ -96,15 +107,10 @@ h1, h2, h3, h4, h5, h6 {
 
   .grid-pattern {
     background-image: 
-      linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+      linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
     background-size: 40px 40px;
   }
-}
-
-.text-stroke {
-  -webkit-text-stroke: 1px rgba(201, 162, 39, 0.2);
-  color: transparent;
 }
 
 /* Swiper Custom Styles */
@@ -112,7 +118,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 40px !important;
   height: 2px !important;
   border-radius: 0 !important;
-  background: rgba(255, 255, 255, 0.2) !important;
+  background: rgba(0, 0, 0, 0.1) !important;
   opacity: 1 !important;
   transition: all 0.3s ease !important;
 }
